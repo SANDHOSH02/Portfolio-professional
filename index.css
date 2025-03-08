@@ -72,7 +72,8 @@ body{
     margin-left: 220px;
     color: white;
     font-size: 16px;
-    font-weight: 700;
+    
+    font-weight: initial;
 
 }
 
@@ -128,3 +129,18 @@ h4{
     margin-top: -120px;
 }
 
+
+/* pro */
+
+
+.pro{
+    color: white;
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: initial;
+}
+
+.pro-img{
+    margin-left: 200px;
+    margin-top: 30px;
+}
