@@ -1,1 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
+/* font-family: "Fira Code", monospace; */
+
+/* color:C778DD; */
+
+body{
+
+    background-color: #282C33;
+    margin: 0%;
+    padding: 0%;
+    font-family: "Fira Code", monospace;
+
+
+}
+
+.nav{
+    margin-left: 900px;
+    padding: 30px;
+    justify-content: space-between;
+    display: flex;
+}
+  
+   a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  spam{
+    color: #C778DD;
+  }
+
+.logo{
+    margin-top: -205px;
+    width: 20px;
+    height: 50px;
+}
+
+.line{
+    width: 1px;
+    height: 160px;
+    background-color: #ABB2BF;
+    margin-left: 20px;
+    margin-top: -80px;
+}
+
+.line-logo{
+    width: 30px;
+    margin-top: 170px;
+    margin-left: -12px;
+}
+
+.line-logo1{
+    width: 30px;
+    margin-top: 10px;
+    margin-left: -12px;
+}
+
+
+.line-logo2{
+    width: 30px;
+    margin-top: 10px;
+    margin-left: -12px;
+}
+
+
+.hero{
+
+    margin-top: 220px;
+    margin-left: 220px;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.image-hero{
+    margin-left: 59%;
+    margin-top: -60px;
+    
+
+}
+
+
+.hero-svg{
+    width: 140px;
+}
+
+.my-img{
+    border-radius: 1%;
+    width: 270px;
+    margin-left: 840px;
+    margin-top: -220px;
+
+
+}
+
+
