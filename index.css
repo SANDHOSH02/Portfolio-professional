@@ -243,8 +243,6 @@ h4 {
 .project-a {
     color: var(--accent-color) !important;
 }
-
-/* Skills */
 #Skills {
     background: var(--primary-bg);
     padding: 40px 20px;
@@ -254,12 +252,14 @@ h4 {
 .container_S {
     max-width: 1200px;
     margin: 0 auto;
+    
 }
 
 .floot {
     position: relative;
     height: 400px;
     overflow: hidden;
+    
 }
 
 .icons {
@@ -277,15 +277,23 @@ h4 {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     border: 1px solid var(--accent-color);
-    transition: var(--transition);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     z-index: 1;
 }
 
-.icons img::after {
+.icons img {
+    position: relative;
+}
+
+.icons img[data-tooltip] {
+    position: relative;
+}
+
+/* .icons img[data-tooltip]::after {
     content: attr(data-tooltip);
     position: absolute;
-    bottom: calc(100% + 10px); /* Position above with spacing */
+    bottom: calc(100% + 10px); 
     left: 50%;
     transform: translateX(-50%);
     background: var(--primary-bg);
@@ -299,60 +307,67 @@ h4 {
     transition: opacity 0.2s ease;
     border: 1px solid var(--accent-color);
     z-index: 10;
-}
+} */
 
-.icons img:hover::after,
+/* .icons img:hover::after,
 .icons img.active::after {
     opacity: 1;
-}
+} */
 
-.icons img:hover,
+/* .icons img:hover,
 .icons img.active {
     transform: scale(1.1);
     background: rgba(199, 120, 221, 0.2);
     box-shadow: 0 0 15px rgba(199, 120, 221, 0.3);
     z-index: 100;
+} */
+
+
+.tooltip {
+    position: absolute;
+    display: inline-block;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    z-index: 1;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .nav { margin-left: 0; justify-content: center; }
-    .my-img { margin-left: auto; margin-right: auto; }
-    .hero { margin-left: 20px; }
-    .box3 { margin-left: auto; }
+.tooltip img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid var(--accent-color);
 }
 
-@media (max-width: 768px) {
-    .nav {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-    .hero {
-        text-align: center;
-        margin: 50px auto;
-        padding: 0 20px;
-    }
-    .image-hero {
-        margin: 0 auto;
-        text-align: center;
-    }
-    .my-img {
-        width: 200px;
-        display: block;
-        margin: 20px auto;
-    }
-    .box2, .quote-box, .box3 {
-        margin: 20px auto;
-        text-align: center;
-    }
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.tooltip:hover img {
+    transform: scale(1.1);
+    background: rgba(199, 120, 221, 0.2); 
+    box-shadow: 0 0 15px rgba(199, 120, 221, 0.3);
 }
 
-@media (max-width: 480px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px; 
+    background-color: var(--primary-bg); 
+    color: var(--text-white); 
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: calc(100% + 10px); 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    border: 1px solid var(--accent-color); 
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.tooltip:hover .tooltiptext,
+.tooltip.active .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

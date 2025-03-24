@@ -6,6 +6,8 @@
     <title>Portfolio</title>
     <link rel="icon" type="image/x-icon" href="/assets/santhosh image.jpeg">
     <link rel="stylesheet" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="nav">
@@ -79,15 +81,42 @@
         <div class="container_S">
             <div class="floot">
                 <div class="icons">
-                    <img src="/assets/skills/React.png" alt="react" data-tooltip="React: JavaScript library for building UI">
-                    <img src="/assets/skills/CSS3.png" alt="css" data-tooltip="CSS3: Styling web pages">
-                    <img src="/assets/skills/Bootstrap.png" alt="Bootstrap" data-tooltip="Bootstrap: Front-end framework">
-                    <img src="/assets/skills/Git.png" alt="git" data-tooltip="Git: Version control system">
-                    <img src="/assets/skills/GitHub.png" alt="github" data-tooltip="GitHub: Code hosting platform">
-                    <img src="/assets/skills/HTML5.png" alt="html" data-tooltip="HTML5: Web structure markup">
-                    <img src="/assets/skills/JavaScript.png" alt="JavaScript" data-tooltip="JavaScript: Programming language">
-                    <img src="/assets/skills/Tailwind CSS.png" alt="Tailwind" data-tooltip="Tailwind CSS: Utility-first CSS">
-                    <img src="/assets/skills/Visual Studio Code (VS Code).png" alt="Vscode" data-tooltip="VS Code: Coding platform">
+                    <i class="tooltip">
+                        <img src="/assets/skills/React.png" alt="react">
+                        <span class="tooltiptext">React: JavaScript library for building UI</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/CSS3.png" alt="css">
+                        <span class="tooltiptext">CSS3: Styling web pages</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/Bootstrap.png" alt="Bootstrap">
+                        <span class="tooltiptext">Bootstrap: Front-end framework</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/Git.png" alt="git">
+                        <span class="tooltiptext">Git: Version control system</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/GitHub.png" alt="github">
+                        <span class="tooltiptext">GitHub: Code hosting platform</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/HTML5.png" alt="html">
+                        <span class="tooltiptext">HTML5: Web structure markup</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/JavaScript.png" alt="JavaScript">
+                        <span class="tooltiptext">JavaScript: Programming language</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/Tailwind CSS.png" alt="Tailwind">
+                        <span class="tooltiptext">Tailwind CSS: Utility-first CSS</span>
+                    </i>
+                    <i class="tooltip">
+                        <img src="/assets/skills/Visual Studio Code (VS Code).png" alt="Vscode">
+                        <span class="tooltiptext">VS Code: Coding platform</span>
+                    </i>
                 </div>
             </div>
         </div>
@@ -95,11 +124,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const icons = document.querySelectorAll('.icons img');
+            const tooltips = document.querySelectorAll('.tooltip');
             const container = document.querySelector('.floot');
             
-            const iconData = Array.from(icons).map(icon => ({
-                element: icon,
+            if (!container) {
+                console.error('Container (.floot) not found!');
+                return;
+            }
+        
+            const iconData = Array.from(tooltips).map(tooltip => ({
+                element: tooltip,
                 x: Math.random() * (container.offsetWidth - 60),
                 y: Math.random() * (container.offsetHeight - 60),
                 vx: (Math.random() - 0.5) * 2,
@@ -142,40 +176,56 @@
         
             animate();
         
-            icons.forEach(icon => {
-                const data = iconData.find(d => d.element === icon);
+            tooltips.forEach(tooltip => {
+                const data = iconData.find(d => d.element === tooltip);
         
-                icon.addEventListener('mouseenter', () => {
+                
+                tooltip.addEventListener('mouseenter', () => {
                     data.isHovered = true;
-                    icon.classList.add('active');
+                    tooltip.classList.add('active');
                 });
         
-                icon.addEventListener('mouseleave', () => {
+                tooltip.addEventListener('mouseleave', () => {
                     data.isHovered = false;
                     data.vx = (Math.random() - 0.5) * 2;
                     data.vy = (Math.random() - 0.5) * 2;
-                    icon.classList.remove('active');
+                    tooltip.classList.remove('active');
                 });
         
-                icon.addEventListener('touchstart', (e) => {
+              
+                tooltip.addEventListener('touchstart', (e) => {
                     e.preventDefault();
                     data.isHovered = true;
-                    icon.classList.add('active');
+                    tooltip.classList.add('active');
                 });
         
-                icon.addEventListener('touchend', (e) => {
+                tooltip.addEventListener('touchend', (e) => {
                     e.preventDefault();
                     data.isHovered = false;
                     data.vx = (Math.random() - 0.5) * 2;
                     data.vy = (Math.random() - 0.5) * 2;
-                    icon.classList.remove('active');
+                    tooltip.classList.remove('active');
                 });
         
-                icon.addEventListener('touchmove', (e) => {
+                tooltip.addEventListener('touchmove', (e) => {
                     e.preventDefault();
                 }, { passive: false });
             });
         });
+        </script>
+       
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
     </script>
+
 </body>
 </html>
