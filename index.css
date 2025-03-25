@@ -118,6 +118,7 @@ span {
     opacity: 0;
     animation: fastFadeIn 0.5s ease forwards;
     animation-delay: 0.3s;
+    padding: 10 5px;
 }
 
 .line-logo, .line-logo1, .line-logo2 {
