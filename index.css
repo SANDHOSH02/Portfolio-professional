@@ -130,7 +130,6 @@ span {
     opacity: 0;
     animation: fastFadeIn 0.5s ease forwards;
     animation-delay: 0.4s;
-    
 }
 
 .line-logo { margin-top: 170px; }
@@ -303,10 +302,6 @@ h4 {
     z-index: 1;
 }
 
-.icons img {
-    position: relative;
-}
-
 .icons img[data-tooltip] {
     position: relative;
 }
@@ -367,7 +362,7 @@ h4 {
     margin: 50px auto;
     padding: 40px;
     background: var(--primary-bg);
-    border-radius: 16px 16px 16px 50px; /* Unique bottom-left curve */
+    border-radius: 16px 16px 16px 50px;
     border: 1px solid var(--accent-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -434,7 +429,7 @@ h4 {
     z-index: 3;
     padding: 25px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px 8px 8px 40px; /* Matches container curve */
+    border-radius: 8px 8px 8px 40px;
     border: 1px solid var(--line-color);
     backdrop-filter: blur(5px);
     transition: var(--transition);
@@ -540,7 +535,7 @@ h4 {
     50% { transform: translateY(-5px); }
 }
 
-/* resume */
+/* Resume */
 #resume {
     position: relative;
     max-width: 900px;
@@ -832,13 +827,189 @@ h4 {
     to { opacity: 1; }
 }
 
+/* mobile */
 
 
 
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
-/* my image */
-
-
-
-
+    .nav {
+        margin-left: 0;
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding-bottom: 70px;
+        overflow-x: hidden;
+    }
     
+    .logo {
+        display: none;
+    }
+    
+    .hero {
+        margin-top: 100px;
+        margin-left: 0;
+        padding: 0 20px;
+        font-size: 14px;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        text-align: center;
+    }
+
+    .image-hero {
+        display: none;
+    }
+
+    .hero-svg {
+        width: 100px;
+        max-width: 100%;
+    }
+
+    .my-img {
+        width: 200px;
+        max-width: 100%;
+        margin: 20px auto;
+        display: block;
+    }
+
+    .box2 {
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 0 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .quote-box {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .mian {
+        margin-top: 0;
+        width: 100%;
+        overflow-x: hidden;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .box3 {
+        display: none;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .project-box {
+        height: 560px;
+        width: 100%;
+    }
+
+    .project-box img {
+        height: 450px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .Skills {
+        padding: 20px 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .floot {
+        height: 300px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .icons img, .tooltip img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tooltip .tooltiptext {
+        width: 120px;
+        font-size: 12px;
+    }
+
+    .about-me {
+        margin: 20px 10px;
+        padding: 20px;
+        border-radius: 12px;
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+    }
+
+    .about-p {
+        font-size: 1.4rem;
+    }
+
+    .about-p1 {
+        font-size: 0.9rem;
+    }
+
+    .readme img {
+        width: 80px;
+        max-width: 100%;
+    }
+
+    .resume {
+        margin: 20px 10px;
+        padding: 15px;
+        border-radius: 20px;
+        min-height: auto;
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+    }
+
+    .mainresume {
+        padding: 20px;
+        margin: 10px;
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+    }
+
+    .resume-title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .resume-intro {
+        font-size: 1rem;
+    }
+
+    .timeline {
+        padding: 15px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .resume-link {
+        font-size: 1.1rem;
+        padding: 10px 20px;
+    }
+
+    .resume-cta {
+        font-size: 1rem;
+    }
+
+    .line {
+        display: none; 
+    }
+}
