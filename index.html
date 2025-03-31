@@ -225,6 +225,8 @@
             </div>
         </div>
 
+        
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const tooltips = document.querySelectorAll('.tooltip');
@@ -325,6 +327,89 @@
       $('[data-toggle="tooltip"]').tooltip();   
     });
     </script>
+
+<script>
+    
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    document.body.appendChild(cursor);
+
+    
+    function updateCursor(x, y) {
+        cursor.style.left = `${x}px`;
+        cursor.style.top = `${y}px`;
+
+        const glitter = document.createElement('div');
+        glitter.classList.add('glitter');
+        glitter.style.left = `${x}px`;
+        glitter.style.top = `${y}px`;
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 6;
+        glitter.style.transform = `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) rotate(${Math.random() * 360}deg)`;
+
+        document.body.appendChild(glitter);
+
+        
+        setTimeout(() => {
+            glitter.remove();
+        }, 500);
+    }
+
+    
+    document.addEventListener('mousemove', (e) => {
+        updateCursor(e.clientX, e.clientY);
+    });
+
+   
+    let isTouching = false;
+    let lastTouchTime = 0;
+    const throttleDelay = 50; 
+
+    document.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        isTouching = true;
+        const touch = e.touches[0];
+        updateCursor(touch.clientX, touch.clientY);
+    }, { passive: false });
+
+    document.addEventListener('touchmove', (e) => {
+        e.preventDefault(); 
+        if (isTouching) {
+            const touch = e.touches[0];
+            const currentTime = Date.now();
+           
+            if (currentTime - lastTouchTime >= throttleDelay) {
+                updateCursor(touch.clientX, touch.clientY);
+                lastTouchTime = currentTime;
+            } else {
+                
+                cursor.style.left = `${touch.clientX}px`;
+                cursor.style.top = `${touch.clientY}px`;
+            }
+        }
+    }, { passive: false });
+
+    document.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        isTouching = false;
+        cursor.style.opacity = '0';
+    }, { passive: false });
+
+    document.addEventListener('touchstart', () => {
+        cursor.style.opacity = '1';
+    });
+
+    
+    document.querySelectorAll('a, button, .tooltip').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
+</script>
 
 </body>
 </html>

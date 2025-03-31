@@ -1021,3 +1021,48 @@ h4 {
     }
      
 }
+
+
+
+
+body, html {
+    cursor: none;
+}
+
+
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(129, 26, 143, 0.8); 
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Star shape */
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+}
+
+
+.glitter {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: rgba(116, 24, 139, 0.7); 
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Star shape */
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    animation: glitterFade 0.5s ease-out forwards;
+}
+
+
+@keyframes glitterFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+}   
