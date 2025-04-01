@@ -329,16 +329,17 @@
     </script>
 
 <script>
-    
+    // Create custom cursor element
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
 
-    
+    // Function to update cursor position and spawn glitter
     function updateCursor(x, y) {
         cursor.style.left = `${x}px`;
         cursor.style.top = `${y}px`;
 
+        // Create glitter particle
         const glitter = document.createElement('div');
         glitter.classList.add('glitter');
         glitter.style.left = `${x}px`;
@@ -350,57 +351,66 @@
 
         document.body.appendChild(glitter);
 
-        
+        // Remove glitter after animation
         setTimeout(() => {
             glitter.remove();
         }, 500);
     }
 
-    
+    // Mouse event for desktop
     document.addEventListener('mousemove', (e) => {
         updateCursor(e.clientX, e.clientY);
     });
 
-   
+    // Touch events for mobile
     let isTouching = false;
     let lastTouchTime = 0;
-    const throttleDelay = 50; 
+    let lastTouchY = 0;
+    let touchStartY = 0;
+    const throttleDelay = 50; // Throttle glitter spawning
 
     document.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        isTouching = true;
         const touch = e.touches[0];
+        isTouching = true;
+        touchStartY = touch.clientY;
+        lastTouchY = touch.clientY;
         updateCursor(touch.clientX, touch.clientY);
-    }, { passive: false });
+        cursor.style.opacity = '1'; // Show cursor on touch
+    }, { passive: true }); // Allow default behavior (scrolling)
 
     document.addEventListener('touchmove', (e) => {
-        e.preventDefault(); 
-        if (isTouching) {
-            const touch = e.touches[0];
-            const currentTime = Date.now();
-           
+        const touch = e.touches[0];
+        const currentTime = Date.now();
+        const deltaY = touch.clientY - lastTouchY;
+
+        // Detect if the movement is primarily vertical (scrolling)
+        const isScrolling = Math.abs(touch.clientY - touchStartY) > 10; // Threshold for scroll detection
+
+        if (isTouching && !isScrolling) {
+            // If not scrolling, update cursor and glitter
             if (currentTime - lastTouchTime >= throttleDelay) {
                 updateCursor(touch.clientX, touch.clientY);
                 lastTouchTime = currentTime;
             } else {
-                
+                // Update cursor position without spawning glitter
                 cursor.style.left = `${touch.clientX}px`;
                 cursor.style.top = `${touch.clientY}px`;
             }
+        } else {
+            // If scrolling, just update cursor position without glitter
+            cursor.style.left = `${touch.clientX}px`;
+            cursor.style.top = `${touch.clientY}px`;
         }
-    }, { passive: false });
+
+        lastTouchY = touch.clientY;
+    }, { passive: true }); // Allow default scrolling
 
     document.addEventListener('touchend', (e) => {
-        e.preventDefault();
         isTouching = false;
-        cursor.style.opacity = '0';
-    }, { passive: false });
+        cursor.style.opacity = '0'; // Hide cursor when touch ends (optional)
+    }, { passive: true });
 
-    document.addEventListener('touchstart', () => {
-        cursor.style.opacity = '1';
-    });
-
-    
+    // Hover effect for desktop only
     document.querySelectorAll('a, button, .tooltip').forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
