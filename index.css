@@ -526,6 +526,231 @@ h4 {
     color: var(--accent-color) !important;
 }
 
+/* Competitions Section */
+#competition {
+    position: relative;
+    background: var(--primary-bg);
+    padding: 80px 20px;
+    margin: 60px 0;
+    overflow: hidden;
+}
+
+.competition-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 20px 24px;
+}
+
+.competition-page > h2 {
+    font-family: "Fira Code", monospace;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--text-white);
+    text-align: center;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(199,120,221,0.3);
+    letter-spacing: 0.5px;
+}
+
+/* Additional typography tweaks limited to the competitions area */
+.competition-page h2, /* covers both the big section title and card titles */
+.competition-page .set h2 {
+    /* tasteful gradient heading for cards & section */
+    background: linear-gradient(90deg, rgba(199,120,221,1), rgba(161,78,185,1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--text-white); /* fallback */
+}
+
+.competition-page > h2 {
+    /* stronger visual for the section title */
+    font-size: 2.6rem;
+    letter-spacing: 0.6px;
+    margin-bottom: 36px;
+}
+
+.competition-page .set h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-transform: none;
+    margin-bottom: 12px;
+}
+
+/* subtle accent underline for card titles */
+.competition-page .set h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), #a14eb9);
+    margin-top: 10px;
+    border-radius: 2px;
+    opacity: 0.95;
+}
+
+/* Paragraphs inside competition cards */
+.competition-page p {
+    color: var(--line-color);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin: 8px 0 0 0;
+    max-width: 100%;
+    opacity: 0.95;
+}
+
+/* Small caption style for image alt/captions inside competition cards */
+.competition-page .caption {
+    color: rgba(171,178,191,0.85);
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+    .competition-page > h2 { font-size: 2rem; }
+    .competition-page .set h2 { font-size: 1.05rem; }
+}
+
+.set {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+    align-items: start;
+}
+
+.set > div {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(199,120,221,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(4px);
+}
+
+.set > div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.5);
+    border-color: rgba(199,120,221,0.35);
+}
+
+.set h2 {
+    font-family: "Fira Code", monospace;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-white);
+    margin: 0 0 16px 0;
+    line-height: 1.3;
+    letter-spacing: 0.2px;
+}
+
+.set img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid rgba(199,120,221,0.08);
+    transition: all 0.4s ease;
+}
+
+.set .one img,
+.set .two img,
+.set .three img,
+.set .four img,
+.set .five img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.set .one img:hover,
+.set .two img:hover,
+.set .three img:hover,
+.set .four img:hover,
+.set .five img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+}
+
+.set > .one, .set > .two, .set > .three, .set > .four, .set > .five {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.set > .one img + img,
+.set > .two img + img,
+.set > .three img + img,
+.set > .four img + img,
+.set > .five img + img {
+    margin-top: 12px;
+}
+
+@media (min-width: 900px) {
+    .set > .one, .set > .two, .set > .three, .set > .four, .set > .five {
+        flex-direction: column;
+    }
+
+    .set img {
+        height: 240px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .set > div:has(img:nth-of-type(2)) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        align-items: stretch;
+    }
+
+    .set > div:has(img:nth-of-type(2)) h2 {
+        grid-column: 1 / -1;
+        margin-bottom: 12px;
+    }
+
+    .set > div:has(img:nth-of-type(2)) img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 700px) {
+    .set {
+        grid-template-columns: 1fr;
+    }
+
+    .set img {
+        height: 200px;
+    }
+
+    .competition-page > h2 {
+        font-size: 2rem;
+    }
+
+    .set > div {
+        padding: 20px;
+    }
+}
+
+/* Add subtle gradient overlay for depth */
+.set > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(199,120,221,0.05) 0%, rgba(199,120,221,0) 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.set > div > * {
+    position: relative;
+    z-index: 1;
+}
+
 #Skills {
     background: var(--primary-bg);
     padding: 40px 20px;
@@ -1325,3 +1550,73 @@ body, html {
         transform: scale(0.2);
     }
 }
+
+/* Lightbox overlay for competition images */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 12, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+.lightbox-overlay img {
+    max-width: 95%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    border: 4px solid rgba(199,120,221,0.06);
+}
+
+
+/* Content box inside overlay (smaller popup) */
+.lightbox-content {
+    width: 820px;
+    max-width: calc(100% - 40px);
+    background: linear-gradient(180deg, rgba(40,44,51,0.98), rgba(24,24,28,0.98));
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+    display: block;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-white);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 10001;
+    transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.lightbox-close:hover { transform: scale(1.05); background: rgba(255,255,255,0.03); }
+
+/* Make sure overlay content uses visible cursor */
+.lightbox-overlay, .lightbox-overlay * { cursor: default !important; }

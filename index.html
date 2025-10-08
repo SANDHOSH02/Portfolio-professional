@@ -231,36 +231,36 @@
     <div class="competition-page">
         <h2>competitions</h2>
 
-     <div class="set">
+        <div class="set">
         <div class="one">
             <h2>Hackathon - HackZion V.1 at AMC Engineering College, Bengaluru</h2>
-            <img src="/assets/competition/competition-one.jpg" alt="">
-            <img src="/assets/competition/competition-two.jpg" alt="">
+            <a class="lightbox" href="/assets/competition/competition-one.jpg"><img src="/assets/competition/competition-one.jpg" alt="HackZion"></a>
+            <a class="lightbox" href="/assets/competition/competition-two.jpg"><img src="/assets/competition/competition-two.jpg" alt="HackZion Team"></a>
 
         </div>
 
         <div class="two">
             <h2>Quantahon 2.0 X IBM Qiskit online , organized by SRM University! </h2>
-            <img src="/assets/competition/competition-three.jpg" alt=""> 
-            <img src="/assets/competition/competition-four.jpg" alt="">
+            <a class="lightbox" href="/assets/competition/competition-three.jpg"><img src="/assets/competition/competition-three.jpg" alt="Quantathon"></a>
+            <a class="lightbox" href="/assets/competition/competition-four.jpg"><img src="/assets/competition/competition-four.jpg" alt="Quantathon Highlights"></a>
         </div>
         <div class="three">
             <h2> 36-hour Hackathon at Karur Kumarasamy College of Engineering</h2>
-            <img src="/assets//competition/ competition-five.jpeg" alt="">
-            <img src="/assets//competition/competition-six.jpeg" alt="">
+            <a class="lightbox" href="/assets/competition/competition-five.jpeg"><img src="/assets/competition/competition-five.jpeg" alt="Karur Hackathon"></a>
+            <a class="lightbox" href="/assets/competition/competition-six.jpg"><img src="/assets/competition/competition-six.jpg" alt="Karur Hackathon Team"></a>
         </div>
 
         <div class="four">
             <h2>Quantahon 2.0 X IBM Qiskit offline in ( SRM chennai ) , organized by SRM University!</h2>
-            <img src="/assets//competition/competition-seven.jpeg" alt="">
-            <img src="/assets//competition/competition-eight.jpeg" alt="">
+            <a class="lightbox" href="/assets/competition/competition-seven.jpeg"><img src="/assets/competition/competition-seven.jpeg" alt="SRM Offline"></a>
+            <a class="lightbox" href="/assets/competition/competition-eight.jpeg"><img src="/assets/competition/competition-eight.jpeg" alt="SRM Event"></a>
 
         </div>
 
         <div class="five">
-            <h2> Major AI Research Challenge! - OpenAI to Z Challenge, a global hackathon focused on archaeological discovery in the Amazon Rainforest using AI</h2>
-                        <img src="/assets//competition/competition-ten.jpeg" alt="">
-                        <img src="/assets//competition/amazon.jpeg" alt="">
+            <h2> Major AI Research Challenge! - OpenAI to Z Challenge, a Global hackathon </h2>
+                        <a class="lightbox" href="/assets/competition/competition-ten.jpeg"><img src="/assets/competition/competition-ten.jpeg" alt="OpenAI to Z"></a>
+                        <a class="lightbox" href="/assets/competition/amazon.jpeg"><img src="/assets/competition/amazon.jpeg" alt="Amazon Archaeology Project"></a>
 
         </div>
         
@@ -498,6 +498,59 @@
             cursor.style.transform = 'translate(-50%, -50%) scale(1)';
         });
     });
+</script>
+
+<!-- Lightbox overlay (popup content) -->
+<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
+    <div class="lightbox-content" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close image">×</button>
+        <img id="lightboxImage" src="" alt="" />
+    </div>
+</div>
+
+<script>
+    (function(){
+        const links = document.querySelectorAll('a.lightbox');
+        const overlay = document.getElementById('lightboxOverlay');
+        const content = document.querySelector('.lightbox-content');
+        const img = document.getElementById('lightboxImage');
+        const closeBtn = document.getElementById('lightboxClose');
+
+        if (!overlay || !img || !content) return;
+
+        function openLightbox(href, alt) {
+            img.src = href;
+            img.alt = alt || '';
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+            // trap focus could be added later
+        }
+
+        function closeLightbox() {
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            img.src = '';
+            img.alt = '';
+        }
+
+        links.forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLightbox(a.href, a.querySelector('img')?.alt);
+            });
+        });
+
+        // Close when clicking outside content
+        overlay.addEventListener('click', (e) => {
+            if (!content.contains(e.target)) closeLightbox();
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    })();
 </script>
 
 </body>
