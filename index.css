@@ -57,7 +57,7 @@ body {
 .pro-img { animation-delay: 0.4s; }
 
 .nav {
-    margin-left: 900px;
+    margin-left: 700px;
     padding: 30px;
     display: flex;
     justify-content: space-between;
@@ -233,6 +233,266 @@ h4 {
     margin: 20px auto;
     padding: 0 20px;
 }
+
+/* Experience Section */
+#experience {
+    position: relative;
+    background: var(--primary-bg);
+    padding: 60px 20px; /* Increased padding for better breathing room */
+    margin: 40px 0;
+    overflow: hidden; /* Prevent content overflow */
+}
+
+.experience-container {
+    max-width: 1200px; /* Slightly wider for modern screens */
+    margin: 0 auto;
+    padding: 0 24px; /* Consistent padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.experience-title {
+    font-family: "Fira Code", monospace;
+    font-size: 2.5rem; /* Larger title for emphasis */
+    color: var(--text-white);
+    text-align: center;
+    margin-bottom: 24px;
+    text-shadow: 0 0 8px rgba(199,120,221,0.4);
+    letter-spacing: 0.5px; /* Subtle letter spacing for readability */
+    transition: transform 0.3s ease; /* Smooth title animation */
+}
+
+.experience-title:hover {
+    transform: scale(1.02); /* Subtle zoom on hover */
+}
+
+.experience-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adaptive grid */
+    gap: 24px; /* Increased gap for better separation */
+    align-items: stretch; /* Ensure cards are equal height */
+    width: 100%;
+}
+
+.exp-card {
+    display: flex;
+    gap: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(199,120,221,0.12);
+    padding: 20px; /* More padding for comfort */
+    border-radius: 16px; /* Softer corners */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden; /* Ensure content stays within bounds */
+}
+
+.exp-card:hover,
+.exp-card:focus-within {
+    transform: translateY(-8px) rotateX(2deg); /* 3D tilt effect */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+    border-color: rgba(199,120,221,0.3); /* Subtle border highlight */
+}
+
+.exp-card:focus-within {
+    outline: 2px solid var(--accent-color); /* Accessibility focus */
+    outline-offset: 2px;
+}
+
+.exp-left {
+    flex: 0 0 80px; /* Slightly larger for logos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.exp-logo {
+    width: 72px; /* Slightly larger logo */
+    height: 72px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    padding: 8px;
+    border: 1px solid rgba(199,120,221,0.12);
+    transition: transform 0.3s ease;
+}
+
+.exp-card:hover .exp-logo {
+    transform: scale(1.1); /* Subtle logo zoom on card hover */
+}
+
+.exp-right h3 {
+    margin: 0 0 8px 0;
+    color: var(--text-white);
+    font-size: 1.25rem; /* Larger for hierarchy */
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.exp-role {
+    margin: 0 0 10px 0;
+    color: var(--accent-color);
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+}
+
+.exp-desc {
+    margin: 0;
+    color: var(--line-color);
+    font-size: 0.95rem;
+    line-height: 1.5; /* Improved readability */
+    max-width: 100%; /* Prevent text overflow */
+}
+
+/* Compatibility styles for the HTML structure used in index.html */
+.experience-page {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 24px;
+}
+
+.experience-page .Company-one,
+.experience-page .Company-two {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(199,120,221,0.08);
+    padding: 20px;
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 24px; /* Space between cards */
+}
+
+.experience-page .Company-one:hover,
+.experience-page .Company-two:hover,
+.experience-page .Company-one:focus-within,
+.experience-page .Company-two:focus-within {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+    border-color: rgba(199,120,221,0.3);
+}
+
+.experience-page .Company-one:focus-within,
+.experience-page .Company-two:focus-within {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.experience-page .Company-one img,
+.experience-page .Company-two img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.03);
+    padding: 8px;
+    border: 1px solid rgba(199,120,221,0.12);
+    flex: 0 0 80px;
+    transition: transform 0.3s ease;
+}
+
+.experience-page .Company-one:hover img,
+.experience-page .Company-two:hover img {
+    transform: scale(1.1);
+}
+
+.experience-page h5 {
+    margin: 0 0 8px 0;
+    color: var(--text-white);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.role {
+    margin: 0;
+    color: var(--line-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .experience-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Tighter grid for medium screens */
+    }
+
+    .experience-title {
+        font-size: 2rem;
+    }
+
+    .exp-card,
+    .experience-page .Company-one,
+    .experience-page .Company-two {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 700px) {
+    .experience-page .Company-one,
+    .experience-page .Company-two {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .experience-page .Company-one img,
+    .experience-page .Company-two img {
+        margin-bottom: 12px;
+    }
+
+    .exp-left {
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .experience-cards {
+        grid-template-columns: 1fr; /* Single column for small screens */
+    }
+
+    .experience-title {
+        font-size: 1.75rem;
+    }
+
+    .experience-container {
+        padding: 0 16px;
+    }
+
+    .nav,
+    .hero,
+    .image-hero {
+        margin-left: 16px; /* Consistent margin */
+    }
+}
+
+/* Animation for card entrance */
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.exp-card,
+.experience-page .Company-one,
+.experience-page .Company-two {
+    animation: cardFadeIn 0.5s ease-out forwards;
+    animation-delay: calc(var(--order) * 0.1s); /* Staggered entrance */
+}
+
+/* Ensure cards have an order for animation */
+.exp-card:nth-child(1) { --order: 1; }
+.exp-card:nth-child(2) { --order: 2; }
+.exp-card:nth-child(3) { --order: 3; }
+.experience-page .Company-one { --order: 1; }
+.experience-page .Company-two { --order: 2; }
 
 .project-box {
     background: var(--primary-bg);
