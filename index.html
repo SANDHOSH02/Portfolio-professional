@@ -13,7 +13,7 @@
     <div class="nav">
         <a href="#projects"><span>#</span>projects</a>
         <a href="#Skills"><span>#</span>Skills</a>
-        <a href="#about-me"><span>#</span>About-me</a>
+        <a href="#about-me"><span>#</span>About</a>
         <a href="#experience"><span>#</span>Experience</a>
         <a href="#competition"><span>#</span>competitions</a>
         <a href="#resume"><span>#</span>Resume</a>
@@ -50,7 +50,48 @@
 
     <img class="box3" src="/assets/box3.svg" alt="">
 
-    <div id="projects">
+
+<div id="projects">
+    <img src="/assets/projects/main.svg" alt="">
+    <div class="project-round projects-grid-round">
+
+        <a class="project-item" href="https://nscet.org/iqarena" target="_blank" rel="noopener noreferrer" aria-label="HackZion project on GitHub">
+            <video class="project-video" src="/assets/iqarena_vid.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">iQarena</span></div>
+        </a>
+
+        <a class="project-item" href="https://nscet.org/iqarena" target="_blank" rel="noopener noreferrer" aria-label="iQarena project link">
+            <video class="project-video" src="/assets/projects/project2_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">iQarena / Competition</span></div>
+        </a>
+
+        <a class="project-item" href="https://github.com/bnaveenbharathi/PERSONALIZED-LEARNING-PLATFORM" target="_blank" rel="noopener noreferrer" aria-label="Personalized Learning Platform on GitHub">
+            <video class="project-video" src="/assets/projects/project3_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">Personalized Learning</span></div>
+        </a>
+
+        <a class="project-item" href="https://github.com/Nerd-Ninjas/Hack-Fest" target="_blank" rel="noopener noreferrer" aria-label="Hack-Fest project on GitHub">
+            <video class="project-video" src="/assets/projects/project4_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">Hack-Fest</span></div>
+        </a>
+
+        <a class="project-item" href="https://github.com/InnovativeSPIN/NSCET-HACKATHON-MANAGEMENT" target="_blank" rel="noopener noreferrer" aria-label="NSCET Hackathon Management on GitHub">
+            <video class="project-video" src="/assets/projects/project5_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">Hackathon Management</span></div>
+        </a>
+
+        <a class="project-item" href="https://github.com/Nerd-Ninjas/Trust-Chain-Quantathon-2.0" target="_blank" rel="noopener noreferrer" aria-label="Trust Chain Quantathon on GitHub">
+            <video class="project-video" src="/assets/projects/project6_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">Trust-Chain Quantathon</span></div>
+        </a>
+
+    </div>
+
+</div>
+
+
+
+    <!-- <div id="projects">
         <img src="/assets/projects/main.svg" alt="">
         <div class="projects-grid">
             <div class="project-box">
@@ -78,7 +119,10 @@
                 <h3><a class="project-a" href="https://github.com/Nerd-Ninjas/Trust-Chain-Quantathon-2.0" target="_blank">Github Link</a></h3>
             </div>
         </div>
-    </div>
+    </div> -->
+
+
+
 
     <div id="Skills">
         <img src="/assets/projects/skills.svg" alt="">
@@ -397,6 +441,74 @@
                 }, { passive: false });
             });
         });
+        </script>
+        
+        <script>
+            // Project circle interactions: play on hover; first tap on mobile previews, second tap follows the link
+            document.addEventListener('DOMContentLoaded', () => {
+                // Try to autoplay all project videos on load (muted required for autoplay in many browsers)
+                document.querySelectorAll('.project-video').forEach(v => {
+                    try {
+                        v.muted = true;
+                        v.playsInline = true;
+                        v.setAttribute('playsinline', '');
+                        v.setAttribute('muted', '');
+                        // attempt to play; some browsers may block autoplay despite muted attribute
+                        const p = v.play();
+                        if (p && typeof p.catch === 'function') p.catch(() => {});
+                    } catch (e) {
+                        // ignore
+                    }
+                });
+
+                // Ensure continuous playback: restart on 'ended' and attempt replay on 'pause' or 'stalled'
+                document.querySelectorAll('.project-video').forEach(v => {
+                    // On 'ended' - try to replay immediately
+                    v.addEventListener('ended', () => {
+                        try { v.currentTime = 0; v.play(); } catch (e) {}
+                    });
+
+                    // On unexpected pause, try to resume after a short delay
+                    v.addEventListener('pause', () => {
+                        // if user intentionally paused, respect that; only auto-resume if still muted and loop intended
+                        if (v.muted) {
+                            setTimeout(() => { try { v.play(); } catch (e) {} }, 300);
+                        }
+                    });
+
+                    // On stalled or waiting, attempt to load and play
+                    v.addEventListener('stalled', () => {
+                        try { v.load(); v.play(); } catch (e) {}
+                    });
+                    v.addEventListener('suspend', () => {
+                        try { v.play(); } catch (e) {}
+                    });
+                });
+
+                document.querySelectorAll('.project-item').forEach(item => {
+                    const video = item.querySelector('video');
+                    if (!video) return;
+
+                    // Ensure video is muted so autoplay works in most browsers
+                    video.muted = true;
+
+                    item.addEventListener('mouseenter', () => { try { video.play(); } catch (e) {} });
+                    item.addEventListener('mouseleave', () => { try { video.pause(); video.currentTime = 0; } catch (e) {} });
+
+                    // For touch devices: first tap previews, second tap follows link
+                    item.addEventListener('click', (e) => {
+                        if (video.paused) {
+                            e.preventDefault();
+                            try { video.play(); } catch (err) {}
+                            // short visual indicator (optional)
+                            item.classList.add('previewing');
+                            setTimeout(() => item.classList.remove('previewing'), 1200);
+                        } else {
+                            // video playing -> allow default behavior (navigate)
+                        }
+                    });
+                });
+            });
         </script>
        
 
