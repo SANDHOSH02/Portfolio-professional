@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="/assets/santhosh image.jpeg">
+    <link rel="icon" type="image/x-icon" href="/assets/santhosh-image.jpg">
     <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -55,24 +55,24 @@
     <img src="/assets/projects/main.svg" alt="">
     <div class="project-round projects-grid-round">
 
-        <a class="project-item" href="https://nscet.org/iqarena" target="_blank" rel="noopener noreferrer" aria-label="HackZion project on GitHub">
+        <a class="project-item" href="https://nscet.org/iqarena" target="_blank" rel="noopener noreferrer" aria-label="HackZion project on GitHub".">
             <video class="project-video" src="/assets/iqarena_vid.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">iQarena</span></div>
+            <div class="project-overlay"><span class="project-title"></span></div>
         </a>
 
-        <a class="project-item" href="https://nscet.org/iqarena" target="_blank" rel="noopener noreferrer" aria-label="iQarena project link">
-            <video class="project-video" src="/assets/projects/project2_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">iQarena / Competition</span></div>
+        <a class="project-item" href="https://github.com/SANDHOSH02/Result-Portal" target="_blank" rel="noopener noreferrer" aria-label="Result-Portal project link">
+            <video class="project-video" src="/assets/result.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title"></span></div>
         </a>
 
-        <a class="project-item" href="https://github.com/bnaveenbharathi/PERSONALIZED-LEARNING-PLATFORM" target="_blank" rel="noopener noreferrer" aria-label="Personalized Learning Platform on GitHub">
-            <video class="project-video" src="/assets/projects/project3_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">Personalized Learning</span></div>
+        <a class="project-item" href="http://nscet.org/hackathon" target="_blank" rel="noopener noreferrer" aria-label="NSCET-HACKATHON-MANAGEMENT">
+            <video class="project-video" src="/assets/hackathon.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title">   </span></div>
         </a>
 
-        <a class="project-item" href="https://github.com/Nerd-Ninjas/Hack-Fest" target="_blank" rel="noopener noreferrer" aria-label="Hack-Fest project on GitHub">
-            <video class="project-video" src="/assets/projects/project4_intro.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">Hack-Fest</span></div>
+        <a class="project-item" href="https://code-clash-black.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Code clash">
+            <video class="project-video" src="/assets/code-clash.mp4" muted playsinline loop autoplay preload="auto"></video>
+            <div class="project-overlay"><span class="project-title"></span></div>
         </a>
 
         <a class="project-item" href="https://github.com/InnovativeSPIN/NSCET-HACKATHON-MANAGEMENT" target="_blank" rel="noopener noreferrer" aria-label="NSCET Hackathon Management on GitHub">
@@ -484,6 +484,45 @@
                         try { v.play(); } catch (e) {}
                     });
                 });
+
+                // --- Text-to-speech on hover for elements with `data-tts` ---
+                if ('speechSynthesis' in window) {
+                    document.querySelectorAll('[data-tts]').forEach(el => {
+                        let utterance = null;
+                        const text = el.getAttribute('data-tts');
+
+                        const speak = () => {
+                            try {
+                                // cancel any ongoing speech and speak this text
+                                window.speechSynthesis.cancel();
+                                utterance = new SpeechSynthesisUtterance(text);
+                                utterance.lang = 'en-US';
+                                utterance.rate = 1;
+                                utterance.pitch = 1;
+                                window.speechSynthesis.speak(utterance);
+                            } catch (e) {}
+                        };
+
+                        const stop = () => {
+                            try { window.speechSynthesis.cancel(); } catch (e) {}
+                        };
+
+                        el.addEventListener('mouseenter', speak);
+                        el.addEventListener('mouseleave', stop);
+
+                        // touch-friendly: first touch will trigger speech (previews), avoid double-fire
+                        let touchTimer = null;
+                        el.addEventListener('touchstart', (ev) => {
+                            // prevent immediate navigation if user intends to preview; do not block default here
+                            if (touchTimer) return;
+                            speak();
+                            // short lock to avoid repeated starts
+                            touchTimer = setTimeout(() => { touchTimer = null; }, 1200);
+                        }, { passive: true });
+
+                        el.addEventListener('touchend', () => { stop(); }, { passive: true });
+                    });
+                }
 
                 document.querySelectorAll('.project-item').forEach(item => {
                     const video = item.querySelector('video');
