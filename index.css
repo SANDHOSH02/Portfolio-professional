@@ -1448,7 +1448,11 @@ h4 {
     }
 
     .image-hero {
-        display: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        margin-left: 0;
+        margin-top: 20px;
     }
 
     .hero-svg {
@@ -1601,6 +1605,19 @@ h4 {
     }
     .line-logo{
         margin-top: -80px;
+    }
+
+    .image {
+        width: 150px;
+        height: 150px;
+        border: 5px solid var(--primary-bg);
+        padding: 3px;
+        margin: 10px auto;
+        display: block;
+    }
+
+    .image:hover {
+        transform: scale(1.03);
     }
      
 }
