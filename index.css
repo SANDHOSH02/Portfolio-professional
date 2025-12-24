@@ -1717,3 +1717,28 @@ body, html {
 
 /* Make sure overlay content uses visible cursor */
 .lightbox-overlay, .lightbox-overlay * { cursor: default !important; }
+
+
+
+.image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 8px solid var(--primary-bg);
+    box-shadow: 
+        0 0 0 2px var(--accent-color),
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        inset 0 0 15px rgba(199, 120, 221, 0.1);
+    border-radius: 8px;
+    padding: 4px;
+    background: linear-gradient(135deg, rgba(199, 120, 221, 0.15), rgba(40, 44, 51, 0.9));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 0 2px var(--accent-color),
+        0 12px 30px rgba(199, 120, 221, 0.3),
+        inset 0 0 20px rgba(199, 120, 221, 0.15);
+}
