@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Portfolio - Sandhosh</title>
     <link rel="icon" type="image/x-icon" href="/assets/santhosh-image.jpg">
     <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -17,12 +17,14 @@
         <a href="#experience"><span>#</span>Experience</a>
         <a href="#competition"><span>#</span>competitions</a>
         <a href="#resume"><span>#</span>Resume</a>
+        <!-- <a href="#journey"><span>#</span>Journey</a> -->
     </div>
 
     <div class="line lineres "  >
         <a href="https://github.com/sandhosh02"><img class="line-logo" src="/assets/githubicon.svg" alt=""></a>
         <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/"><img class="line-logo1" src="/assets/linkedinicon.svg" alt=""></a>
         <a href="https://leetcode.com/u/santhoshgowravan/"><img class="line-logo2" src="/assets/leetcodeicon.svg" alt=""></a>
+        <a href=""></a>
     </div>
     
 
@@ -37,7 +39,17 @@
         </div>
         <div class="image-hero">
             <!-- <img class="hero-svg" src="/assets/box.svg" alt=""> -->
-            <img class="image" src="/assets/sandhosh .jpeg" alt="">
+            <div class="flip-card" id="imageFlipCard">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img class="image" src="/assets/sandhosh .jpeg" alt="">
+                    </div>
+                    <div class="flip-card-back">
+                        <img class="image" src="/assets/sandhosh .jpeg" alt="">
+                        <a href="other-side.html" class="flip-button">Other Side of Me</a>
+                    </div>
+                </div>
+            </div>
            
         </div>
          
@@ -354,6 +366,19 @@
         </div>
 
         
+
+    <script>
+        // Flip card on click
+        document.addEventListener('DOMContentLoaded', () => {
+            const flipCard = document.getElementById('imageFlipCard');
+            
+            if (flipCard) {
+                flipCard.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            }
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
