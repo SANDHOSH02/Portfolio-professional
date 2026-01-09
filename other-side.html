@@ -21,7 +21,12 @@
         body {
             font-family: "Fira Code", monospace, sans-serif;
             background-color: var(--bg-dark);
+            background-image: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            background-position: 0 0, 40px 60px;
             overflow-x: hidden;
+            position: relative;
         }
 
         .back-home {
@@ -134,7 +139,6 @@
         }
 
         .astronomy-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
 
         .planet {
@@ -169,7 +173,6 @@
 
         /* Physics Section */
         .physics-section {
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
         }
 
         .atom-container {
@@ -230,7 +233,6 @@
 
         /* Space Exploration Section */
         .space-section {
-            background: linear-gradient(135deg, #000000 0%, #434343 100%);
         }
 
         /* Space section background video */
@@ -274,7 +276,6 @@
 
         /* Cricket Section */
         .cricket-section {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
         }
 
         .cricket-ball {
@@ -312,7 +313,6 @@
 
         /* Anime Section */
         .anime-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .sakura-container {
@@ -389,7 +389,6 @@
             align-items: center;
             justify-content: center;
             padding: 80px 40px;
-            background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
             position: relative;
             overflow: hidden;
         }
@@ -460,12 +459,12 @@
     </section>
 
     <!-- Astronomy Section -->
-    <section class="section astronomy-section">
+    <!-- <section class="section astronomy-section">
         <div class="planet planet-1"></div>
         <div class="planet planet-2"></div>
         <div class="content-wrapper">
             <div class="content-text">
-                <span class="icon">🌌</span>
+                <span class="icon"></span>
                 <h2><span>Astronomy</span> & Space</h2>
                 <p>Fascinated by the cosmos, from black holes to exoplanets. I spend countless nights 
                    stargazing and following space missions.</p>
@@ -474,7 +473,7 @@
             </div>
             <div class="visual-content"></div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Physics Section -->
     <section class="section physics-section">
@@ -492,7 +491,7 @@
                 </div>
             </div>
             <div class="content-text">
-                <span class="icon">⚛️</span>
+                <span class="icon"></span>
                 <h2><span>Physics</span></h2>
                 <p>The fundamental laws that govern our reality never cease to amaze me. From quantum 
                    mechanics to relativity, physics provides the perfect blend of mathematics and philosophy.</p>
@@ -505,7 +504,7 @@
     <!-- Space Exploration Section -->
     <section class="section space-section">
         <!-- Background space video -->
-        <video class="space-bg" src="other-side/space.mp4" poster="assets/me.png" muted playsinline autoplay loop preload="auto"></video>
+        <!-- <video class="space-bg" src="other-side/space.mp4" poster="assets/me.png" muted playsinline autoplay loop preload="auto"></video> -->
         <div class="content-wrapper">
             <div class="content-text">
                 <span class="icon"></span>
@@ -538,7 +537,7 @@
         <div class="content-wrapper">
             <div class="visual-content"></div>
             <div class="content-text">
-                <span class="icon">🏏</span>
+                <span class="icon"></span>
                 <h2><span>Cricket</span></h2>
                 <p>Cricket isn't just a sport—it's a strategic battle that combines skill, patience, 
                    and teamwork.</p>
@@ -553,7 +552,7 @@
         <div class="sakura-container" id="sakura-container"></div>
         <div class="content-wrapper">
             <div class="content-text">
-                <span class="icon">🎌</span>
+                <span class="icon"></span>
                 <h2><span>Anime</span></h2>
                 <p>Anime offers incredible storytelling that blends art, philosophy, and emotion. 
                    From thought-provoking narratives to stunning animation.</p>
