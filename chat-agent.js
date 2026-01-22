@@ -18,7 +18,7 @@ class ChatAgent {
     }
 
     init() {
-        // Initialize speech recognition
+      
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             this.recognition = new SpeechRecognition();
@@ -186,7 +186,7 @@ class ChatAgent {
                 const errorData = await response.json().catch(() => ({}));
                 console.error('API Error:', response.status, errorData);
                 
-                // Try next model if available
+                
                 if (this.currentModelIndex < this.models.length - 1) {
                     this.currentModelIndex++;
                     console.log(`Trying alternative model: ${this.models[this.currentModelIndex]}`);
@@ -213,7 +213,7 @@ class ChatAgent {
             this.addMessage(aiMessage, 'agent');
             this.speakResponse(aiMessage);
             
-            // Reset model index on success
+            
             this.currentModelIndex = 0;
             
         } catch (error) {
@@ -238,18 +238,18 @@ class ChatAgent {
     }
 
     speakResponse(text) {
-        // Cancel any ongoing speech
+        
         if (this.synthesis.speaking) {
             this.synthesis.cancel();
         }
 
-        // Create speech utterance
+        
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.rate = 1.0;
         utterance.pitch = 1.0;
         utterance.volume = 1.0;
         
-        // Use a natural voice if available
+        
         const voices = this.synthesis.getVoices();
         const preferredVoice = voices.find(voice => 
             voice.lang.startsWith('en') && voice.name.includes('Female')
@@ -263,7 +263,7 @@ class ChatAgent {
     }
 }
 
-// Initialize chat agent when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
     const chatAgent = new ChatAgent();
 });
