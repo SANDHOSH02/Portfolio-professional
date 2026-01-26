@@ -303,6 +303,7 @@
         .badge-leave { background: #e06c75; color: #fff; }
         .badge-halfday { background: #e5c07b; color: #000; }
         .badge-wfh { background: #61afef; color: #fff; }
+        .badge-holiday { background: #c778dd; color: #fff; }
 
         /* Header Section */
         .other-header {
@@ -489,6 +490,7 @@
                         <button class="status-btn" data-status="Leave">Leave</button>
                         <button class="status-btn" data-status="Half Day">Half Day</button>
                         <button class="status-btn" data-status="WFH">Work From Home</button>
+                        <button class="status-btn" data-status="Government Holiday">Government Holiday</button>
                     </div>
                     <label for="shortNotes" style="color: var(--line-color); margin-top: 12px; display: block;">2 Words / Notes</label>
                     <input id="shortNotes" type="text" placeholder="e.g., Good work, Meeting done" style="width: 100%; background: #1f2329; color: var(--text-white); border: 1px solid var(--line-color); border-radius: 6px; padding: 8px 10px; margin-bottom: 12px;" />
@@ -829,7 +831,8 @@
                     'Present': 'badge-present',
                     'Leave': 'badge-leave',
                     'Half Day': 'badge-halfday',
-                    'WFH': 'badge-wfh'
+                    'WFH': 'badge-wfh',
+                    'Government Holiday': 'badge-holiday'
                 };
                 return map[status] || 'badge-present';
             }
