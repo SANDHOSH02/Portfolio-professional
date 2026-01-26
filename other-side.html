@@ -29,6 +29,40 @@
             position: relative;
         }
 
+        /* Password gate overlay */
+        .auth-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            backdrop-filter: blur(2px);
+        }
+        .auth-box {
+            background: var(--bg-dark);
+            color: var(--text-white);
+            border: 1px solid var(--line-color);
+            border-radius: 12px;
+            width: min(420px, 92vw);
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .auth-box h2 { font-size: 20px; margin-bottom: 8px; }
+        .auth-box p { color: var(--line-color); font-size: 14px; margin-bottom: 12px; }
+        .auth-box input {
+            width: 100%;
+            background: #1f2329;
+            color: var(--text-white);
+            border: 1px solid var(--line-color);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .auth-error { color: #e06c75; font-size: 12px; margin-top: 8px; }
+        body.locked { overflow: hidden; }
+        body.locked .auth-overlay { display: flex; }
+
         .back-home {
             position: fixed;
             top: 30px;
@@ -426,7 +460,49 @@
         }
     </style>
 </head>
-<body>
+<body class="locked">
+    <!-- Password Gate UI -->
+    <div id="authModal" class="auth-overlay" aria-hidden="false">
+        <div class="auth-box" role="dialog" aria-labelledby="authTitle">
+            <h2 id="authTitle">Enter Password</h2>
+            <p>Access to this page is protected.</p>
+            <input id="authInput" type="password" placeholder="Password" autocomplete="current-password" />
+            <div class="form-actions" style="margin-top: 12px;">
+                <button id="authSubmit">Unlock</button>
+            </div>
+            <div id="authError" class="auth-error" style="display:none;">Incorrect password. Try again.</div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const PASS = 'ant02';
+            const input = document.getElementById('authInput');
+            const submit = document.getElementById('authSubmit');
+            const err = document.getElementById('authError');
+            try {
+                const cached = sessionStorage.getItem('os_pass');
+                if (cached === PASS) {
+                    document.body.classList.remove('locked');
+                    return;
+                }
+            } catch (_) {}
+
+            function tryUnlock() {
+                if (input.value === PASS) {
+                    try { sessionStorage.setItem('os_pass', PASS); } catch (_) {}
+                    document.body.classList.remove('locked');
+                    err.style.display = 'none';
+                } else {
+                    err.style.display = 'block';
+                    input.select();
+                }
+            }
+
+            submit.addEventListener('click', tryUnlock);
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+            setTimeout(() => input && input.focus(), 0);
+        })();
+    </script>
     <a href="index.html" class="back-home">← Back to Portfolio</a>
     <a href="#" class="report-button">Report</a>
     <a href="#" class="short-report-button">Short Report</a>
