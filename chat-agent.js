@@ -1,7 +1,7 @@
 
 class ChatAgent {
     constructor() {
-        this.apiKey = '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';
+        this.apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
         this.apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
         this.recognition = null;
         this.synthesis = window.speechSynthesis;
