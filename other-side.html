@@ -84,7 +84,7 @@
         }
 
         .report-button {
-            position: fixed;
+            position: absolute;
             top: 30px;
             right: 30px;
             background-color: var(--accent-color);
@@ -104,7 +104,7 @@
         }
 
         .short-report-button {
-            position: fixed;
+            position: absolute;
             top: 80px;
             right: 30px;
             background-color: var(--accent-color);
@@ -432,9 +432,114 @@
 
 
 
+        /* Content Sections */
+        .content-section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: 48px;
+            color: var(--text-white);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .content-card {
+            background: rgba(40, 44, 52, 0.9);
+            border: 1px solid var(--line-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(199, 120, 221, 0.3);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 24px;
+            color: var(--text-white);
+            margin-bottom: 15px;
+        }
+
+        .card-description {
+            color: var(--line-color);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .section-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+        }
+
         @media (max-width: 968px) {
             .header-content h1 {
                 font-size: 40px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .content-section {
+                padding: 60px 20px;
             }
 
             .back-home {
@@ -589,6 +694,141 @@
         </div>
     </section>
 
+    <!-- Space Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+        <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=1600');"></div>
+        <div class="section-container">
+            <h2 class="section-title"><span>Space</span> & Universe</h2>
+            <div class="section-content">
+                <div class="content-card">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Cosmic Wonders</h3>
+                    <p class="card-description">
+                        Fascinated by the mysteries of black holes, neutron stars, and the vast expanse of the cosmos. 
+                        Every documentary about space exploration ignites my sense of wonder about our place in the universe.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">🚀</span>
+                    <h3 class="card-title">Space Exploration</h3>
+                    <p class="card-description">
+                        Following missions from SpaceX, NASA, and ISRO closely. The idea of humanity becoming a multi-planetary 
+                        species is not just science fiction anymore—it's the future we're building.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">🔭</span>
+                    <h3 class="card-title">Stargazing</h3>
+                    <p class="card-description">
+                        There's something humbling about looking up at the night sky and realizing how small we are. 
+                        Spotting constellations and planets reminds me that there's always more to discover.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #2d1b00 0%, #1a0f00 100%);">
+        <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600');"></div>
+        <div class="section-container">
+            <h2 class="section-title"><span>Books</span> & Reading</h2>
+            <div class="section-content">
+                <div class="content-card">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Sci-Fi & Fantasy</h3>
+                    <p class="card-description">
+                        Lost in worlds created by Asimov, Clarke, and Tolkien. Science fiction teaches us to imagine 
+                        impossible futures, while fantasy reminds us of the power of storytelling and mythmaking.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">🧠</span>
+                    <h3 class="card-title">Philosophy & Psychology</h3>
+                    <p class="card-description">
+                        Exploring the human mind through works on cognitive science, philosophy, and psychology. 
+                        Understanding how we think helps me build better solutions and connect with people.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">💡</span>
+                    <h3 class="card-title">Technology & Innovation</h3>
+                    <p class="card-description">
+                        Staying updated with books on AI, blockchain, and emerging technologies. Reading about innovation 
+                        fuels my own creative process and keeps me ahead in the tech landscape.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anime Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #1a0033 0%, #0d001a 100%);">
+        <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1600');"></div>
+        <div class="section-container">
+            <h2 class="section-title"><span>Anime</span> & Manga</h2>
+            <div class="section-content">
+                <div class="content-card">
+                    <span class="card-icon">⚔️</span>
+                    <h3 class="card-title">Epic Storytelling</h3>
+                    <p class="card-description">
+                        From Attack on Titan to Fullmetal Alchemist, anime shows complex narratives, deep character 
+                        development, and philosophical themes that rival any literary masterpiece.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">🎨</span>
+                    <h3 class="card-title">Art & Animation</h3>
+                    <p class="card-description">
+                        Appreciating the incredible artistry in anime—from Studio Ghibli's breathtaking landscapes to 
+                        the fluid action sequences in modern battle shounen. Every frame is a work of art.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">🎭</span>
+                    <h3 class="card-title">Life Lessons</h3>
+                    <p class="card-description">
+                        Anime teaches resilience, friendship, and determination. Stories about never giving up and 
+                        protecting what matters most resonate deeply and inspire me in my own journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cricket Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #001a00 0%, #000d00 100%);">
+        <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=1600');"></div>
+        <div class="section-container">
+            <h2 class="section-title"><span>Cricket</span> Passion</h2>
+            <div class="section-content">
+                <div class="content-card">
+                    <span class="card-icon">🏏</span>
+                    <h3 class="card-title">The Gentleman's Game</h3>
+                    <p class="card-description">
+                        Cricket isn't just a sport—it's a test of patience, strategy, and mental strength. Whether it's 
+                        Test cricket's slow burn or T20's explosive action, every format has its own charm.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">🇮🇳</span>
+                    <h3 class="card-title">Team India</h3>
+                    <p class="card-description">
+                        Following the Indian cricket team through victories and defeats. The passion, the nail-biting 
+                        finishes, and the moments of pure brilliance make it more than just a game.
+                    </p>
+                </div>
+                <div class="content-card">
+                    <span class="card-icon">📊</span>
+                    <h3 class="card-title">Stats & Strategy</h3>
+                    <p class="card-description">
+                        Analyzing player statistics, match strategies, and team compositions. Cricket analytics combines 
+                        my love for numbers with the excitement of the sport.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- jsPDF for PDF export -->
