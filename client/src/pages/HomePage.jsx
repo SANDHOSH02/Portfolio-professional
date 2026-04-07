@@ -1,5 +1,6 @@
 import ChatWidget from '../components/ChatWidget'
 import Nav from '../components/Nav'
+import ModeToggle from '../components/ModeToggle'
 import SocialLine from '../components/SocialLine'
 import Logo from '../components/Logo'
 import Hero from '../components/Hero'
@@ -18,6 +19,7 @@ export default function HomePage() {
   return (
     <>
       <ChatWidget />
+      <ModeToggle />
       <Nav />
       <SocialLine />
       <Logo />

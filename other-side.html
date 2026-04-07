@@ -123,6 +123,37 @@
             transform: translateX(5px);
         }
 
+        /* Camera top button */
+        .camera-top {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .camera-top .camera-button {
+            background-color: var(--accent-color);
+            color: var(--text-white);
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: 2px solid var(--accent-color);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .camera-top .camera-thumb {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 2px solid var(--accent-color);
+            display: none;
+        }
+
         /* Report Modal */
         .modal {
             position: fixed;
@@ -611,6 +642,11 @@
     <a href="index.html" class="back-home">← Back to Portfolio</a>
     <a href="#" class="report-button">Report</a>
     <a href="#" class="short-report-button">Short Report</a>
+    <div class="camera-top">
+        <button id="openCameraBtn" class="camera-button">Open Camera</button>
+        <button id="quickCaptureBtn" class="camera-button">Capture Photo</button>
+        <img id="cameraThumb" class="camera-thumb" alt="Saved photo" />
+    </div>
 
     <!-- Report Modal -->
     <div id="reportModal" class="modal" aria-hidden="true">
@@ -642,6 +678,23 @@
                     </div>
                 </div>
             </div>
+
+                    <!-- Camera Modal -->
+                    <div id="cameraOverlay" class="modal" aria-hidden="true">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Camera</h2>
+                                <button id="closeCamera" class="close-modal" aria-label="Close">×</button>
+                            </div>
+                            <div class="modal-body" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+                                <video id="cameraVideo" autoplay playsinline style="width:100%; max-width:640px; border-radius:8px; background:#000;"></video>
+                                <div class="form-actions" style="margin-top:6px;">
+                                    <button id="capturePhoto">Capture Photo</button>
+                                    <button id="closeCamera2" class="secondary">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
         </div>
     </div>
 
@@ -1417,6 +1470,128 @@
                 selectedYear = parseInt(yearSelect.value, 10);
                 renderCalendar(selectedYear, selectedMonth);
             });
+        })();
+    </script>
+    <script>
+        (function() {
+            const openBtn = document.getElementById('openCameraBtn');
+            const quickCaptureBtn = document.getElementById('quickCaptureBtn');
+            const overlay = document.getElementById('cameraOverlay');
+            const closeBtn = document.getElementById('closeCamera');
+            const closeBtn2 = document.getElementById('closeCamera2');
+            const video = document.getElementById('cameraVideo');
+            const captureBtn = document.getElementById('capturePhoto');
+            const thumb = document.getElementById('cameraThumb');
+            let stream = null;
+
+            function loadThumb() {
+                try {
+                    const data = localStorage.getItem('cameraPhoto');
+                    if (data) {
+                        thumb.src = data;
+                        thumb.style.display = 'block';
+                    } else {
+                        thumb.style.display = 'none';
+                    }
+                } catch (e) {
+                    console.warn('Could not load saved photo', e);
+                }
+            }
+
+            function stopStream() {
+                if (stream) {
+                    stream.getTracks().forEach(t => t.stop());
+                    stream = null;
+                }
+                try { video.srcObject = null; } catch (_) {}
+            }
+
+            function openCamera() {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                .then(s => {
+                    stream = s;
+                    video.srcObject = s;
+                    overlay.classList.add('show');
+                    overlay.setAttribute('aria-hidden', 'false');
+                    video.play().catch(() => {});
+                })
+                .catch(err => {
+                    alert('Unable to access camera: ' + (err && err.message ? err.message : err));
+                });
+            }
+
+            function closeCameraModal() {
+                overlay.classList.remove('show');
+                overlay.setAttribute('aria-hidden', 'true');
+                stopStream();
+            }
+
+            openBtn.addEventListener('click', (e) => { e.preventDefault(); openCamera(); });
+            closeBtn.addEventListener('click', closeCameraModal);
+            closeBtn2.addEventListener('click', closeCameraModal);
+
+            captureBtn.addEventListener('click', () => {
+                if (!video.videoWidth || !video.videoHeight) return alert('Camera not ready');
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                try {
+                    const dataUrl = canvas.toDataURL('image/png');
+                    localStorage.setItem('cameraPhoto', dataUrl);
+                    thumb.src = dataUrl;
+                    thumb.style.display = 'block';
+                    alert('Photo captured and saved locally');
+                } catch (e) {
+                    alert('Failed to save photo: ' + e.message);
+                }
+                closeCameraModal();
+            });
+
+            // Close when clicking overlay background
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeCameraModal(); });
+
+            // load existing on init
+            loadThumb();
+
+            // Quick capture: open camera, take single frame, save, and stop (no modal)
+            if (quickCaptureBtn) {
+                quickCaptureBtn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        const s = await navigator.mediaDevices.getUserMedia({ video: true });
+                        const tmpVideo = document.createElement('video');
+                        tmpVideo.autoplay = true;
+                        tmpVideo.playsInline = true;
+                        tmpVideo.style.display = 'none';
+                        document.body.appendChild(tmpVideo);
+                        tmpVideo.srcObject = s;
+                        await new Promise((res) => {
+                            tmpVideo.onloadedmetadata = () => res();
+                            // fallback
+                            setTimeout(res, 600);
+                        });
+                        const w = tmpVideo.videoWidth || 640;
+                        const h = tmpVideo.videoHeight || 480;
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(tmpVideo, 0, 0, w, h);
+                        const dataUrl = canvas.toDataURL('image/png');
+                        try { localStorage.setItem('cameraPhoto', dataUrl); } catch (_) {}
+                        thumb.src = dataUrl;
+                        thumb.style.display = 'block';
+                        // cleanup
+                        s.getTracks().forEach(t => t.stop());
+                        tmpVideo.remove();
+                        alert('Photo captured and saved locally');
+                    } catch (err) {
+                        alert('Unable to capture photo: ' + (err && err.message ? err.message : err));
+                    }
+                });
+            }
         })();
     </script>
 </body>

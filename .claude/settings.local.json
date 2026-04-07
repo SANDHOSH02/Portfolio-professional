@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la *.sh)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir -p \"C:/Users/SandhoshGowravan/Music/Portfolio-professional/client/src/styles\")",
+      "Bash(cp \"C:/Users/SandhoshGowravan/Music/Portfolio-professional/index.css\" \"C:/Users/SandhoshGowravan/Music/Portfolio-professional/client/src/styles/index.css\")",
+      "Bash(npm run:*)",
+      "Bash(timeout 8 npx vite --host)",
+      "Skill(ralph-loop:cancel-ralph)"
+    ]
+  }
+}

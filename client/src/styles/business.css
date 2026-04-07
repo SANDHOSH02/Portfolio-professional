@@ -1,0 +1,631 @@
+/* ============================================
+   Business Mode Styles
+   Reuses existing CSS variables from index.css:
+   --primary-bg, --text-white, --accent-color,
+   --line-color, --transition, --fast-transition
+   ============================================ */
+
+/* --- Mode Toggle (always visible) --- */
+.mode-toggle-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(40, 44, 51, 0.9);
+  border: 1px solid var(--line-color);
+  border-radius: 30px;
+  padding: 6px 16px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+}
+
+.mode-toggle:hover {
+  border-color: var(--accent-color);
+}
+
+.mode-label {
+  font-family: "Fira Code", monospace;
+  font-size: 12px;
+  color: var(--line-color);
+  transition: var(--transition);
+}
+
+.mode-label.active {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.mode-toggle-track {
+  width: 36px;
+  height: 18px;
+  background: var(--line-color);
+  border-radius: 9px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.mode-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.mode-toggle-thumb.business {
+  left: 20px;
+}
+
+/* --- Business Layout --- */
+.business-mode {
+  background-color: var(--primary-bg);
+  color: var(--text-white);
+  font-family: "Fira Code", monospace;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.business-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  position: sticky;
+  top: 0;
+  background: rgba(40, 44, 51, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  border-bottom: 1px solid rgba(171, 178, 191, 0.15);
+}
+
+.business-header .logo {
+  margin: 0;
+  opacity: 1;
+  animation: none;
+}
+
+.business-header .mode-toggle-wrapper {
+  position: static;
+}
+
+.business-nav {
+  display: flex;
+  gap: 25px;
+}
+
+.business-nav a {
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.business-nav a:hover,
+.business-nav a.active {
+  color: var(--accent-color);
+}
+
+.business-nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: var(--transition);
+}
+
+.business-nav a:hover::after,
+.business-nav a.active::after {
+  width: 100%;
+}
+
+.business-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+.business-footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid rgba(171, 178, 191, 0.15);
+  color: var(--line-color);
+  font-size: 13px;
+}
+
+/* --- Section headings --- */
+.business-mode h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--text-white);
+}
+
+.section-subtitle {
+  color: var(--line-color);
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  display: inline-block;
+  background: var(--accent-color);
+  color: var(--primary-bg);
+  padding: 12px 28px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  color: var(--primary-bg);
+}
+
+.btn-primary::after {
+  display: none;
+}
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--accent-color);
+  padding: 12px 28px;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  background: var(--accent-color);
+  color: var(--primary-bg);
+  transform: translateY(-2px);
+}
+
+.btn-outline::after {
+  display: none;
+}
+
+/* --- Business Home --- */
+.business-hero {
+  text-align: center;
+  padding: 60px 0 40px;
+}
+
+.business-hero h1 {
+  font-size: 36px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.business-hero p {
+  color: var(--line-color);
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.business-hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.business-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.highlight-card {
+  border: 1px solid rgba(171, 178, 191, 0.2);
+  border-radius: 6px;
+  padding: 30px 24px;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.highlight-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-4px);
+}
+
+.highlight-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.highlight-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-white);
+}
+
+.highlight-card p {
+  font-size: 13px;
+  color: var(--line-color);
+}
+
+/* --- Services --- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  border: 1px solid rgba(171, 178, 191, 0.2);
+  border-radius: 6px;
+  padding: 28px 24px;
+  transition: var(--transition);
+}
+
+.service-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.service-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-white);
+}
+
+.service-card p {
+  font-size: 13px;
+  color: var(--line-color);
+  margin-bottom: 14px;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border: 1px solid var(--accent-color);
+  border-radius: 3px;
+  color: var(--accent-color);
+}
+
+.services-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* --- Projects --- */
+.project-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--line-color);
+  color: var(--line-color);
+  padding: 6px 18px;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  border: 1px solid rgba(171, 178, 191, 0.2);
+  border-radius: 6px;
+  padding: 28px 24px;
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.project-card-category {
+  font-size: 11px;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.project-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text-white);
+}
+
+.project-card p {
+  font-size: 13px;
+  color: var(--line-color);
+  margin-bottom: 14px;
+}
+
+.project-outcome {
+  font-size: 12px;
+  color: var(--accent-color);
+  border-top: 1px solid rgba(171, 178, 191, 0.1);
+  padding-top: 12px;
+}
+
+/* --- Pricing --- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.pricing-card {
+  border: 1px solid rgba(171, 178, 191, 0.2);
+  border-radius: 6px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+}
+
+.pricing-card:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-4px);
+}
+
+.pricing-card.highlighted {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 30px rgba(199, 120, 221, 0.15);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color);
+  color: var(--primary-bg);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 10px;
+}
+
+.pricing-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.pricing-amount {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 24px;
+}
+
+.pricing-card ul {
+  list-style: none;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.pricing-card li {
+  font-size: 13px;
+  color: var(--line-color);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(171, 178, 191, 0.08);
+}
+
+.pricing-card li::before {
+  content: '✓ ';
+  color: var(--accent-color);
+}
+
+/* --- Testimonials --- */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  border: 1px solid rgba(171, 178, 191, 0.2);
+  border-radius: 6px;
+  padding: 28px 24px;
+  transition: var(--transition);
+}
+
+.testimonial-card:hover {
+  border-color: var(--accent-color);
+}
+
+.testimonial-card blockquote {
+  font-size: 14px;
+  color: var(--line-color);
+  font-style: italic;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial-author strong {
+  font-size: 14px;
+  color: var(--text-white);
+}
+
+.testimonial-author span {
+  font-size: 12px;
+  color: var(--accent-color);
+  font-weight: 400;
+}
+
+/* --- Contact Form --- */
+.contact-form {
+  max-width: 600px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-white);
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(171, 178, 191, 0.08);
+  border: 1px solid rgba(171, 178, 191, 0.25);
+  border-radius: 4px;
+  color: var(--text-white);
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-status {
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.form-status.success {
+  color: #73daca;
+}
+
+.form-status.error {
+  color: #f7768e;
+}
+
+/* --- Animations (respect prefers-reduced-motion) --- */
+@media (prefers-reduced-motion: reduce) {
+  .mode-toggle-thumb,
+  .highlight-card,
+  .service-card,
+  .project-card,
+  .pricing-card,
+  .testimonial-card,
+  .btn-primary,
+  .btn-outline {
+    transition: none;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .business-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .business-header .mode-toggle-wrapper {
+    order: -1;
+  }
+
+  .business-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .business-highlights,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .business-hero h1 {
+    font-size: 26px;
+  }
+
+  .business-main {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mode-toggle-wrapper {
+    top: 12px;
+    right: 12px;
+  }
+
+  .mode-toggle {
+    padding: 4px 10px;
+  }
+
+  .mode-label {
+    font-size: 11px;
+  }
+
+  .business-hero-ctas {
+    flex-direction: column;
+    align-items: center;
+  }
+}
