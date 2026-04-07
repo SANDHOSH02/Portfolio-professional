@@ -154,6 +154,53 @@
             display: none;
         }
 
+            /* Gallery */
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+                padding: 12px;
+            }
+
+            .gallery-item {
+                background: #1f2329;
+                border: 1px solid var(--line-color);
+                border-radius: 8px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gallery-item img {
+                width: 100%;
+                height: 100px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .gallery-actions {
+                display: flex;
+                gap: 8px;
+                padding: 8px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .gallery-actions button, .gallery-actions a {
+                background: var(--accent-color);
+                color: var(--text-white);
+                border-radius: 6px;
+                padding: 6px 8px;
+                border: 2px solid var(--accent-color);
+                font-size: 12px;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
         /* Report Modal */
         .modal {
             position: fixed;
@@ -684,6 +731,7 @@
     <div class="camera-top">
         <button id="openCameraBtn" class="camera-button">Open Camera</button>
         <button id="quickCaptureBtn" class="camera-button">Capture Photo</button>
+        <button id="openGalleryBtn" class="camera-button">Gallery</button>
         <img id="cameraThumb" class="camera-thumb" alt="Saved photo" />
     </div>
 
@@ -730,6 +778,21 @@
                                 <div class="form-actions" style="margin-top:6px;">
                                     <button id="capturePhoto">Capture Photo</button>
                                     <button id="closeCamera2" class="secondary">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Modal -->
+                    <div id="cameraGalleryModal" class="modal" aria-hidden="true">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Saved Photos</h2>
+                                <button id="closeGallery" class="close-modal" aria-label="Close">×</button>
+                            </div>
+                            <div class="modal-body" id="galleryBody">
+                                <div id="galleryGrid" class="gallery-grid">
+                                    <!-- thumbnails injected here -->
                                 </div>
                             </div>
                         </div>
@@ -1523,17 +1586,28 @@
             const thumb = document.getElementById('cameraThumb');
             let stream = null;
 
-            function loadThumb() {
+            function getSavedPhotos() {
                 try {
-                    const data = localStorage.getItem('cameraPhoto');
-                    if (data) {
-                        thumb.src = data;
-                        thumb.style.display = 'block';
-                    } else {
-                        thumb.style.display = 'none';
-                    }
+                    const raw = localStorage.getItem('cameraPhotos');
+                    if (raw) return JSON.parse(raw);
+                    const single = localStorage.getItem('cameraPhoto');
+                    return single ? [single] : [];
                 } catch (e) {
-                    console.warn('Could not load saved photo', e);
+                    return [];
+                }
+            }
+
+            function savePhotos(list) {
+                try { localStorage.setItem('cameraPhotos', JSON.stringify(list)); } catch (_) {}
+            }
+
+            function loadThumb() {
+                const photos = getSavedPhotos();
+                if (photos.length > 0) {
+                    thumb.src = photos[0];
+                    thumb.style.display = 'block';
+                } else {
+                    thumb.style.display = 'none';
                 }
             }
 
@@ -1578,7 +1652,10 @@
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                 try {
                     const dataUrl = canvas.toDataURL('image/png');
-                    localStorage.setItem('cameraPhoto', dataUrl);
+                    const photos = getSavedPhotos();
+                    photos.unshift(dataUrl);
+                    savePhotos(photos);
+                    try { localStorage.setItem('cameraPhoto', dataUrl); } catch (_) {}
                     thumb.src = dataUrl;
                     thumb.style.display = 'block';
                     alert('Photo captured and saved locally');
@@ -1619,6 +1696,9 @@
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(tmpVideo, 0, 0, w, h);
                         const dataUrl = canvas.toDataURL('image/png');
+                        const photos = getSavedPhotos();
+                        photos.unshift(dataUrl);
+                        savePhotos(photos);
                         try { localStorage.setItem('cameraPhoto', dataUrl); } catch (_) {}
                         thumb.src = dataUrl;
                         thumb.style.display = 'block';
@@ -1631,6 +1711,70 @@
                     }
                 });
             }
+
+            // Gallery UI
+            const openGalleryBtn = document.getElementById('openGalleryBtn');
+            const galleryModal = document.getElementById('cameraGalleryModal');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const closeGallery = document.getElementById('closeGallery');
+
+            function renderGallery() {
+                const photos = getSavedPhotos();
+                galleryGrid.innerHTML = '';
+                if (!photos.length) {
+                    galleryGrid.innerHTML = '<div style="color:var(--line-color); padding:12px;">No saved photos</div>';
+                    return;
+                }
+                photos.forEach((p, idx) => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    const img = document.createElement('img');
+                    img.src = p;
+                    img.alt = `Photo ${idx+1}`;
+                    img.addEventListener('click', () => {
+                        const w = window.open('about:blank', '_blank');
+                        if (w) {
+                            w.document.write(`<img src="${p}" style="width:100%;height:auto;display:block;">`);
+                            w.document.title = `Photo ${idx+1}`;
+                        }
+                    });
+                    const actions = document.createElement('div');
+                    actions.className = 'gallery-actions';
+                    const dl = document.createElement('a');
+                    dl.href = p;
+                    dl.download = `photo_${idx+1}.png`;
+                    dl.textContent = 'Download';
+                    const del = document.createElement('button');
+                    del.textContent = 'Delete';
+                    del.addEventListener('click', () => {
+                        const photos2 = getSavedPhotos();
+                        photos2.splice(idx, 1);
+                        savePhotos(photos2);
+                        try { localStorage.setItem('cameraPhoto', photos2[0] || ''); } catch (_) {}
+                        loadThumb();
+                        renderGallery();
+                    });
+                    actions.appendChild(dl);
+                    actions.appendChild(del);
+                    item.appendChild(img);
+                    item.appendChild(actions);
+                    galleryGrid.appendChild(item);
+                });
+            }
+
+            if (openGalleryBtn) {
+                openGalleryBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderGallery();
+                    galleryModal.classList.add('show');
+                    galleryModal.setAttribute('aria-hidden', 'false');
+                });
+            }
+            if (closeGallery) closeGallery.addEventListener('click', () => {
+                galleryModal.classList.remove('show');
+                galleryModal.setAttribute('aria-hidden', 'true');
+            });
+            if (galleryModal) galleryModal.addEventListener('click', (e) => { if (e.target === galleryModal) { galleryModal.classList.remove('show'); galleryModal.setAttribute('aria-hidden', 'true'); } });
         })();
     </script>
 </body>
