@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio MCP Tester</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --accent: #22c55e;
+      --line: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top right, #1e293b, var(--bg));
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(920px, 100%);
+      background: color-mix(in srgb, var(--panel) 92%, black 8%);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: #1f2937;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: 140ms ease;
+    }
+
+    button:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .accent {
+      background: #14532d;
+      border-color: #166534;
+    }
+
+    pre {
+      margin: 0;
+      background: #020617;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      min-height: 280px;
+      max-height: 56vh;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #cbd5e1;
+    }
+
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .ok {
+      color: #4ade80;
+    }
+
+    .bad {
+      color: #f87171;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Portfolio MCP Tester</h1>
+    <p>Validates that this URL returns MCP JSON-RPC from a real server handler, not HTML.</p>
+
+    <div class="row">
+      <button class="accent" id="btnInit">Initialize</button>
+      <button id="btnTools">Tools List</button>
+      <button id="btnProfile">Call portfolio_profile</button>
+      <button id="btnProjects">Call portfolio_projects</button>
+      <button id="btnContact">Call portfolio_contact</button>
+      <button id="btnClear">Clear</button>
+    </div>
+
+    <pre id="output"></pre>
+    <div class="hint" id="status"></div>
+  </main>
+
+  <script>
+    const endpoint = "/api/mcp";
+    const output = document.getElementById("output");
+    const status = document.getElementById("status");
+
+    function setStatus(message, ok) {
+      status.textContent = message;
+      status.className = ok ? "hint ok" : "hint bad";
+    }
+
+    function append(label, data) {
+      const block = `\n=== ${label} ===\n${JSON.stringify(data, null, 2)}\n`;
+      output.textContent += block;
+      output.scrollTop = output.scrollHeight;
+    }
+
+    async function rpc(method, params, id) {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", id, method, params }),
+      });
+
+      const text = await res.text();
+      let data = text;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        // keep raw text when not JSON
+      }
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}: ${typeof data === "string" ? data : JSON.stringify(data)}`);
+      }
+
+      return data;
+    }
+
+    async function run(label, method, params, id = Date.now()) {
+      try {
+        const data = await rpc(method, params, id);
+        append(label, data);
+        setStatus("MCP endpoint responded with JSON successfully.", true);
+      } catch (error) {
+        append(`${label} ERROR`, String(error));
+        setStatus("Request failed. If response is HTML, route is not wired to MCP handler.", false);
+      }
+    }
+
+    document.getElementById("btnInit").addEventListener("click", () => {
+      run("initialize", "initialize", {
+        protocolVersion: "2024-11-05",
+        capabilities: {},
+        clientInfo: { name: "portfolio-mcp-tester", version: "1.0.0" },
+      }, 1);
+    });
+
+    document.getElementById("btnTools").addEventListener("click", () => {
+      run("tools/list", "tools/list", {}, 2);
+    });
+
+    document.getElementById("btnProfile").addEventListener("click", () => {
+      run("tools/call portfolio_profile", "tools/call", {
+        name: "portfolio_profile",
+        arguments: {},
+      }, 3);
+    });
+
+    document.getElementById("btnProjects").addEventListener("click", () => {
+      run("tools/call portfolio_projects", "tools/call", {
+        name: "portfolio_projects",
+        arguments: { limit: 3 },
+      }, 4);
+    });
+
+    document.getElementById("btnContact").addEventListener("click", () => {
+      run("tools/call portfolio_contact", "tools/call", {
+        name: "portfolio_contact",
+        arguments: {},
+      }, 5);
+    });
+
+    document.getElementById("btnClear").addEventListener("click", () => {
+      output.textContent = "";
+      setStatus("Output cleared.", true);
+    });
+
+    setStatus("Ready. Click Initialize first.", true);
+  </script>
+</body>
+</html>

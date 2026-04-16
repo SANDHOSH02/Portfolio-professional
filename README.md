@@ -45,3 +45,35 @@ This powers the AI chat assistant widget on the homepage.
 
 - `/` — Main portfolio page
 - `/other-side` — "Other Side of Me" page (password-protected)
+
+## MCP Endpoint (Vercel)
+
+This repo now includes a Vercel serverless MCP endpoint at:
+
+- `/api/mcp`
+
+And a rewrite alias:
+
+- `/mcp` -> `/api/mcp`
+
+### Connector URL
+
+Use this in Claude connector:
+
+- `https://sandhosh.vercel.app/api/mcp`
+
+The endpoint returns MCP JSON-RPC responses and includes portfolio tools:
+
+- `portfolio_profile`
+- `portfolio_projects`
+- `portfolio_contact`
+
+### Quick Validation
+
+Run:
+
+```bash
+curl -i https://sandhosh.vercel.app/api/mcp
+```
+
+Expected for GET is `405 Method not allowed` JSON (not HTML), which confirms the API route exists.
