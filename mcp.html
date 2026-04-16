@@ -48,6 +48,40 @@
       color: var(--muted);
     }
 
+    .endpoint-wrap {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .endpoint-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .endpoint-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      flex: 1 1 520px;
+      min-width: 260px;
+      border: 1px solid var(--line);
+      background: #0b1220;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18);
+    }
+
     .row {
       display: flex;
       gap: 10px;
@@ -109,7 +143,17 @@
     <h1>Portfolio MCP Tester</h1>
     <p>Validates that this URL returns MCP JSON-RPC from a real server handler, not HTML.</p>
 
+    <div class="endpoint-wrap">
+      <div class="endpoint-label">MCP endpoint URL</div>
+      <div class="endpoint-row">
+        <input id="endpointInput" type="text" value="https://sandhosh.vercel.app/api/mcp" />
+        <button id="btnUseLocal">Use /api/mcp</button>
+        <button id="btnCopyUrl">Copy URL</button>
+      </div>
+    </div>
+
     <div class="row">
+      <button id="btnHealth">Health Check (GET)</button>
       <button class="accent" id="btnInit">Initialize</button>
       <button id="btnTools">Tools List</button>
       <button id="btnProfile">Call portfolio_profile</button>
@@ -123,9 +167,13 @@
   </main>
 
   <script>
-    const endpoint = "/api/mcp";
     const output = document.getElementById("output");
     const status = document.getElementById("status");
+    const endpointInput = document.getElementById("endpointInput");
+
+    function getEndpoint() {
+      return endpointInput.value.trim();
+    }
 
     function setStatus(message, ok) {
       status.textContent = message;
@@ -138,19 +186,69 @@
       output.scrollTop = output.scrollHeight;
     }
 
+    async function parseResponse(res) {
+      const contentType = res.headers.get("content-type") || "";
+      const text = await res.text();
+      let data = text;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = text;
+      }
+
+      const seemsHtml =
+        contentType.toLowerCase().includes("text/html") ||
+        (typeof data === "string" && data.trim().toLowerCase().startsWith("<!doctype html"));
+
+      return { data, contentType, seemsHtml };
+    }
+
+    async function healthCheck() {
+      const endpoint = getEndpoint();
+      if (!endpoint) {
+        setStatus("Enter endpoint URL first.", false);
+        return;
+      }
+
+      try {
+        const res = await fetch(endpoint, { method: "GET" });
+        const parsed = await parseResponse(res);
+        append("health (GET)", {
+          status: res.status,
+          contentType: parsed.contentType,
+          body: parsed.data,
+        });
+
+        if (parsed.seemsHtml) {
+          setStatus("Endpoint returned HTML. Use a real MCP API route, not a page route.", false);
+          return;
+        }
+
+        setStatus("GET check passed: endpoint is reachable and not HTML.", res.ok);
+      } catch (error) {
+        append("health (GET) ERROR", String(error));
+        setStatus("Health check failed. Verify domain and path.", false);
+      }
+    }
+
     async function rpc(method, params, id) {
+      const endpoint = getEndpoint();
+      if (!endpoint) {
+        throw new Error("Missing endpoint URL");
+      }
+
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ jsonrpc: "2.0", id, method, params }),
       });
 
-      const text = await res.text();
-      let data = text;
-      try {
-        data = JSON.parse(text);
-      } catch {
-        // keep raw text when not JSON
+      const parsed = await parseResponse(res);
+      const data = parsed.data;
+
+      if (parsed.seemsHtml) {
+        throw new Error("Endpoint returned HTML instead of MCP JSON-RPC.");
       }
 
       if (!res.ok) {
@@ -159,6 +257,24 @@
 
       return data;
     }
+
+    document.getElementById("btnHealth").addEventListener("click", () => {
+      healthCheck();
+    });
+
+    document.getElementById("btnUseLocal").addEventListener("click", () => {
+      endpointInput.value = `${window.location.origin}/api/mcp`;
+      setStatus("Endpoint switched to current site /api/mcp.", true);
+    });
+
+    document.getElementById("btnCopyUrl").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(getEndpoint());
+        setStatus("Endpoint URL copied.", true);
+      } catch {
+        setStatus("Could not copy URL. Copy it manually.", false);
+      }
+    });
 
     async function run(label, method, params, id = Date.now()) {
       try {
@@ -209,7 +325,7 @@
       setStatus("Output cleared.", true);
     });
 
-    setStatus("Ready. Click Initialize first.", true);
+    setStatus("Ready. Run Health Check, then Initialize.", true);
   </script>
 </body>
 </html>

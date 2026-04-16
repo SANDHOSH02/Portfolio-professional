@@ -42,7 +42,8 @@ function withCorsHeaders(headers: Record<string, string> = {}) {
   return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, MCP-Session-Id, mcp-session-id, anthropic-version, x-api-key",
+    Vary: "Origin",
     "Cache-Control": "no-store",
     ...headers,
   };
@@ -207,6 +208,20 @@ export default async function handler(req: any, res: any) {
     const headers = withCorsHeaders();
     Object.entries(headers).forEach(([key, value]) => res.setHeader(key, value));
     res.status(204).send("");
+    return;
+  }
+
+  if (req.method === "GET") {
+    sendJson(res, 200, {
+      ok: true,
+      transport: "json-rpc-over-http",
+      endpoint: "/api/mcp",
+      server: {
+        name: SERVER_NAME,
+        version: SERVER_VERSION,
+      },
+      hint: "Send JSON-RPC POST requests to this endpoint.",
+    });
     return;
   }
 
