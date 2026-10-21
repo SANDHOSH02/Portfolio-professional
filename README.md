@@ -1,79 +1,47 @@
-Portfolio
----------
+# Portfolio - Sandhosh
 
-Personal portfolio site for Sandhosh — AI model developer & Full Stack Enthusiast.
+Personal portfolio website for **Sandhosh** — AI Model Developer & Full Stack Enthusiast.
 
-## React + Vite App
+## Tech Stack
 
-The portfolio has been migrated to a React + Vite application located in the `client/` directory.
+- **HTML5 & CSS3**
+- **Vanilla JavaScript** (custom cursor with sparkle trail, physics-based floating skill icons, video preview controls, lightbox for achievements)
+- **Bootstrap 3 & jQuery** (tooltips & lightbox dependencies)
 
-### Getting Started
+## Features
+
+- **Hero Section**: Profile overview with social links (GitHub, LinkedIn, LeetCode).
+- **Projects**: Interactive video showcase featuring PyLab Arena, IQ Arena, Result Portal, Hackathon Management, Safety Gear Detection, and Retail Monitoring.
+- **Skills**: Interactive floating physics icon wall with animated floating skill badges.
+- **About Me**: Professional introduction and background.
+- **Experience**: Internship experience at WG Tech Solutions & Syed Ammal Engineering College.
+- **Competitions**: Hackathon and challenge awards gallery with modal lightbox view.
+- **Resume**: Interactive timeline and downloadable resume PDF.
+
+## How to Run
+
+Simply open `index.html` in any web browser, or serve it using any static file server:
 
 ```bash
-cd client
-npm install
-npm run dev      # Start dev server (http://localhost:5173)
-npm run build    # Production build to client/dist/
-npm run preview  # Preview the production build locally
+# Using Python
+python -m http.server 8000
+
+# Using Node.js (npx)
+npx serve .
 ```
 
-### Environment Variables
-
-Create a `.env` file in `client/` with:
-
-```
-VITE_OPENROUTER_API_KEY=your_api_key_here
-```
-
-This powers the AI chat assistant widget on the homepage.
-
-### File Mapping (Old → New)
-
-| Original File        | React Component(s)                              |
-|----------------------|-------------------------------------------------|
-| `index.html`         | `src/pages/HomePage.jsx` + child components     |
-| `index.css`          | `src/styles/index.css` (unchanged)              |
-| `chat-agent.js`      | `src/components/ChatWidget.jsx`                  |
-| `other-side.html`    | `src/pages/OtherSidePage.jsx` + `src/styles/other-side.css` |
-| Inline flip card JS  | `src/components/Hero.jsx` (useEffect)            |
-| Inline floating icons JS | `src/hooks/useFloatingIcons.js`              |
-| Inline custom cursor JS  | `src/hooks/useCustomCursor.js`               |
-| Inline lightbox JS   | `src/components/Lightbox.jsx`                    |
-| Inline project video JS | `src/components/Projects.jsx` (useEffect)     |
-
-### Routes
-
-- `/` — Main portfolio page
-- `/other-side` — "Other Side of Me" page (password-protected)
 
 ## MCP Endpoint (Vercel)
 
-This repo now includes a Vercel serverless MCP endpoint at:
+This repository includes a Vercel serverless MCP endpoint at:
 
 - `/api/mcp`
+- Rewrite alias: `/mcp` -> `/api/mcp`
 
-And a rewrite alias:
-
-- `/mcp` -> `/api/mcp`
-
-### Connector URL
-
-Use this in Claude connector:
-
+### Connector URL for Claude:
 - `https://sandhosh.vercel.app/api/mcp`
 
-The endpoint returns MCP JSON-RPC responses and includes portfolio tools:
-
+### Supported Tools:
 - `portfolio_profile`
 - `portfolio_projects`
 - `portfolio_contact`
-
-### Quick Validation
-
-Run:
-
-```bash
-curl -i https://sandhosh.vercel.app/api/mcp
-```
-
-Expected for GET is `405 Method not allowed` JSON (not HTML), which confirms the API route exists.
