@@ -3,790 +3,903 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Sandhosh</title>
-    <link rel="icon" type="image/x-icon" href="/assets/santhosh-image.jpg">
+    <title>Sandhosh.ai — AI Agent & n8n Automation Engineer</title>
+    <meta name="description" content="Sandhosh Gowravan — AI Agent Developer & n8n Automation Architect. Claude Code, MCP, autonomous agents and production n8n workflows.">
+    <link rel="icon" type="image/jpeg" href="assets/me/portrait.jpg">
     <link rel="stylesheet" href="index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- Chat Agent Widget -->
-    <div id="chatWidget">
-        <button id="chatButton" class="chat-button" aria-label="Open Chat">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
-                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.68-.31-3.85-.85l-.27-.14-2.81.48.48-2.81-.14-.27C4.31 14.68 4 13.38 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
-                <circle cx="9" cy="12" r="1.5"/>
-                <circle cx="12" cy="12" r="1.5"/>
-                <circle cx="15" cy="12" r="1.5"/>
-            </svg>
-        </button>
-        
-        <div id="chatWindow" class="chat-window">
-            <div class="chat-header">
-                <div class="chat-header-content">
-                    <div class="agent-avatar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                        </svg>
+
+    <!-- SVG icon sprite (no emojis anywhere) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+        <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
+        <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+        <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5M8 3H3v5M12 22v-8.3a4 4 0 0 0-1.17-2.87L3 3M15 9l6-6"/></symbol>
+        <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+        <symbol id="i-pen" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
+        <symbol id="i-term" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+        <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect x="13" y="13" width="8" height="8" rx="2"/></symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/><path d="M19 3v4M17 5h4"/></symbol>
+        <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+        <symbol id="i-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+        <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></symbol>
+        <symbol id="i-leet" viewBox="0 0 24 24"><path d="M14 4 6 12l8 8M10 12h11"/></symbol>
+        <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+        <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+        <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></symbol>
+    </svg>
+
+    <!-- ADVANCED BACKGROUND: aurora + neural mesh + cursor spotlight + grain -->
+    <div class="bg" aria-hidden="true">
+        <div class="aurora a1"></div>
+        <div class="aurora a2"></div>
+        <div class="aurora a3"></div>
+        <canvas id="neural"></canvas>
+        <div class="spotlight"></div>
+        <div class="grain"></div>
+    </div>
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <header class="nav-wrap">
+        <nav class="nav">
+            <a class="brand" href="#top">
+                <svg class="ic brand-ic"><use href="#i-infinity"/></svg>
+                <span class="brand-text">Sandhosh<span>.ai</span></span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
+            <div class="nav-links">
+                <a href="#live"><span>#</span>live-flow</a>
+                <a href="#orchestration"><span>#</span>orchestration</a>
+                <a href="#expertise"><span>#</span>expertise</a>
+                <a href="#workflows"><span>#</span>case-studies</a>
+                <a href="#skills"><span>#</span>stack</a>
+                <a href="#experience"><span>#</span>experience</a>
+                <a class="nav-cta" href="#contact">Hire me</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- SOCIAL RAIL (original theme) -->
+    <div class="side-rail">
+        <span class="rail-line"></span>
+        <a href="https://github.com/sandhosh02" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="ic"><use href="#i-github"/></svg></a>
+        <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="ic"><use href="#i-linkedin"/></svg></a>
+        <a href="https://leetcode.com/u/santhoshgowravan/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode"><svg class="ic"><use href="#i-leet"/></svg></a>
+    </div>
+
+    <main id="top">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="grid-floor" aria-hidden="true"></div>
+
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <div class="status-pill reveal"><span class="dot"></span>Available for AI Agent &amp; n8n Automation projects</div>
+
+                    <h1 class="headline">
+                        <span class="ln"><span>Architecting <em class="gradient-text">Autonomous</em></span></span>
+                        <span class="ln"><span><em class="gradient-text">AI Agents</em> &amp; Production</span></span>
+                        <span class="ln"><span><em class="gradient-text">n8n Automations</em><i class="type-caret"></i></span></span>
+                    </h1>
+
+                    <p class="hero-sub reveal">
+                        I turn repetitive manual processes into autonomous, self-healing agentic workflows —
+                        from tool-calling agents with Claude Code &amp; MCP to enterprise n8n pipelines that run 24/7.
+                    </p>
+
+                    <div class="hero-cta reveal">
+                        <a class="btn btn-primary" href="#live">Watch an agent run <svg class="ic"><use href="#i-down"/></svg></a>
+                        <a class="btn btn-ghost" href="mailto:sandhoshtechie02@gmail.com">Let's automate together <svg class="ic"><use href="#i-arrow"/></svg></a>
                     </div>
-                    <div class="agent-info">
-                        <h3>ANT Assistant</h3>
-                        <span class="status">Online</span>
+
+                    <div class="terminal reveal" aria-label="Agent run demo">
+                        <div class="terminal-bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#i-term"/></svg> agent.log</span></div>
+                        <pre id="agentLog"></pre>
                     </div>
                 </div>
-                <button id="closeChat" class="close-button" aria-label="Close Chat">×</button>
-            </div>
-            
-            <div id="chatMessages" class="chat-messages">
-                <div class="message agent-message">
-                    <div class="message-content">
-                        Hi! I'm your AI assistant. You can type your question or use voice input. How can I help you today?
+
+                <!-- AI portrait: real photo swept by an AI-render scan -->
+                <div class="hero-visual reveal">
+                    <div class="ai-portrait" id="aiPortrait">
+                        <div class="ring r1"></div>
+                        <div class="ring r2"></div>
+                        <div class="frame">
+                            <img class="real" src="assets/me/portrait.jpg" alt="Sandhosh Gowravan">
+                            <div class="ai-layer"><img src="assets/me/portrait.jpg" alt=""></div>
+                            <div class="scanline"></div>
+                            <svg class="mesh" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                                <g class="mesh-lines">
+                                    <path d="M54 22 L37 36 L48 40 L54 22 L61 40 L68 36 Z"/>
+                                    <path d="M37 36 L40 56 L48 55 L48 40 M68 36 L66 56 L61 55 L61 40"/>
+                                    <path d="M48 40 L55 49 L61 40 M48 55 L55 49 L61 55 M40 56 L55 66 L66 56 M48 55 L55 66 L61 55"/>
+                                </g>
+                                <g class="mesh-pts">
+                                    <circle cx="54" cy="22" r=".9"/><circle cx="37" cy="36" r=".9"/><circle cx="68" cy="36" r=".9"/>
+                                    <circle cx="48" cy="40" r="1.1"/><circle cx="61" cy="40" r="1.1"/><circle cx="55" cy="49" r=".9"/>
+                                    <circle cx="48" cy="55" r=".9"/><circle cx="61" cy="55" r=".9"/><circle cx="40" cy="56" r=".9"/>
+                                    <circle cx="66" cy="56" r=".9"/><circle cx="55" cy="66" r=".9"/>
+                                </g>
+                            </svg>
+                            <div class="detect" style="left:33%;top:16%;width:39%;height:56%"><b>face · 0.99</b></div>
+                            <span class="hud tl"></span><span class="hud tr"></span><span class="hud bl"></span><span class="hud br"></span>
+                            <div class="readout">
+                                <span>model: <b>vision-v4</b></span>
+                                <span>identity: <b>sandhosh</b></span>
+                                <span>role: <b>ai_engineer</b></span>
+                            </div>
+                        </div>
                     </div>
+                    <div class="chip chip-1"><svg class="ic"><use href="#i-flow"/></svg>n8n Specialist</div>
+                    <div class="chip chip-2"><svg class="ic"><use href="#i-bot"/></svg>Claude Code &amp; MCP</div>
+                    <div class="chip chip-3"><svg class="ic"><use href="#i-code"/></svg>Python &amp; FastAPI</div>
                 </div>
             </div>
-            
-            <div class="chat-input-container">
-                <button id="voiceButton" class="voice-button" aria-label="Voice Input">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </section>
+
+        <!-- METRICS -->
+        <section class="metrics">
+            <div class="metric reveal">
+                <svg class="ic m-ic"><use href="#i-flow"/></svg>
+                <strong><span class="count" data-to="50">0</span>+</strong>
+                <p>Workflows automated — webhooks, error handlers, sub-workflows</p>
+            </div>
+            <div class="metric reveal">
+                <svg class="ic m-ic"><use href="#i-clock"/></svg>
+                <strong><span class="count" data-to="24">0</span>/7</strong>
+                <p>Autonomous pipelines running without human clicks</p>
+            </div>
+            <div class="metric reveal">
+                <svg class="ic m-ic"><use href="#i-layers"/></svg>
+                <strong><span class="count" data-to="3">0</span> LLMs</strong>
+                <p>Claude, OpenAI &amp; Gemini orchestrated with smart fallbacks</p>
+            </div>
+            <div class="metric reveal">
+                <svg class="ic m-ic"><use href="#i-plug"/></svg>
+                <strong>MCP</strong>
+                <p>Custom tool-calling servers &amp; Claude Code agent loops</p>
+            </div>
+        </section>
+
+        <!-- LIVE n8n CANVAS -->
+        <section id="live" class="section">
+            <h2 class="section-title reveal"><span>#</span>live-workflow</h2>
+
+            <div class="n8n reveal">
+                <div class="n8n-bar">
+                    <div class="n8n-title">
+                        <svg class="ic"><use href="#i-flow"/></svg>
+                        <span class="wf-name">Lead Qualifier Agent</span>
+                        <span class="badge-active"><i></i>Active</span>
+                    </div>
+                    <div class="n8n-actions">
+                        <span class="exec-status" id="execStatus">Waiting for trigger…</span>
+                        <button class="btn btn-primary btn-sm" id="execBtn"><svg class="ic"><use href="#i-play"/></svg>Execute workflow</button>
+                    </div>
+                </div>
+
+                <div class="n8n-canvas">
+                    <svg class="n8n-svg" viewBox="0 0 1000 400" role="img" aria-label="n8n workflow: Webhook, Normalize, AI Agent with Claude model, memory and vector store, If, Slack and Gmail">
+                        <!-- main wires -->
+                        <path id="w1" class="wire" d="M136 178 L200 178"/>
+                        <path id="w2" class="wire" d="M296 178 L360 178"/>
+                        <path id="w3" class="wire" d="M610 178 L680 178"/>
+                        <path id="w4" class="wire" d="M776 160 C 825 160, 820 98, 870 98"/>
+                        <path id="w5" class="wire" d="M776 196 C 825 196, 820 278, 870 278"/>
+                        <!-- sub-node wires (AI connections) -->
+                        <path id="s1" class="wire sub" d="M405 300 L405 226"/>
+                        <path id="s2" class="wire sub" d="M485 300 L485 226"/>
+                        <path id="s3" class="wire sub" d="M565 300 L565 226"/>
+
+                        <text class="items" id="t1" x="168" y="168">1 item</text>
+                        <text class="items" id="t2" x="328" y="168">1 item</text>
+                        <text class="items" id="t3" x="645" y="168">1 item</text>
+                        <text class="items" id="t4" x="835" y="118">true</text>
+                        <text class="branch" x="790" y="152">true</text>
+                        <text class="branch" x="790" y="214">false</text>
+
+                        <circle class="packet" id="pk1" r="5"><animateMotion begin="indefinite" dur=".5s" fill="freeze"><mpath href="#w1"/></animateMotion></circle>
+                        <circle class="packet" id="pk2" r="5"><animateMotion begin="indefinite" dur=".5s" fill="freeze"><mpath href="#w2"/></animateMotion></circle>
+                        <circle class="packet" id="pk3" r="5"><animateMotion begin="indefinite" dur=".5s" fill="freeze"><mpath href="#w3"/></animateMotion></circle>
+                        <circle class="packet" id="pk4" r="5"><animateMotion begin="indefinite" dur=".6s" fill="freeze"><mpath href="#w4"/></animateMotion></circle>
+
+                        <!-- nodes -->
+                        <g class="nd trigger" id="n-wh">
+                            <path class="body" d="M84 130 h44 a8 8 0 0 1 8 8 v80 a8 8 0 0 1 -8 8 h-44 a44 48 0 0 1 0 -96 z"/>
+                            <use class="nic" href="#i-zap" x="70" y="160" width="36" height="36"/>
+                            <circle class="h-out" cx="136" cy="178" r="5"/>
+                            <g class="ok"><circle cx="128" cy="138" r="9"/><use href="#i-check" x="122" y="132" width="12" height="12"/></g>
+                            <text class="lbl" x="88" y="248">Webhook</text><text class="sub-lbl" x="88" y="264">POST /lead</text>
+                        </g>
+
+                        <g class="nd" id="n-ef">
+                            <rect class="body" x="200" y="130" width="96" height="96" rx="8"/>
+                            <use class="nic" href="#i-pen" x="230" y="160" width="36" height="36"/>
+                            <rect class="h-in" x="195" y="172" width="6" height="12" rx="1"/><circle class="h-out" cx="296" cy="178" r="5"/>
+                            <g class="ok"><circle cx="288" cy="138" r="9"/><use href="#i-check" x="282" y="132" width="12" height="12"/></g>
+                            <text class="lbl" x="248" y="248">Normalize</text><text class="sub-lbl" x="248" y="264">Edit Fields</text>
+                        </g>
+
+                        <g class="nd agent" id="n-ag">
+                            <rect class="body" x="360" y="130" width="250" height="96" rx="8"/>
+                            <use class="nic" href="#i-bot" x="380" y="156" width="40" height="40"/>
+                            <text class="lbl in" x="436" y="174">AI Agent</text>
+                            <text class="sub-lbl in" x="436" y="192">Tools Agent · ReAct</text>
+                            <rect class="h-in" x="355" y="172" width="6" height="12" rx="1"/><circle class="h-out" cx="610" cy="178" r="5"/>
+                            <path class="port" d="M405 220 l6 6 -6 6 -6 -6z"/><path class="port" d="M485 220 l6 6 -6 6 -6 -6z"/><path class="port" d="M565 220 l6 6 -6 6 -6 -6z"/>
+                            <g class="ok"><circle cx="602" cy="138" r="9"/><use href="#i-check" x="596" y="132" width="12" height="12"/></g>
+                            <g class="spinner"><circle cx="590" cy="160" r="8"/></g>
+                        </g>
+
+                        <g class="nd subnode" id="n-llm">
+                            <circle class="body" cx="405" cy="330" r="30"/>
+                            <use class="nic" href="#i-spark" x="391" y="316" width="28" height="28"/>
+                            <text class="lbl sm" x="405" y="380">Claude</text>
+                        </g>
+                        <g class="nd subnode" id="n-mem">
+                            <circle class="body" cx="485" cy="330" r="30"/>
+                            <use class="nic" href="#i-db" x="471" y="316" width="28" height="28"/>
+                            <text class="lbl sm" x="485" y="380">Memory</text>
+                        </g>
+                        <g class="nd subnode" id="n-vec">
+                            <circle class="body" cx="565" cy="330" r="30"/>
+                            <use class="nic" href="#i-search" x="551" y="316" width="28" height="28"/>
+                            <text class="lbl sm" x="565" y="380">Vectors</text>
+                        </g>
+
+                        <g class="nd" id="n-if">
+                            <rect class="body" x="680" y="130" width="96" height="96" rx="8"/>
+                            <use class="nic" href="#i-split" x="710" y="160" width="36" height="36"/>
+                            <rect class="h-in" x="675" y="172" width="6" height="12" rx="1"/>
+                            <circle class="h-out" cx="776" cy="160" r="5"/><circle class="h-out" cx="776" cy="196" r="5"/>
+                            <g class="ok"><circle cx="768" cy="138" r="9"/><use href="#i-check" x="762" y="132" width="12" height="12"/></g>
+                            <text class="lbl" x="728" y="248">If</text><text class="sub-lbl" x="728" y="264">score &gt; 0.8</text>
+                        </g>
+
+                        <g class="nd" id="n-sl">
+                            <rect class="body" x="870" y="50" width="96" height="96" rx="8"/>
+                            <use class="nic" href="#i-msg" x="900" y="80" width="36" height="36"/>
+                            <rect class="h-in" x="865" y="92" width="6" height="12" rx="1"/>
+                            <g class="ok"><circle cx="958" cy="58" r="9"/><use href="#i-check" x="952" y="52" width="12" height="12"/></g>
+                            <text class="lbl" x="918" y="30">Slack</text><text class="sub-lbl" x="918" y="166">#sales alert</text>
+                        </g>
+
+                        <g class="nd" id="n-gm">
+                            <rect class="body" x="870" y="230" width="96" height="96" rx="8"/>
+                            <use class="nic" href="#i-mail" x="900" y="260" width="36" height="36"/>
+                            <rect class="h-in" x="865" y="272" width="6" height="12" rx="1"/>
+                            <text class="lbl" x="918" y="346">Gmail</text><text class="sub-lbl" x="918" y="362">nurture email</text>
+                        </g>
                     </svg>
-                </button>
-                <input type="text" id="chatInput" placeholder="Type your message..." />
-                <button id="sendButton" class="send-button" aria-label="Send Message">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                    </svg>
-                </button>
+                </div>
+
+                <div class="n8n-log" id="execLog" aria-live="polite"></div>
             </div>
-        </div>
-    </div>
-    
-    <script src="chat-agent.js"></script>
-    <div class="nav">
-        <a href="#projects"><span>#</span>projects</a>
-        <a href="#Skills"><span>#</span>Skills</a>
-        <a href="#about-me"><span>#</span>About</a>
-        <a href="#experience"><span>#</span>Experience</a>
-        <a href="#competition"><span>#</span>competitions</a>
-        <a href="#resume"><span>#</span>Resume</a>
-        <a href="/mcp.html"><span>#</span>MCP</a>
-        <!-- <a href="#journey"><span>#</span>Journey</a> -->
-    </div>
+        </section>
 
-    <div class="line lineres "  >
-        <a href="https://github.com/sandhosh02"><img class="line-logo" src="/assets/githubicon.svg" alt=""></a>
-        <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/"><img class="line-logo1" src="/assets/linkedinicon.svg" alt=""></a>
-        <a href="https://leetcode.com/u/santhoshgowravan/"><img class="line-logo2" src="/assets/leetcodeicon.svg" alt=""></a>
-        <a href=""></a>
-    </div>
-    
+        <!-- CLAUDE ORCHESTRATION: one goal → parallel sub-agents → full stack app -->
+        <section id="orchestration" class="section">
+            <h2 class="section-title reveal"><span>#</span>claude-orchestration</h2>
+            <p class="section-lead reveal">One goal in, a full stack product out. A Claude orchestrator plans the build, fans the work out to specialised sub-agents running in parallel, then reviews and merges what they ship.</p>
 
-    <div class="logo">
-        <a href="/index.html"><img class="img-logo" src="/assets/infinity-svgrepo-com.svg" alt=""></a>
-    </div>
-    
-    <div class="mian">
-        <div class="hero">
-            <h2>I'am Sandhosh <span>Ai model developer </span><br>&<span>Full Stack Enthusiast </span></h2>
-            <h4>I create AI-powered websites where technology <br>enhances imagination</h4>
-        </div>
-        <div class="image-hero">
-            <!-- <img class="hero-svg" src="/assets/box.svg" alt=""> -->
-            <div class="flip-card" id="imageFlipCard">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <img class="image" src="/assets/sandhosh .jpeg" alt="">
+            <div class="orch reveal" id="orch">
+                <div class="n8n-bar">
+                    <div class="n8n-title">
+                        <svg class="ic"><use href="#i-spark"/></svg>
+                        <span class="wf-name">claude-orchestrator</span>
+                        <span class="badge-active"><i></i>5 agents</span>
                     </div>
-                    <div class="flip-card-back">
-                        <img class="image" src="/assets/sandhosh .jpeg" alt="">
-                        <a href="other-side.html" class="flip-button">Other Side of Me</a>
+                    <div class="n8n-actions">
+                        <span class="exec-status" id="orchStatus">Idle</span>
+                        <button class="btn btn-primary btn-sm" id="orchBtn"><svg class="ic"><use href="#i-play"/></svg>Run build</button>
                     </div>
                 </div>
+
+                <div class="orch-body">
+                    <div class="orch-core">
+                        <div class="core-orb"><svg class="ic"><use href="#i-spark"/></svg></div>
+                        <h3>Orchestrator</h3>
+                        <span class="core-model">claude · planner</span>
+                        <div class="core-goal"><b>goal</b><span id="orchGoal"></span></div>
+                        <ol class="core-plan" id="orchPlan">
+                            <li>decompose → 5 tasks</li>
+                            <li>dispatch in parallel</li>
+                            <li>review &amp; run tests</li>
+                            <li>merge &amp; ship</li>
+                        </ol>
+                    </div>
+
+                    <div class="orch-agents">
+                        <div class="agent-row" data-agent="0">
+                            <b class="link"></b>
+                            <div class="agent-card">
+                                <div class="agent-top"><svg class="ic"><use href="#i-layout"/></svg><strong>Frontend agent</strong><i class="agent-state">queued</i></div>
+                                <div class="agent-task">waiting for plan…</div>
+                                <div class="agent-bar"><span></span></div>
+                            </div>
+                            <b class="link"></b>
+                            <div class="layer"><svg class="ic"><use href="#i-layout"/></svg>React UI</div>
+                        </div>
+                        <div class="agent-row" data-agent="1">
+                            <b class="link"></b>
+                            <div class="agent-card">
+                                <div class="agent-top"><svg class="ic"><use href="#i-server"/></svg><strong>Backend agent</strong><i class="agent-state">queued</i></div>
+                                <div class="agent-task">waiting for plan…</div>
+                                <div class="agent-bar"><span></span></div>
+                            </div>
+                            <b class="link"></b>
+                            <div class="layer"><svg class="ic"><use href="#i-server"/></svg>FastAPI</div>
+                        </div>
+                        <div class="agent-row" data-agent="2">
+                            <b class="link"></b>
+                            <div class="agent-card">
+                                <div class="agent-top"><svg class="ic"><use href="#i-db"/></svg><strong>Data agent</strong><i class="agent-state">queued</i></div>
+                                <div class="agent-task">waiting for plan…</div>
+                                <div class="agent-bar"><span></span></div>
+                            </div>
+                            <b class="link"></b>
+                            <div class="layer"><svg class="ic"><use href="#i-db"/></svg>PostgreSQL</div>
+                        </div>
+                        <div class="agent-row" data-agent="3">
+                            <b class="link"></b>
+                            <div class="agent-card">
+                                <div class="agent-top"><svg class="ic"><use href="#i-shield"/></svg><strong>QA agent</strong><i class="agent-state">queued</i></div>
+                                <div class="agent-task">waiting for plan…</div>
+                                <div class="agent-bar"><span></span></div>
+                            </div>
+                            <b class="link"></b>
+                            <div class="layer"><svg class="ic"><use href="#i-shield"/></svg>Tests</div>
+                        </div>
+                        <div class="agent-row" data-agent="4">
+                            <b class="link"></b>
+                            <div class="agent-card">
+                                <div class="agent-top"><svg class="ic"><use href="#i-rocket"/></svg><strong>DevOps agent</strong><i class="agent-state">queued</i></div>
+                                <div class="agent-task">waiting for plan…</div>
+                                <div class="agent-bar"><span></span></div>
+                            </div>
+                            <b class="link"></b>
+                            <div class="layer"><svg class="ic"><use href="#i-rocket"/></svg>Docker · CI</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="orch-foot">
+                    <span><svg class="ic"><use href="#i-layers"/></svg>Parallel sub-agents</span>
+                    <span><svg class="ic"><use href="#i-plug"/></svg>Shared context via MCP</span>
+                    <span><svg class="ic"><use href="#i-shield"/></svg>Self-review &amp; tests before merge</span>
+                    <span><svg class="ic"><use href="#i-code"/></svg>Claude Code in the loop</span>
+                </div>
             </div>
-           
-        </div>
-         
-        <div class="box2">
-            <a href="#resume"><img src="/assets/box2.svg" alt=""></a>
-        </div>
-    </div>
+        </section>
 
-    <div class="quote">
-        <img class="quote-box" src="/assets/quote.svg" alt="">
-    </div>
+        <!-- EXPERTISE -->
+        <section id="expertise" class="section">
+            <h2 class="section-title reveal"><span>#</span>what-i-build</h2>
 
-    <img class="box3" src="/assets/box3.svg" alt="">
+            <div class="pillars">
+                <article class="pillar reveal">
+                    <div class="pillar-icon"><svg class="ic"><use href="#i-bot"/></svg></div>
+                    <h3>Autonomous AI Agents &amp; Tool Calling</h3>
+                    <p>Agents that read their environment, plan, execute multi-step CLI / browser / API tools and self-correct on failure.</p>
+                    <ul class="tags"><li>Claude Code</li><li>Agentic Loops</li><li>ReAct</li><li>Function Calling</li><li>MCP Servers</li></ul>
+                </article>
+                <article class="pillar reveal">
+                    <div class="pillar-icon"><svg class="ic"><use href="#i-flow"/></svg></div>
+                    <h3>Enterprise n8n Workflow Automation</h3>
+                    <p>End-to-end pipelines connecting CRMs, databases, Slack / WhatsApp and internal APIs — with real error handling.</p>
+                    <ul class="tags"><li>n8n Self-Hosted</li><li>Webhooks</li><li>AI Agent Nodes</li><li>Vector Stores</li><li>JSON Transforms</li></ul>
+                </article>
+                <article class="pillar reveal">
+                    <div class="pillar-icon"><svg class="ic"><use href="#i-server"/></svg></div>
+                    <h3>Full Stack &amp; Production Engineering</h3>
+                    <p>React frontends, Python &amp; Node.js APIs, databases and Docker deploys — the whole product, built and orchestrated with Claude.</p>
+                    <ul class="tags"><li>React</li><li>FastAPI</li><li>Node.js</li><li>PostgreSQL</li><li>Docker</li></ul>
+                </article>
+            </div>
+        </section>
 
+        <!-- CASE STUDIES -->
+        <section id="workflows" class="section">
+            <h2 class="section-title reveal"><span>#</span>case-studies</h2>
 
-<div id="projects">
-    <img src="/assets/projects/main.svg" alt="">
-    <div class="project-round projects-grid-round">
+            <div class="cases">
+                <article class="case reveal">
+                    <div class="mini-flow">
+                        <span><svg class="ic"><use href="#i-term"/></svg></span><b></b>
+                        <span class="hot"><svg class="ic"><use href="#i-bot"/></svg></span><b></b>
+                        <span><svg class="ic"><use href="#i-plug"/></svg></span><b></b>
+                        <span><svg class="ic"><use href="#i-check"/></svg></span>
+                    </div>
+                    <div class="case-head"><span class="case-no">01</span><span class="case-kind">Claude Code · MCP</span></div>
+                    <h3>Autonomous Multi-Tool Agent</h3>
+                    <p class="case-tag">Goal-driven execution engine with system tool invocation.</p>
+                    <dl>
+                        <dt>Problem</dt><dd>Dev &amp; data routines needed manual hand-offs across many APIs.</dd>
+                        <dt>Solution</dt><dd>An agent loop on Model Context Protocol that runs bash, queries vector stores and verifies its own output.</dd>
+                    </dl>
+                    <ul class="tags"><li>Claude Code</li><li>MCP</li><li>Python</li><li>Node.js</li></ul>
+                </article>
 
-        <a class="project-item" href="https://github.com/SANDHOSH02/PyLab_Arena" target="_blank" rel="noopener noreferrer" aria-label="Code clash">
-            <video class="project-video" src="/assets/pylearn.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title"></span></div>
-        </a>
+                <article class="case reveal">
+                    <div class="mini-flow">
+                        <span><svg class="ic"><use href="#i-zap"/></svg></span><b></b>
+                        <span class="hot"><svg class="ic"><use href="#i-spark"/></svg></span><b></b>
+                        <span><svg class="ic"><use href="#i-split"/></svg></span><b></b>
+                        <span><svg class="ic"><use href="#i-msg"/></svg></span>
+                    </div>
+                    <div class="case-head"><span class="case-no">02</span><span class="case-kind">n8n · LLM</span></div>
+                    <h3>AI Lead Intelligence Pipeline</h3>
+                    <p class="case-tag">Webhook ingestion, AI enrichment, scoring &amp; routing in real time.</p>
+                    <dl>
+                        <dt>Problem</dt><dd>Sales lost hours researching inbound leads and typing CRM data.</dd>
+                        <dt>Solution</dt><dd>n8n flow that enriches company data, scores intent with an LLM node and pushes structured alerts to Slack &amp; CRM.</dd>
+                    </dl>
+                    <ul class="tags"><li>n8n</li><li>Anthropic / OpenAI</li><li>Webhooks</li><li>JSON</li></ul>
+                </article>
 
-        <a class="project-item" href="https://nscet.org/iqarena" target="_blank" rel="noopener noreferrer" aria-label="HackZion project on GitHub".">
-            <video class="project-video" src="/assets/iqarena_vid.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title"></span></div>
-        </a>
+                <article class="case reveal">
+                    <div class="mini-flow">
+                        <span><svg class="ic"><use href="#i-file"/></svg></span><b></b>
+                        <span><svg class="ic"><use href="#i-layers"/></svg></span><b></b>
+                        <span class="hot"><svg class="ic"><use href="#i-db"/></svg></span><b></b>
+                        <span><svg class="ic"><use href="#i-search"/></svg></span>
+                    </div>
+                    <div class="case-head"><span class="case-no">03</span><span class="case-kind">RAG · Vector</span></div>
+                    <h3>Document Extraction &amp; RAG Pipeline</h3>
+                    <p class="case-tag">Multi-format PDFs turned into searchable knowledge.</p>
+                    <dl>
+                        <dt>Problem</dt><dd>Invoices, contracts and resumes sat siloed and unsearchable.</dd>
+                        <dt>Solution</dt><dd>Automated split → embed → store, plus a retrieval-augmented assistant the whole team can query.</dd>
+                    </dl>
+                    <ul class="tags"><li>n8n</li><li>Python</li><li>Qdrant / Pinecone</li><li>LangChain</li></ul>
+                </article>
+            </div>
+        </section>
 
-        <a class="project-item" href="https://github.com/SANDHOSH02/Result-Portal" target="_blank" rel="noopener noreferrer" aria-label="Result-Portal project link">
-            <video class="project-video" src="/assets/result.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title"></span></div>
-        </a>
+        <!-- ABOUT (desk photo with computer-vision overlay) -->
+        <section id="about" class="section about">
+            <div class="cv-shot reveal" style="aspect-ratio:1672/941">
+                <img src="assets/me/desk.jpg" alt="Sandhosh at his workstation">
+                <div class="detect" style="left:30%;top:12%;width:44%;height:87%"><b>engineer · 0.98</b></div>
+                <div class="detect alt" style="left:.6%;top:28%;width:23.6%;height:34%"><b>monitor · 0.95</b></div>
+                <div class="detect alt" style="left:8%;top:65%;width:21%;height:9%"><b>keyboard · 0.91</b></div>
+                <div class="cv-scan"></div>
+            </div>
+            <div class="about-copy reveal">
+                <h2 class="section-title"><span>#</span>about-me</h2>
+                <p>I'm <span>Sandhosh</span> — I build the systems that let LLMs actually <em>do</em> work: agents that call tools, n8n flows that never sleep, and the backends that keep them honest.</p>
+                <p>My rule: if a human clicks it twice a day, an agent should be doing it.</p>
+                <ul class="about-list">
+                    <li><svg class="ic"><use href="#i-check"/></svg>Designs agent loops with guardrails &amp; retries</li>
+                    <li><svg class="ic"><use href="#i-check"/></svg>Ships n8n flows with error branches, not just happy paths</li>
+                    <li><svg class="ic"><use href="#i-check"/></svg>Writes the MCP servers &amp; APIs the agents need</li>
+                </ul>
+            </div>
+        </section>
 
-        <a class="project-item" href="http://nscet.org/hackathon" target="_blank" rel="noopener noreferrer" aria-label="NSCET-HACKATHON-MANAGEMENT">
-            <video class="project-video" src="/assets/hackathon.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">   </span></div>
-        </a>
+        <!-- SKILLS -->
+        <section id="skills" class="section">
+            <h2 class="section-title reveal"><span>#</span>stack-&amp;-tools</h2>
 
-        <a class="project-item" href="https://github.com/SANDHOSH02/Safety-gear" target="_blank" rel="noopener noreferrer" aria-label="Safety-gear">
-            <video class="project-video" src="/assets/Safetygear.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">   </span></div>
-        </a>
+            <div class="skills-grid">
+                <div class="skill-box reveal">
+                    <h3><svg class="ic"><use href="#i-spark"/></svg>Agentic AI &amp; LLMs</h3>
+                    <ul><li>Anthropic Claude</li><li>Claude Code</li><li>MCP</li><li>OpenAI API</li><li>Gemini</li><li>Prompt Architecture</li><li>RAG</li></ul>
+                </div>
+                <div class="skill-box reveal">
+                    <h3><svg class="ic"><use href="#i-flow"/></svg>Workflow Automation</h3>
+                    <ul><li>n8n Cloud &amp; Self-Hosted</li><li>Webhooks</li><li>REST Integrations</li><li>Sub-workflows</li><li>Data Transformation</li><li>Zapier</li></ul>
+                </div>
+                <div class="skill-box reveal">
+                    <h3><svg class="ic"><use href="#i-code"/></svg>Programming &amp; Backend</h3>
+                    <ul><li>Python</li><li>JavaScript ES6+</li><li>React</li><li>FastAPI</li><li>Django</li><li>Node.js</li><li>Bash</li></ul>
+                </div>
+                <div class="skill-box reveal">
+                    <h3><svg class="ic"><use href="#i-db"/></svg>Databases &amp; DevOps</h3>
+                    <ul><li>PostgreSQL</li><li>MongoDB</li><li>Vector DBs</li><li>Git</li><li>Docker</li><li>Linux</li></ul>
+                </div>
+            </div>
 
-        <a class="project-item" href="https://github.com/SANDHOSH02/Retail-monitoring" target="_blank" rel="noopener noreferrer" aria-label="Retail-monitoring">
-            <video class="project-video" src="/assets/retail.mp4" muted playsinline loop autoplay preload="auto"></video>
-            <div class="project-overlay"><span class="project-title">   </span></div>
-        </a>
+            <div class="marquee" aria-hidden="true">
+                <div class="marquee-track">
+                    <span>n8n</span><span>Claude Code</span><span>MCP</span><span>LangChain</span><span>FastAPI</span><span>Python</span><span>RAG</span><span>Webhooks</span><span>Vector DB</span><span>Docker</span>
+                    <span>n8n</span><span>Claude Code</span><span>MCP</span><span>LangChain</span><span>FastAPI</span><span>Python</span><span>RAG</span><span>Webhooks</span><span>Vector DB</span><span>Docker</span>
+                </div>
+            </div>
+        </section>
 
-        
+        <!-- EXPERIENCE -->
+        <section id="experience" class="section experience">
+            <div>
+                <h2 class="section-title reveal"><span>#</span>experience</h2>
+                <ol class="timeline">
+                    <li class="reveal">
+                        <span class="when">2025 — Present</span>
+                        <h3>AI &amp; Automation Engineer</h3>
+                        <p>Architecting autonomous agent pipelines, custom n8n business automations and LLM integrations.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="when">2024 — 2025</span>
+                        <h3>AI Model Developer · <span>WG Tech Solutions</span></h3>
+                        <p>Real-world AI solution modelling, model training and integration.</p>
+                    </li>
+                </ol>
+            </div>
+            <div class="cv-shot tall reveal" style="aspect-ratio:720/1280">
+                <img src="assets/me/office.jpg" alt="Sandhosh at the office">
+                <div class="detect" style="left:61%;top:31%;width:38%;height:66%"><b>status: shipping</b></div>
+                <div class="cv-scan"></div>
+            </div>
+        </section>
 
-       
+        <!-- CONTACT -->
+        <section id="contact" class="section contact reveal">
+            <div class="contact-card">
+                <svg class="ic contact-ic"><use href="#i-bot"/></svg>
+                <h2 class="contact-title">Have an automation pipeline or <span class="gradient-text">AI agent</span> to build?</h2>
+                <p>Tell me the manual process. I'll send back the workflow.</p>
+                <div class="hero-cta center">
+                    <a class="btn btn-primary" href="mailto:sandhoshtechie02@gmail.com"><svg class="ic"><use href="#i-mail"/></svg>sandhoshtechie02@gmail.com</a>                </div>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-linkedin"/></svg>LinkedIn</a>
+                    <a href="https://github.com/sandhosh02" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+                    <a href="https://leetcode.com/u/santhoshgowravan/" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-leet"/></svg>LeetCode</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    </div>
+    <footer class="footer">
+        <svg class="ic"><use href="#i-infinity"/></svg> © 2026 Sandhosh Gowravan · built with agents in mind
+    </footer>
 
-</div>
+    <!--
+    ===== ARCHIVED (no longer needed) — old projects, college & competitions. Uncomment to restore. =====
 
-
-
-    <!-- <div id="projects">
+    <div id="projects">
         <img src="/assets/projects/main.svg" alt="">
-        <div class="projects-grid">
-            
-            <div class="project-box">
-                <img src="/assets/projects/1.png" alt="Project 1">
-                <h3><a class="project-a" href="https://github.com/SANDHOSH02/Hackzion_2023_cyber_hygiene" target="_blank">Github Link</a></h3>
-            </div>
-            <div class="project-box">
-                <img src="/assets/projects/Cyber.jpg" alt="Project 2">
-                <h3><a class="project-a" href="https://nscet.org/iqarena" target="_blank">Link</a></h3>
-            </div>
-            <div class="project-box">
-                <img src="/assets/projects/3.png" alt="Project 3">
-                <h3><a class="project-a" href="https://github.com/bnaveenbharathi/PERSONALIZED-LEARNING-PLATFORM" target="_blank">Github Link</a></h3>
-            </div>
-            <div class="project-box">
-                <img src="/assets/projects/4.png" alt="Project 4">
-                <h3><a class="project-a" href="https://github.com/Nerd-Ninjas/Hack-Fest" target="_blank">Github Link</a></h3>
-            </div>
-            <div class="project-box">
-                <img src="/assets/projects/5.png" alt="Project 5">
-                <h3><a class="project-a" href="https://github.com/InnovativeSPIN/NSCET-HACKATHON-MANAGEMENT" target="_blank">Github Link</a></h3>
-            </div>
-            
-        </div>
-    </div> -->
-
-
-
-
-    <div id="Skills">
-        <img src="/assets/projects/skills.svg" alt="">
-        <div class="container_S">
-            <div class="floot">
-                <div class="icons">
-                        <a class="tooltip" href="https://react.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/React.png" alt="react">
-                            <span class="tooltiptext">React: JavaScript library for building UI</span>
-                        </a>
-                        <a class="tooltip" href="https://www.w3.org/Style/CSS/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/CSS3.png" alt="css">
-                            <span class="tooltiptext">CSS3: Styling web pages</span>
-                        </a>
-                        <a class="tooltip" href="https://getbootstrap.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Bootstrap.png" alt="Bootstrap">
-                            <span class="tooltiptext">Bootstrap: Front-end framework</span>
-                        </a>
-                        <a class="tooltip" href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Git.png" alt="git">
-                            <span class="tooltiptext">Git: Version control system</span>
-                        </a>
-                        <a class="tooltip" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/GitHub.png" alt="github">
-                            <span class="tooltiptext">GitHub: Code hosting platform</span>
-                        </a>
-                        <a class="tooltip" href="https://www.w3.org/TR/html5/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/HTML5.png" alt="html">
-                            <span class="tooltiptext">HTML5: Web structure markup</span>
-                        </a>
-                        <a class="tooltip" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/JavaScript.png" alt="JavaScript">
-                            <span class="tooltiptext">JavaScript: Programming language</span>
-                        </a>
-                        <a class="tooltip" href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Tailwind CSS.png" alt="Tailwind CSS">
-                            <span class="tooltiptext">Tailwind CSS: Utility-first CSS</span>
-                        </a>
-                        <a class="tooltip" href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Visual Studio Code (VS Code).png" alt="VS Code">
-                            <span class="tooltiptext">VS Code: Coding platform</span>
-                        </a>
-                        <a class="tooltip" href="https://dart.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Dart.png" alt="Dart">
-                            <span class="tooltiptext">Dart: Programming language</span>
-                        </a>
-                        <a class="tooltip" href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Figma.png" alt="Figma">
-                            <span class="tooltiptext">Figma: Web-based design tool UI & UX</span>
-                        </a>
-                        <a class="tooltip" href="https://flask.palletsprojects.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Flask.png" alt="Flask">
-                            <span class="tooltiptext">Flask: Web application framework</span>
-                        </a>
-                        <a class="tooltip" href="https://www.mongodb.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/MongoDB.png" alt="MongoDB">
-                            <span class="tooltiptext">MongoDB: Database</span>
-                        </a>
-                        <a class="tooltip" href="https://www.python.org/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Python.png" alt="Python">
-                            <span class="tooltiptext">Python: Programming language</span>
-                        </a>
-                        <a class="tooltip" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Canva.png" alt="Canva">
-                            <span class="tooltiptext">Canva: Online graphic design platform</span>
-                        </a>
-                        <a class="tooltip" href="https://www.djangoproject.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Django.png" alt="Django">
-                            <span class="tooltiptext">Django: Python web framework</span>
-                        </a>
-                        <a class="tooltip" href="https://flutter.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Flutter.png" alt="Flutter">
-                            <span class="tooltiptext">Flutter: Build cross-platform mobile, web, and desktop</span>
-                        </a>
-                        <a class="tooltip" href="https://www.kaggle.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Kaggle.png" alt="Kaggle">
-                            <span class="tooltiptext">Kaggle: Data Science Platform</span>
-                        </a>
-                        <a class="tooltip" href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/MySQL.png" alt="MySQL">
-                            <span class="tooltiptext">MySQL: Database</span>
-                        </a>
-                        <a class="tooltip" href="https://nodejs.org/en" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/Node.js.png" alt="Node.js">
-                            <span class="tooltiptext">Node JS: Backend Development Framework</span>
-                        </a>
-                        <a class="tooltip" href="https://www.php.net/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/skills/PHP.png" alt="PHP">
-                            <span class="tooltiptext">PHP: Server-side scripting language</span>
-                        </a>
-                </div>
-            </div>
+        <div class="project-round projects-grid-round">
+            <a class="project-item" href="https://github.com/SANDHOSH02/PyLab_Arena" target="_blank"><video class="project-video" src="/assets/pylearn.mp4" muted playsinline loop autoplay></video></a>
+            <a class="project-item" href="https://nscet.org/iqarena" target="_blank"><video class="project-video" src="/assets/iqarena_vid.mp4" muted playsinline loop autoplay></video></a>
+            <a class="project-item" href="https://github.com/SANDHOSH02/Result-Portal" target="_blank"><video class="project-video" src="/assets/result.mp4" muted playsinline loop autoplay></video></a>
+            <a class="project-item" href="http://nscet.org/hackathon" target="_blank"><video class="project-video" src="/assets/hackathon.mp4" muted playsinline loop autoplay></video></a>
+            <a class="project-item" href="https://github.com/SANDHOSH02/Safety-gear" target="_blank"><video class="project-video" src="/assets/Safetygear.mp4" muted playsinline loop autoplay></video></a>
+            <a class="project-item" href="https://github.com/SANDHOSH02/Retail-monitoring" target="_blank"><video class="project-video" src="/assets/retail.mp4" muted playsinline loop autoplay></video></a>
         </div>
     </div>
 
-    <!-- ABOUT ME  -->
-    <img src="/assets/aboutme/about.svg" alt="">
-    <div  id="about-me">
+    College:
+        Syed Ammal Engineering College: Django internship, BMI calculation & analysis project, 2024.
+        2023 - Present: Engineering Student at Anna University (AI & Data Science).
 
-        <img class="git-back"  src="/assets/aboutme/github-back.png" alt="">
-       
-
-        <div class="about-box">
-
-        <p class="about-p">Hello, i’m  Sandhosh !</p>
-
-        <p  class="about-p1">I am an engineering student specializing in <span> Artificial
-            Intelligence and Data Science</span>, with a strong focus on
-             AI development and Fullstack . Passionate about modern
-            technology, I constantly work towards masteringand
-            integrating the latest advancements in tech. My interests
-            span various modern technologies, driving my commitment
-            to innovative solutions and continuous learning </p>
-            
-                <a class="readme" href="#resume"><img src="/assets/aboutme/readmore.svg" alt=""></a>
-            </div>
+    <div id="competition">
+        HackZion V.1 at AMC Engineering College, Bengaluru — competition-one.jpg, competition-two.jpg
+        Quantathon 2.0 X IBM Qiskit online, SRM University — competition-three.jpg, competition-four.jpg
+        36-hour Hackathon at Karur Kumarasamy College of Engineering — competition-five.jpeg, competition-six.jpg
+        Quantathon 2.0 X IBM Qiskit offline, SRM Chennai — competition-seven.jpeg, competition-eight.jpeg
+        OpenAI to Z Challenge, global hackathon — competition-ten.jpeg, amazon.jpeg
     </div>
-
- <!-- experience -->
-<img src="/assets/experience.svg" alt="">
-<div id="experience">
-    <div class="experience-page" >
-        <h2 class="experience-title" > Internship Experience</h2>
-
-        <div class="Company-one" >
-            <img src="/assets/wg_logo.png" alt="">
-            <h5>Solve Real-World Problems Using AI !!</h5>
-
-            <p class="role" >WG Tech Solutions pvt company Ai model traine and currently workingwith stipend internship</p>
-
-        </div>
-        <div class="Company-two">
-            <img src="/assets/sy.svg" alt="">
-            <h5>Develop an django python level project</h5>
-            <p class="role"> Syed Ammal Engineering College: Completed an internship on Django,working on a project focused on BMI calculation and analysis , 2024.</p>
-
-        </div>
-
-    </div>
-
-
-
-</div>
-
-
-<!--competition-->
-<img src="/assets/competition.svg" alt="">
-
-<div id="competition">
-    <div class="competition-page">
-        <h2>competitions</h2>
-
-        <div class="set">
-        <div class="one">
-            <h2>Hackathon - HackZion V.1 at AMC Engineering College, Bengaluru</h2>
-            <a class="lightbox" href="/assets/competition/competition-one.jpg"><img src="/assets/competition/competition-one.jpg" alt="HackZion"></a>
-            <a class="lightbox" href="/assets/competition/competition-two.jpg"><img src="/assets/competition/competition-two.jpg" alt="HackZion Team"></a>
-
-        </div>
-
-        <div class="two">
-            <h2>Quantahon 2.0 X IBM Qiskit online , organized by SRM University! </h2>
-            <a class="lightbox" href="/assets/competition/competition-three.jpg"><img src="/assets/competition/competition-three.jpg" alt="Quantathon"></a>
-            <a class="lightbox" href="/assets/competition/competition-four.jpg"><img src="/assets/competition/competition-four.jpg" alt="Quantathon Highlights"></a>
-        </div>
-        <div class="three">
-            <h2> 36-hour Hackathon at Karur Kumarasamy College of Engineering</h2>
-            <a class="lightbox" href="/assets/competition/competition-five.jpeg"><img src="/assets/competition/competition-five.jpeg" alt="Karur Hackathon"></a>
-            <a class="lightbox" href="/assets/competition/competition-six.jpg"><img src="/assets/competition/competition-six.jpg" alt="Karur Hackathon Team"></a>
-        </div>
-
-        <div class="four">
-            <h2>Quantahon 2.0 X IBM Qiskit offline in ( SRM chennai ) , organized by SRM University!</h2>
-            <a class="lightbox" href="/assets/competition/competition-seven.jpeg"><img src="/assets/competition/competition-seven.jpeg" alt="SRM Offline"></a>
-            <a class="lightbox" href="/assets/competition/competition-eight.jpeg"><img src="/assets/competition/competition-eight.jpeg" alt="SRM Event"></a>
-
-        </div>
-
-        <div class="five">
-            <h2> Major AI Research Challenge! - OpenAI to Z Challenge, a Global hackathon </h2>
-                        <a class="lightbox" href="/assets/competition/competition-ten.jpeg"><img src="/assets/competition/competition-ten.jpeg" alt="OpenAI to Z"></a>
-                        <a class="lightbox" href="/assets/competition/amazon.jpeg"><img src="/assets/competition/amazon.jpeg" alt="Amazon Archaeology Project"></a>
-
-        </div>
-        
-     </div>
-
-
-
-    </div>
-
-
-</div>
-
-        <!-- Resume -->
-        
-        <img src="/assets/resume/resume.svg" alt="">
-        <div id="resume">
-            <div class="mainresume">
-                <h2 class="resume-title">My Professional Journey</h2>
-                <p class="resume-intro">This is my professional resume, showcasing my skills and experiences in Artificial Intelligence, Data Science, and Fullstack Development. Click below to download the full PDF version!</p>
-                <div class="timeline">
-                    
-                    <div class="timeline-item">
-                        <span class="timeline-dot"></span>
-                        <p>2023 - Present: Engineering Student at  Anna University</p>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="timeline-dot"></span>
-                        <p>2024:  Frontend Enthusiast & AI  </p>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="timeline-dot"></span>
-                        <p>2025: Currently Intern at WG Tech Solutions Pvt. — AI model development</p>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="timeline-dot"></span>
-                        <p>Ongoing: Personal Projects in  Web Development  and  AI </p>
-                    </div>
-                </div>
-                <a href="/assets/resume/Santhosh-resume.pdf" target="blank" class="resume-link">Download Resume</a>
-                <p class="resume-cta">Want to collaborate? <a href="mailto:sandhoshtechie02@gmail.com
-                    " class="email-link">Email me!</a></p>
-            </div>
-        </div>
-
-        
+    -->
 
     <script>
-        // Flip card on click
-        document.addEventListener('DOMContentLoaded', () => {
-            const flipCard = document.getElementById('imageFlipCard');
-            
-            if (flipCard) {
-                flipCard.addEventListener('click', function() {
-                    this.classList.toggle('flipped');
-                });
-            }
+    (() => {
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const fine = matchMedia('(pointer: fine)').matches;
+        const sleep = ms => new Promise(r => setTimeout(r, ms));
+        const $ = s => document.querySelector(s);
+
+        // --- Mobile nav ---
+        const toggle = $('.nav-toggle'), links = $('.nav-links');
+        toggle.addEventListener('click', () => toggle.setAttribute('aria-expanded', links.classList.toggle('open')));
+        links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            links.classList.remove('open'); toggle.setAttribute('aria-expanded', false);
+        }));
+
+        // --- Scroll progress + nav glass ---
+        const bar = $('.scroll-progress'), navWrap = $('.nav-wrap');
+        const onScroll = () => {
+            const h = document.documentElement;
+            bar.style.transform = `scaleX(${h.scrollTop / (h.scrollHeight - h.clientHeight || 1)})`;
+            navWrap.classList.toggle('scrolled', h.scrollTop > 20);
+        };
+        addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+        // --- Reveal on scroll + count-up ---
+        const io = new IntersectionObserver(entries => entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('in');
+            e.target.querySelectorAll('.count').forEach(countUp);
+            io.unobserve(e.target);
+        }), { threshold: 0.15 });
+        document.querySelectorAll('.reveal, .section-title, .cv-shot').forEach((el, i) => {
+            el.style.setProperty('--d', `${(i % 4) * 90}ms`);
+            io.observe(el);
         });
-    </script>
+        function countUp(el) {
+            const to = +el.dataset.to;
+            if (reduce) { el.textContent = to; return; }
+            const t0 = performance.now();
+            const step = t => {
+                const p = Math.min((t - t0) / 1400, 1);
+                el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tooltips = document.querySelectorAll('.tooltip');
-            const container = document.querySelector('.floot');
-            
-            if (!container) {
-                console.error('Container (.floot) not found!');
-                return;
-            }
-        
-            const iconData = Array.from(tooltips).map(tooltip => ({
-                element: tooltip,
-                x: Math.random() * (container.offsetWidth - 60),
-                y: Math.random() * (container.offsetHeight - 60),
-                vx: (Math.random() - 0.5) * 2,
-                vy: (Math.random() - 0.5) * 2,
-                isHovered: false
-            }));
-        
-            function animate() {
-                iconData.forEach(data => {
-                    if (!data.isHovered) {
-                        let { element, x, y, vx, vy } = data;
-                        x += vx;
-                        y += vy;
-        
-                        if (x <= 0 || x >= container.offsetWidth - element.offsetWidth) {
-                            vx = -vx;
-                            x = Math.max(0, Math.min(x, container.offsetWidth - element.offsetWidth));
-                        }
-                        if (y <= 0 || y >= container.offsetHeight - element.offsetHeight) {
-                            vy = -vy;
-                            y = Math.max(0, Math.min(y, container.offsetHeight - element.offsetHeight));
-                        }
-        
-                        element.style.left = `${x}px`;
-                        element.style.top = `${y}px`;
-        
-                        data.x = x;
-                        data.y = y;
-                        data.vx = vx;
-                        data.vy = vy;
+        // --- Agent terminal typing loop ---
+        const log = $('#agentLog');
+        const lines = [
+            '<b>$</b> agent run --goal "qualify inbound leads"',
+            '<i>▸ thinking…</i> planned 4 steps',
+            '<i>▸ tool_call</i> webhook.fetch(lead)',
+            '<i>▸ tool_call</i> vector.search(company) → 6 docs',
+            '<i>▸ tool_call</i> claude.score(intent) → <u>0.92</u>',
+            '<i>▸ tool_call</i> slack.notify(#sales)',
+            '<em>✓ done in 2.4s · 0 human clicks</em>'
+        ];
+        if (reduce) log.innerHTML = lines.join('\n');
+        else (async () => {
+            for (;;) {
+                log.innerHTML = '';
+                for (const line of lines) {
+                    const plain = line.replace(/<[^>]+>/g, ''), before = log.innerHTML;
+                    for (let i = 1; i <= plain.length; i++) {
+                        log.innerHTML = before + plain.slice(0, i) + '<span class="caret">▋</span>';
+                        await sleep(16 + Math.random() * 22);
                     }
-                });
-                requestAnimationFrame(animate);
-            }
-        
-            iconData.forEach(data => {
-                data.element.style.left = `${data.x}px`;
-                data.element.style.top = `${data.y}px`;
-            });
-        
-            animate();
-        
-            tooltips.forEach(tooltip => {
-                const data = iconData.find(d => d.element === tooltip);
-        
-                
-                tooltip.addEventListener('mouseenter', () => {
-                    data.isHovered = true;
-                    tooltip.classList.add('active');
-                });
-        
-                tooltip.addEventListener('mouseleave', () => {
-                    data.isHovered = false;
-                    data.vx = (Math.random() - 0.5) * 2;
-                    data.vy = (Math.random() - 0.5) * 2;
-                    tooltip.classList.remove('active');
-                });
-        
-              
-                tooltip.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    data.isHovered = true;
-                    tooltip.classList.add('active');
-                });
-        
-                tooltip.addEventListener('touchend', (e) => {
-                    e.preventDefault();
-                    data.isHovered = false;
-                    data.vx = (Math.random() - 0.5) * 2;
-                    data.vy = (Math.random() - 0.5) * 2;
-                    tooltip.classList.remove('active');
-                });
-        
-                tooltip.addEventListener('touchmove', (e) => {
-                    e.preventDefault();
-                }, { passive: false });
-            });
-        });
-        </script>
-        
-        <script>
-            // Project circle interactions: play on hover; first tap on mobile previews, second tap follows the link
-            document.addEventListener('DOMContentLoaded', () => {
-                // Try to autoplay all project videos on load (muted required for autoplay in many browsers)
-                document.querySelectorAll('.project-video').forEach(v => {
-                    try {
-                        v.muted = true;
-                        v.playsInline = true;
-                        v.setAttribute('playsinline', '');
-                        v.setAttribute('muted', '');
-                        // attempt to play; some browsers may block autoplay despite muted attribute
-                        const p = v.play();
-                        if (p && typeof p.catch === 'function') p.catch(() => {});
-                    } catch (e) {
-                        // ignore
-                    }
-                });
-
-                // Ensure continuous playback: restart on 'ended' and attempt replay on 'pause' or 'stalled'
-                document.querySelectorAll('.project-video').forEach(v => {
-                    // On 'ended' - try to replay immediately
-                    v.addEventListener('ended', () => {
-                        try { v.currentTime = 0; v.play(); } catch (e) {}
-                    });
-
-                    // On unexpected pause, try to resume after a short delay
-                    v.addEventListener('pause', () => {
-                        // if user intentionally paused, respect that; only auto-resume if still muted and loop intended
-                        if (v.muted) {
-                            setTimeout(() => { try { v.play(); } catch (e) {} }, 300);
-                        }
-                    });
-
-                    // On stalled or waiting, attempt to load and play
-                    v.addEventListener('stalled', () => {
-                        try { v.load(); v.play(); } catch (e) {}
-                    });
-                    v.addEventListener('suspend', () => {
-                        try { v.play(); } catch (e) {}
-                    });
-                });
-
-                // --- Text-to-speech on hover for elements with `data-tts` ---
-                if ('speechSynthesis' in window) {
-                    document.querySelectorAll('[data-tts]').forEach(el => {
-                        let utterance = null;
-                        const text = el.getAttribute('data-tts');
-
-                        const speak = () => {
-                            try {
-                                // cancel any ongoing speech and speak this text
-                                window.speechSynthesis.cancel();
-                                utterance = new SpeechSynthesisUtterance(text);
-                                utterance.lang = 'en-US';
-                                utterance.rate = 1;
-                                utterance.pitch = 1;
-                                window.speechSynthesis.speak(utterance);
-                            } catch (e) {}
-                        };
-
-                        const stop = () => {
-                            try { window.speechSynthesis.cancel(); } catch (e) {}
-                        };
-
-                        el.addEventListener('mouseenter', speak);
-                        el.addEventListener('mouseleave', stop);
-
-                        // touch-friendly: first touch will trigger speech (previews), avoid double-fire
-                        let touchTimer = null;
-                        el.addEventListener('touchstart', (ev) => {
-                            // prevent immediate navigation if user intends to preview; do not block default here
-                            if (touchTimer) return;
-                            speak();
-                            // short lock to avoid repeated starts
-                            touchTimer = setTimeout(() => { touchTimer = null; }, 1200);
-                        }, { passive: true });
-
-                        el.addEventListener('touchend', () => { stop(); }, { passive: true });
-                    });
+                    log.innerHTML = before + line + '\n';
+                    await sleep(240);
                 }
-
-                document.querySelectorAll('.project-item').forEach(item => {
-                    const video = item.querySelector('video');
-                    if (!video) return;
-
-                    // Ensure video is muted so autoplay works in most browsers
-                    video.muted = true;
-
-                    item.addEventListener('mouseenter', () => { try { video.play(); } catch (e) {} });
-                    item.addEventListener('mouseleave', () => { try { video.pause(); video.currentTime = 0; } catch (e) {} });
-
-                    // For touch devices: first tap previews, second tap follows link
-                    item.addEventListener('click', (e) => {
-                        if (video.paused) {
-                            e.preventDefault();
-                            try { video.play(); } catch (err) {}
-                            // short visual indicator (optional)
-                            item.classList.add('previewing');
-                            setTimeout(() => item.classList.remove('previewing'), 1200);
-                        } else {
-                            // video playing -> allow default behavior (navigate)
-                        }
-                    });
-                });
-            });
-        </script>
-       
-
-
-
-<script>
-    $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip();   
-    });
-    </script>
-
-<script>
-    // Create custom cursor element
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
-
-    // Function to update cursor position and spawn glitter
-    function updateCursor(x, y) {
-        cursor.style.left = `${x}px`;
-        cursor.style.top = `${y}px`;
-
-        // Create glitter particle
-        const glitter = document.createElement('div');
-        glitter.classList.add('glitter');
-        glitter.style.left = `${x}px`;
-        glitter.style.top = `${y}px`;
-
-        const angle = Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 6;
-        glitter.style.transform = `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px) rotate(${Math.random() * 360}deg)`;
-
-        document.body.appendChild(glitter);
-
-        // Remove glitter after animation
-        setTimeout(() => {
-            glitter.remove();
-        }, 500);
-    }
-
-    // Mouse event for desktop
-    document.addEventListener('mousemove', (e) => {
-        updateCursor(e.clientX, e.clientY);
-    });
-
-    // Touch events for mobile
-    let isTouching = false;
-    let lastTouchTime = 0;
-    let lastTouchY = 0;
-    let touchStartY = 0;
-    const throttleDelay = 50; // Throttle glitter spawning
-
-    document.addEventListener('touchstart', (e) => {
-        const touch = e.touches[0];
-        isTouching = true;
-        touchStartY = touch.clientY;
-        lastTouchY = touch.clientY;
-        updateCursor(touch.clientX, touch.clientY);
-        cursor.style.opacity = '1'; // Show cursor on touch
-    }, { passive: true }); // Allow default behavior (scrolling)
-
-    document.addEventListener('touchmove', (e) => {
-        const touch = e.touches[0];
-        const currentTime = Date.now();
-        const deltaY = touch.clientY - lastTouchY;
-
-        // Detect if the movement is primarily vertical (scrolling)
-        const isScrolling = Math.abs(touch.clientY - touchStartY) > 10; // Threshold for scroll detection
-
-        if (isTouching && !isScrolling) {
-            // If not scrolling, update cursor and glitter
-            if (currentTime - lastTouchTime >= throttleDelay) {
-                updateCursor(touch.clientX, touch.clientY);
-                lastTouchTime = currentTime;
-            } else {
-                // Update cursor position without spawning glitter
-                cursor.style.left = `${touch.clientX}px`;
-                cursor.style.top = `${touch.clientY}px`;
+                log.innerHTML += '<span class="caret">▋</span>';
+                await sleep(3200);
             }
-        } else {
-            // If scrolling, just update cursor position without glitter
-            cursor.style.left = `${touch.clientX}px`;
-            cursor.style.top = `${touch.clientY}px`;
+        })();
+
+        // --- Neural mesh background (fixed, pauses when tab hidden) ---
+        const cv = $('#neural'), ctx = cv.getContext('2d');
+        let W, H, nodes = [];
+        const mouse = { x: -9999, y: -9999 };
+        function resize() {
+            const dpr = Math.min(devicePixelRatio || 1, 2);
+            W = innerWidth; H = innerHeight;
+            cv.width = W * dpr; cv.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const n = Math.round(Math.min(90, W * H / 15000));
+            nodes = Array.from({ length: n }, () => ({
+                x: Math.random() * W, y: Math.random() * H,
+                vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, p: Math.random() * 6.28
+            }));
         }
-
-        lastTouchY = touch.clientY;
-    }, { passive: true }); // Allow default scrolling
-
-    document.addEventListener('touchend', (e) => {
-        isTouching = false;
-        cursor.style.opacity = '0'; // Hide cursor when touch ends (optional)
-    }, { passive: true });
-
-    // Hover effect for desktop only
-    document.querySelectorAll('a, button, .tooltip').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-    });
-</script>
-
-<!-- Lightbox overlay (popup content) -->
-<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
-    <div class="lightbox-content" role="dialog" aria-modal="true">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Close image">×</button>
-        <img id="lightboxImage" src="" alt="" />
-    </div>
-</div>
-
-<script>
-    (function(){
-        const links = document.querySelectorAll('a.lightbox');
-        const overlay = document.getElementById('lightboxOverlay');
-        const content = document.querySelector('.lightbox-content');
-        const img = document.getElementById('lightboxImage');
-        const closeBtn = document.getElementById('lightboxClose');
-
-        if (!overlay || !img || !content) return;
-
-        function openLightbox(href, alt) {
-            img.src = href;
-            img.alt = alt || '';
-            overlay.classList.add('active');
-            overlay.setAttribute('aria-hidden', 'false');
-            // trap focus could be added later
+        function draw(t) {
+            ctx.clearRect(0, 0, W, H);
+            const sy = scrollY * .15; // parallax drift
+            // ponytail: O(n²) pair scan, fine for ≤90 nodes
+            for (let i = 0; i < nodes.length; i++) {
+                const a = nodes[i];
+                if (!reduce) {
+                    a.x += a.vx; a.y += a.vy;
+                    if (a.x < 0 || a.x > W) a.vx *= -1;
+                    if (a.y < 0 || a.y > H) a.vy *= -1;
+                }
+                const ay = (a.y - sy % H + H) % H;
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const b = nodes[j], by = (b.y - sy % H + H) % H, d = Math.hypot(a.x - b.x, ay - by);
+                    if (d < 140) {
+                        ctx.strokeStyle = `rgba(199,120,221,${(1 - d / 140) * .22})`;
+                        ctx.beginPath(); ctx.moveTo(a.x, ay); ctx.lineTo(b.x, by); ctx.stroke();
+                    }
+                }
+                const dm = Math.hypot(a.x - mouse.x, ay - mouse.y);
+                if (dm < 200) {
+                    ctx.strokeStyle = `rgba(97,175,239,${(1 - dm / 200) * .5})`;
+                    ctx.beginPath(); ctx.moveTo(a.x, ay); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+                }
+                const pulse = 1.4 + Math.sin((t || 0) / 600 + a.p) * .6;
+                ctx.fillStyle = dm < 200 ? '#61AFEF' : 'rgba(199,120,221,.7)';
+                ctx.beginPath(); ctx.arc(a.x, ay, pulse, 0, 7); ctx.fill();
+            }
+            if (!reduce && !document.hidden) requestAnimationFrame(draw);
         }
+        document.addEventListener('visibilitychange', () => { if (!document.hidden && !reduce) requestAnimationFrame(draw); });
+        addEventListener('resize', resize);
+        resize(); requestAnimationFrame(draw);
 
-        function closeLightbox() {
-            overlay.classList.remove('active');
-            overlay.setAttribute('aria-hidden', 'true');
-            img.src = '';
-            img.alt = '';
-        }
+        // --- Cursor spotlight + mouse for mesh ---
+        const spot = $('.spotlight');
+        addEventListener('mousemove', e => {
+            mouse.x = e.clientX; mouse.y = e.clientY;
+            spot.style.setProperty('--x', e.clientX + 'px');
+            spot.style.setProperty('--y', e.clientY + 'px');
+        }, { passive: true });
 
-        links.forEach(a => {
-            a.addEventListener('click', (e) => {
-                e.preventDefault();
-                openLightbox(a.href, a.querySelector('img')?.alt);
+        // --- Portrait parallax tilt ---
+        const portrait = $('#aiPortrait');
+        if (fine && !reduce) {
+            portrait.addEventListener('mousemove', e => {
+                const r = portrait.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+                portrait.style.transform = `perspective(900px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg)`;
             });
-        });
+            portrait.addEventListener('mouseleave', () => { portrait.style.transform = ''; });
+        }
 
-        // Close when clicking outside content
-        overlay.addEventListener('click', (e) => {
-            if (!content.contains(e.target)) closeLightbox();
-        });
+        // --- n8n workflow execution (runs when on screen, replays on button) ---
+        const canvas = $('.n8n');
+        const statusEl = $('#execStatus'), execLog = $('#execLog'), execBtn = $('#execBtn');
+        let runId = 0, visible = false;
+        const node = id => document.getElementById(id);
+        const logLine = (txt, cls = '') => {
+            const d = document.createElement('div');
+            d.className = cls; d.innerHTML = txt;
+            execLog.prepend(d);
+            while (execLog.children.length > 4) execLog.lastChild.remove();
+        };
+        function resetFlow() {
+            canvas.querySelectorAll('.nd').forEach(n => n.classList.remove('running', 'done', 'thinking'));
+            canvas.querySelectorAll('.wire').forEach(w => w.classList.remove('live'));
+            canvas.querySelectorAll('.items').forEach(t => t.classList.remove('show'));
+            canvas.querySelectorAll('.packet').forEach(p => p.classList.remove('go'));
+        }
+        async function step(id, ms, label) {
+            const n = node(id);
+            n.classList.add('running');
+            statusEl.textContent = `Executing: ${label}`;
+            await sleep(ms);
+            n.classList.remove('running'); n.classList.add('done');
+            logLine(`<b>✓</b> ${label} <i>${ms}ms</i>`);
+        }
+        function send(w, pk, t) {
+            node(w).classList.add('live');
+            const p = node(pk);
+            p.classList.add('go');
+            p.querySelector('animateMotion').beginElement();
+            setTimeout(() => { p.classList.remove('go'); t && node(t).classList.add('show'); }, 520);
+        }
+        async function run() {
+            const id = ++runId, alive = () => id === runId;
+            resetFlow(); execLog.innerHTML = '';
+            await step('n-wh', 500, 'Webhook'); if (!alive()) return;
+            send('w1', 'pk1', 't1'); await sleep(550);
+            await step('n-ef', 450, 'Normalize'); if (!alive()) return;
+            send('w2', 'pk2', 't2'); await sleep(550);
+            node('n-ag').classList.add('running');
+            statusEl.textContent = 'Executing: AI Agent';
+            for (const [s, n, l] of [['s2', 'n-mem', 'Memory · load context'], ['s3', 'n-vec', 'Vectors · 6 docs'], ['s1', 'n-llm', 'Claude · intent 0.92']]) {
+                node(s).classList.add('live'); node(n).classList.add('thinking');
+                await sleep(550); if (!alive()) return;
+                node(n).classList.replace('thinking', 'done'); logLine(`<b>◆</b> ${l}`);
+            }
+            node('n-ag').classList.replace('running', 'done'); logLine('<b>✓</b> AI Agent <i>1.9s</i>');
+            send('w3', 'pk3', 't3'); await sleep(550);
+            await step('n-if', 350, 'If · score > 0.8 → true'); if (!alive()) return;
+            send('w4', 'pk4', 't4'); await sleep(650);
+            await step('n-sl', 450, 'Slack · #sales alert'); if (!alive()) return;
+            statusEl.innerHTML = '<span class="ok-txt">Workflow executed successfully</span> · 4.1s';
+            await sleep(3500);
+            if (alive() && visible && !reduce) run();
+        }
+        execBtn.addEventListener('click', run);
+        new IntersectionObserver(([e]) => {
+            const was = visible; visible = e.isIntersecting;
+            if (visible && !was) run();
+        }, { threshold: .35 }).observe(canvas);
 
-        closeBtn.addEventListener('click', closeLightbox);
+        // --- Claude orchestration: plan → parallel sub-agents → shipped stack ---
+        const orch = $('#orch'), orchStatus = $('#orchStatus'), orchGoal = $('#orchGoal');
+        const planItems = orch.querySelectorAll('.core-plan li');
+        const rows = [...orch.querySelectorAll('.agent-row')];
+        const tasks = [
+            ['scaffold React + Vite', 'build dashboard & auth screens', 'wire API client + states'],
+            ['design REST contract', 'implement FastAPI routes', 'JWT auth + validation'],
+            ['model schema', 'write migrations', 'seed + index queries'],
+            ['generate unit tests', 'e2e: login → create task', 'all 42 tests passing'],
+            ['write Dockerfile', 'CI pipeline: lint · test · build', 'deploy preview live']
+        ];
+        const GOAL = 'Build a task-manager SaaS with auth';
+        let orchRun = 0, orchVisible = false;
+        async function runAgent(row, list, alive) {
+            const state = row.querySelector('.agent-state'), task = row.querySelector('.agent-task'), fill = row.querySelector('.agent-bar span');
+            row.classList.add('active'); state.textContent = 'running';
+            for (let i = 0; i < list.length; i++) {
+                task.textContent = list[i];
+                fill.style.width = `${((i + 1) / list.length) * 100}%`;
+                await sleep(700 + Math.random() * 900);
+                if (!alive()) return;
+            }
+            row.classList.replace('active', 'done'); state.textContent = 'done';
+        }
+        async function runOrch() {
+            const id = ++orchRun, alive = () => id === orchRun;
+            rows.forEach(r => {
+                r.classList.remove('active', 'done');
+                r.querySelector('.agent-state').textContent = 'queued';
+                r.querySelector('.agent-task').textContent = 'waiting for plan…';
+                r.querySelector('.agent-bar span').style.width = '0';
+            });
+            planItems.forEach(li => li.classList.remove('on'));
+            orch.classList.remove('shipped'); orch.classList.add('thinking');
+            orchStatus.textContent = 'Planning…'; orchGoal.textContent = '';
+            for (let i = 1; i <= GOAL.length; i++) {
+                orchGoal.textContent = GOAL.slice(0, i);
+                await sleep(reduce ? 0 : 28); if (!alive()) return;
+            }
+            planItems[0].classList.add('on'); await sleep(600);
+            planItems[1].classList.add('on'); orchStatus.textContent = 'Agents working in parallel…';
+            await Promise.all(rows.map((r, i) => sleep(i * 150).then(() => runAgent(r, tasks[i], alive))));
+            if (!alive()) return;
+            planItems[2].classList.add('on'); orchStatus.textContent = 'Reviewing & testing…';
+            await sleep(900); if (!alive()) return;
+            planItems[3].classList.add('on'); orch.classList.replace('thinking', 'shipped');
+            orchStatus.innerHTML = '<span class="ok-txt">Shipped</span> · 5 agents · 0 merge conflicts';
+            await sleep(4500);
+            if (alive() && orchVisible && !reduce) runOrch();
+        }
+        $('#orchBtn').addEventListener('click', runOrch);
+        new IntersectionObserver(([e]) => {
+            const was = orchVisible; orchVisible = e.isIntersecting;
+            if (orchVisible && !was) runOrch();
+        }, { threshold: .3 }).observe(orch);
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
+        // --- Sparkle cursor (original theme), lerp-smoothed; desktop only ---
+        if (fine && !reduce) {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+            let tx = -100, ty = -100, cx = -100, cy = -100, last = 0;
+            addEventListener('mousemove', e => {
+                tx = e.clientX; ty = e.clientY;
+                const now = performance.now();
+                if (now - last < 35) return;
+                last = now;
+                const g = document.createElement('div');
+                g.className = 'glitter';
+                g.style.left = tx + 'px'; g.style.top = ty + 'px';
+                g.style.setProperty('--dx', (Math.random() - .5) * 24 + 'px');
+                g.style.setProperty('--dy', (Math.random() - .5) * 24 + 'px');
+                document.body.appendChild(g);
+                setTimeout(() => g.remove(), 700);
+            });
+            (function follow() {
+                cx += (tx - cx) * .25; cy += (ty - cy) * .25;
+                cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+                requestAnimationFrame(follow);
+            })();
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+            });
+
+            // --- 3D tilt + glow follow on cards ---
+            document.querySelectorAll('.pillar, .case').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const r = card.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+                    card.style.transform = `perspective(800px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
+                    card.style.setProperty('--mx', `${(x + .5) * 100}%`);
+                    card.style.setProperty('--my', `${(y + .5) * 100}%`);
+                });
+                card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+            });
+        }
     })();
-</script>
-
+    </script>
 </body>
 </html>
