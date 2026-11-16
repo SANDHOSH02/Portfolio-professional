@@ -1,3 +1,9 @@
+## 2026-11-17 · Clean URL for the other-side page
+- What: vercel.json cleanUrls on, so /other-side serves other-side.html; /othersite and /other-site redirect there; /choose also redirects home.
+- Files: `vercel.json`
+- Why: user wants /othersite to work.
+- Tests: vercel.json parses; live check after deploy.
+
 ## 2026-11-17 · Removed old pill start page and unused media
 - What: moved choose.html (red/blue pill page), assets/pill/ and unused root media (3 mp4s, my1.jpg, download.jpeg, glitch_portrait.png, colorized jpeg) to Downloads/portfolio-removed/; /choose.html redirects to /.
 - Files: `vercel.json`
