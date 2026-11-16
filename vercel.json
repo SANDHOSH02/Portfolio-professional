@@ -1,4 +1,21 @@
 {
+  "redirects": [
+    {
+      "source": "/portfolio.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/choose.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/mcp",

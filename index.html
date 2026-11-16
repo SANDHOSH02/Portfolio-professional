@@ -1,905 +1,671 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandhosh.ai — AI Agent & n8n Automation Engineer</title>
-    <meta name="description" content="Sandhosh Gowravan — AI Agent Developer & n8n Automation Architect. Claude Code, MCP, autonomous agents and production n8n workflows.">
-    <link rel="icon" type="image/jpeg" href="assets/me/portrait.jpg">
-    <link rel="stylesheet" href="index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandhosh Gowravan — AI Agent &amp; Automation Engineer</title>
+<meta name="description" content="Sandhosh Gowravan — AI & Automation Engineer at Promon Software Solutions. Claude Code, MCP, autonomous agents and production n8n workflows.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&family=Unbounded:wght@600;800&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #E8E6EE; --card: #FFFFFF; --ink: #120D1C; --muted: #5C566B; --line: #D5D0E0;
+    --violet: #7B2FF7; --violet-2: #A06BFF; --black: #0E0A16; --black-2: #1A1328; --soft: #F1EEF7;
+    --glow: 0 0 0 1px rgba(160,107,255,.25), 0 18px 60px -12px rgba(123,47,247,.55);
+    --r: 20px; --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 "Lexend", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .display { font-family: "Unbounded", system-ui, sans-serif; line-height: 1.15; }
+  a { color: inherit; text-decoration: none; }
+  img, video { display: block; max-width: 100%; }
+  :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+  .ic { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- hero slider: zoom-through titles, blur cross-fade ---------- */
+  .show { position: relative; height: 100svh; min-height: 600px; max-height: 1000px; background: var(--black); color: #fff; overflow: hidden; isolation: isolate; }
+  .show-top { position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(16px, 4vw, 48px); }
+  .show-brand { display: flex; align-items: center; gap: 12px; }
+  .show-brand img { width: 38px; height: 38px; border-radius: 50%; }
+  .show-brand span { font-weight: 600; font-size: 14px; line-height: 1.25; }
+  .show-brand small { display: block; font-weight: 400; font-size: 12px; opacity: .65; }
+  .show-nav { display: flex; gap: clamp(16px, 2.6vw, 36px); }
+  .show-nav a { font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; opacity: .75; padding: 8px 0; position: relative; transition: opacity .2s; }
+  .show-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 1.5px; background: var(--violet-2); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+  .show-nav a:hover { opacity: 1; }
+  .show-nav a:hover::after { transform: none; }
+
+  .slide { position: absolute; inset: 0; visibility: hidden; }
+  .slide.on { visibility: visible; z-index: 1; }
+  .slide.leaving { visibility: visible; z-index: 2; }
+  .slide::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+                  background: linear-gradient(0deg, rgba(8,6,13,.85) 0%, transparent 28%), radial-gradient(55% 70% at 78% 50%, rgba(123,47,247,.28), transparent 70%), linear-gradient(90deg, rgba(8,6,13,.15) 0%, rgba(8,6,13,.55) 45%, rgba(8,6,13,.85) 100%); }
+  .bg { position: absolute; inset: 0 34% 0 0; -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent); mask-image: linear-gradient(90deg, #000 55%, transparent); }
+  .bg img, .bg video { width: 100%; height: 100%; object-fit: cover; }
+  .bg img.contain { object-fit: contain; object-position: 6% center; }
+  .bg video.fit { object-fit: contain; object-position: 10% center; -webkit-mask-image: radial-gradient(ellipse 48% 62% at 32% 46%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 48% 62% at 32% 46%, #000 62%, transparent 100%); }
+  .on .bg { animation: ken 9s linear forwards; }
+  .on .bg img, .on .bg video { animation: bgIn 1.3s var(--ease) both; }
+  .leaving .bg img, .leaving .bg video { animation: bgOut 1s var(--ease) forwards; }
+
+  .txt { position: absolute; z-index: 3; left: 47%; right: 5%; top: 50%; transform: translateY(-50%); }
+  .kick { display: block; font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--violet-2); margin-bottom: 14px; }
+  .title { font: 700 clamp(44px, 6.6vw, 104px)/.98 "Cinzel", Georgia, serif; text-transform: uppercase; letter-spacing: .01em; transform-origin: 18% 55%; text-shadow: 0 6px 40px rgba(0,0,0,.45); }
+  .aside { display: flex; gap: 16px; align-items: baseline; margin-top: 18px; max-width: 520px; font-size: 14px; color: rgba(255,255,255,.72); }
+  .aside em { font: 600 22px/1 "Cinzel", Georgia, serif; font-style: normal; color: var(--violet-2); white-space: nowrap; }
+  .on .kick, .on .aside { animation: textIn .9s var(--ease) .55s both; }
+  .on .title { animation: titleIn 1.1s var(--ease) .3s both; }
+  .leaving .title { animation: zoomThrough 1s cubic-bezier(.6,0,.3,1) forwards; }
+  .leaving .kick, .leaving .aside { animation: textOut .35s ease forwards; }
+
+  .show-foot { position: absolute; z-index: 5; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding: 24px clamp(16px, 4vw, 48px) 28px; }
+  .foot-l { display: grid; gap: 2px; font-size: 13px; }
+  .foot-l b { font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+  .foot-l span { opacity: .65; }
+  .foot-l a { margin-top: 6px; color: var(--violet-2); font-weight: 500; }
+  .foot-r { display: flex; align-items: center; gap: 18px; }
+  .dots { display: flex; gap: 8px; }
+  .dots button { width: 44px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; }
+  .dots button i { position: relative; display: block; width: 100%; height: 2px; background: rgba(255,255,255,.25); overflow: hidden; }
+  .dots button i::after { content: ""; position: absolute; inset: 0; background: #fff; transform: scaleX(0); transform-origin: left; }
+  .dots button.on i::after { animation: fill var(--dur, 5s) linear forwards; }
+  .dots button.done i::after { transform: none; }
+  .show.paused .dots button.on i::after { animation-play-state: paused; }
+  .count { font: 600 13px "Lexend"; opacity: .8; min-width: 54px; }
+  .count b { font-size: 18px; }
+  .down { width: 52px; height: 52px; border-radius: 50%; background: var(--violet); display: grid; place-items: center; box-shadow: 0 0 0 6px rgba(123,47,247,.25); transition: transform .3s var(--ease), box-shadow .3s; }
+  .down:hover { transform: translateY(3px); box-shadow: 0 0 0 10px rgba(123,47,247,.2); }
+  .down .ic { width: 20px; height: 20px; }
+
+  @keyframes ken { from { transform: scale(1.02); } to { transform: scale(1.12); } }
+  @keyframes bgIn { from { filter: blur(18px) brightness(.45); transform: scale(1.12); } to { filter: blur(0) brightness(1); transform: scale(1); } }
+  @keyframes bgOut { to { filter: blur(18px) brightness(.35); opacity: 0; } }
+  @keyframes titleIn { from { opacity: 0; filter: blur(16px); transform: scale(.94); letter-spacing: .08em; } to { opacity: 1; filter: blur(0); transform: none; letter-spacing: .01em; } }
+  @keyframes zoomThrough { 0% { opacity: 1; filter: blur(0); transform: scale(1); } 70% { opacity: 1; } 100% { opacity: 0; filter: blur(8px); transform: scale(5.5); } }
+  @keyframes textIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes textOut { to { opacity: 0; transform: translateY(-8px); } }
+  @keyframes fill { to { transform: scaleX(1); } }
+
+  @media (max-width: 760px) {
+    .show { min-height: 640px; }
+    .show-nav { display: none; }
+    .bg img.contain { object-position: center top; }
+    .bg video.fit { object-fit: cover; object-position: center 10%; -webkit-mask-image: none; mask-image: none; }
+    .bg { inset: 0; -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 85%); mask-image: linear-gradient(180deg, #000 45%, transparent 85%); }
+    .slide::after { background: linear-gradient(180deg, rgba(8,6,13,.2) 0%, rgba(8,6,13,.35) 40%, rgba(8,6,13,.92) 72%); }
+    .txt { left: 16px; right: 16px; top: auto; bottom: 150px; transform: none; }
+    .title { font-size: clamp(36px, 11vw, 54px); }
+    .aside { flex-direction: column; gap: 6px; }
+    .show-foot { flex-direction: column; align-items: stretch; }
+    .foot-r { justify-content: space-between; }
+    .foot-l { display: none; }
+  }
+
+
+  /* ---------- sticky tab bar ---------- */
+  .bar { position: sticky; top: 12px; z-index: 20; margin-top: 24px; }
+  .bar-in { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,.82); backdrop-filter: blur(10px);
+            border: 1px solid var(--line); border-radius: 99px; padding: 6px 8px 6px 6px; }
+  .logo { width: 40px; height: 40px; border-radius: 50%; background: var(--violet); color: #fff; display: grid; place-items: center; font: 800 16px "Unbounded"; }
+  .tabs { position: relative; display: flex; gap: 4px; }
+  .tabs a { position: relative; z-index: 1; padding: 9px 16px; border-radius: 99px; font-weight: 500; font-size: 15px; color: var(--muted); transition: color .25s; }
+  .tabs a.on { color: #fff; }
+  .pill-ind { position: absolute; top: 0; height: 100%; border-radius: 99px; background: var(--black); transition: left .35s var(--ease), width .35s var(--ease); }
+  .bar-icons { margin-left: auto; display: flex; gap: 6px; }
+  .bar-icons a { width: 40px; height: 40px; border: 1.5px solid var(--ink); border-radius: 50%; display: grid; place-items: center; transition: background .2s, color .2s; }
+  .bar-icons a:hover { background: var(--ink); color: #fff; }
+  .bar-icons .ic { width: 17px; height: 17px; }
+
+  /* ---------- cards & panels ---------- */
+  section { padding-top: 28px; }
+  .panel { background: var(--card); border-radius: var(--r); padding: 22px; border: 1px solid var(--line); }
+  details > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary h2, details > summary h3 { font-size: clamp(18px, 1.8vw, 22px); font-weight: 600; }
+  .chev { width: 30px; height: 30px; border: 1.5px solid var(--ink); border-radius: 50%; display: grid; place-items: center; transition: transform .35s var(--ease), background .2s, color .2s; }
+  .chev .ic { width: 15px; height: 15px; }
+  details[open] > summary .chev { transform: rotate(180deg); }
+  summary:hover .chev { background: var(--ink); color: #fff; }
+  details[open] > .body { animation: fadeUp .45s var(--ease); }
+  .body { margin-top: 16px; }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 1fr 1.35fr; gap: 20px; }
+  .me { position: relative; border-radius: var(--r); overflow: hidden; background: #0E0A14; min-height: 520px; color: #fff; cursor: pointer; }
+  .me img, .me video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .me video { transition: opacity .8s; }
+  .me video.hide { opacity: 0; }
+  .me::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, transparent 38%, transparent 62%, rgba(0,0,0,.75) 100%); pointer-events: none; }
+  .me-copy { position: absolute; inset: 0; z-index: 1; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+  .me-copy small { font-size: 14px; opacity: .85; }
+  .me-copy h2 { font-size: clamp(32px, 3.8vw, 48px); font-weight: 600; margin-top: 4px; }
+  .me-copy p { font-size: 13px; opacity: .85; max-width: 340px; }
+  .me-tag { font: 500 11px/1 ui-monospace, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; opacity: .7; margin-bottom: 8px; }
+  .replay { position: absolute; z-index: 2; right: 18px; top: 18px; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 99px;
+            background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); color: #fff; font: 500 13px "Lexend"; cursor: pointer; opacity: 0; transition: opacity .3s; }
+  .me.ended .replay { opacity: 1; }
+  .replay .ic { width: 15px; height: 15px; }
+
+  .about-right { display: grid; gap: 20px; align-content: start; }
+  .intro-card { display: grid; grid-template-columns: 1fr 150px; gap: 18px; align-items: center; border: 1.5px solid var(--ink); border-radius: 16px; padding: 18px; }
+  .intro-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .intro-card p { font-size: 14px; color: var(--muted); }
+  .intro-card img { width: 150px; height: 150px; object-fit: cover; object-position: center 25%; border-radius: 12px; }
+  .contact3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cbox { border-radius: 16px; padding: 16px; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between; border: 1.5px solid var(--ink);
+          transition: transform .3s var(--ease), box-shadow .3s; overflow-wrap: anywhere; }
+  .cbox:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+  .cbox .ic { width: 30px; height: 30px; }
+  .cbox span { font-size: 12px; opacity: .85; }
+  .cbox.dark { background: var(--black); color: #fff; border-color: var(--black); }
+  .cbox.blue { background: var(--violet); color: #fff; border-color: var(--violet); }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .fact { border-radius: 16px; background: var(--soft); padding: 16px; }
+  .fact b { display: block; font: 800 26px/1.1 "Unbounded"; }
+  .fact span { font-size: 13px; color: var(--muted); }
+
+  /* resume */
+  .resume { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; align-items: start; }
+  .col { display: grid; gap: 20px; }
+  .job { border: 1.5px solid var(--ink); border-radius: 16px; padding: 16px; transition: transform .3s var(--ease); }
+  .job + .job { margin-top: 12px; }
+  .job:hover { transform: translateX(4px); }
+  .date { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; background: var(--violet); color: #fff; }
+  .date.dk { background: var(--ink); }
+  .job small { display: block; color: var(--muted); font-size: 12px; margin-top: 10px; }
+  .job h4 { font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .job p { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .track { height: 4px; background: var(--line); border-radius: 4px; margin-top: 14px; overflow: hidden; }
+  .track i { display: block; height: 100%; width: 0; background: var(--ink); border-radius: 4px; transition: width 1.4s var(--ease) .2s; }
+  .in .track i { width: var(--p); }
+  .track-l { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .expert { font-size: 14px; color: var(--muted); }
+  .hard { background: radial-gradient(80% 60% at 100% 0%, rgba(123,47,247,.45), transparent 70%), var(--black); color: #fff; border-radius: 16px; padding: 18px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+  .chips li { font-size: 12.5px; font-weight: 500; padding: 5px 12px; border-radius: 99px; border: 1.5px solid currentColor; }
+  .hard .chips li { border-color: rgba(255,255,255,.35); }
+  .hard h5 { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; opacity: .6; margin: 14px 0 8px; }
+  .hard h5:first-child { margin-top: 0; }
+  .soft .chips li.f { background: var(--violet); border-color: var(--violet); color: #fff; }
+  .edu { background: radial-gradient(80% 70% at 100% 0%, rgba(123,47,247,.4), transparent 70%), var(--black); color: #fff; border-radius: 16px; padding: 16px; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; transition: transform .3s var(--ease); }
+  .edu:hover { transform: translateY(-3px); }
+  .edu + .edu { margin-top: 12px; }
+  .edu .date { background: var(--violet); color: #fff; align-self: flex-start; }
+  .edu small { font-size: 12px; opacity: .65; display: block; }
+  .edu h4 { font-size: 16px; font-weight: 600; line-height: 1.3; }
+  .edu p { font-size: 12px; opacity: .75; }
+
+  /* work */
+  .work-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+  .proj { grid-column: span 3; position: relative; border-radius: var(--r); padding: 26px; background: var(--card); border: 1px solid var(--line); overflow: hidden;
+          display: flex; flex-direction: column; gap: 10px; min-height: 280px; transition: transform .35s var(--ease), box-shadow .35s; cursor: none; }
+  .proj:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,.12); }
+  .proj.blue { background: var(--violet); color: #fff; border-color: var(--violet); }
+  .proj.dark { background: var(--black-2); color: #fff; border-color: rgba(160,107,255,.25); }
+  .proj.blue:hover, .proj.dark:hover, .edu:hover, .cbox.dark:hover, .cbox.blue:hover { box-shadow: var(--glow); }
+  .band .early a { border-color: rgba(255,255,255,.3); color: #fff; }
+  .band .early a:hover { background: var(--violet); border-color: var(--violet); }
+  .proj.wide { grid-column: span 4; }
+  .proj.narrow { grid-column: span 2; }
+  .proj .no { font: 800 14px "Unbounded"; opacity: .5; }
+  .proj h3 { font-size: clamp(19px, 1.8vw, 24px); font-weight: 600; }
+  .proj p { font-size: 14px; opacity: .8; }
+  .proj .chips { margin-top: auto; padding-top: 10px; }
+  .proj .chips li { font-size: 12px; border-width: 1px; opacity: .9; }
+  .proj .big { position: absolute; right: -10px; bottom: -34px; font: 800 140px/1 "Unbounded"; opacity: .07; pointer-events: none; transition: transform .6s var(--ease); }
+  .proj:hover .big { transform: translate(-10px, -10px) rotate(-6deg); }
+  .early { grid-column: span 6; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .early a { border: 1.5px solid var(--ink); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px; transition: background .25s, color .25s; }
+  .early a:hover { background: var(--ink); color: #fff; }
+  .early b { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; font-size: 15px; }
+  .early span { font-size: 13px; opacity: .75; }
+
+  /* cursor bubble on project cards */
+  .bubble { position: fixed; z-index: 50; left: 0; top: 0; pointer-events: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 99px;
+            background: rgba(255,255,255,.92); color: var(--ink); font-weight: 600; font-size: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.18);
+            transform: translate(-50%, -50%) scale(0); transition: transform .25s var(--ease); }
+  .bubble.is-visible { transform: translate(-50%, -50%) scale(1); }
+
+  /* CTA + footer */
+  .cta { margin-top: 28px; background: radial-gradient(60% 80% at 100% 100%, rgba(123,47,247,.6), transparent 70%), var(--black); box-shadow: var(--glow); color: #fff; border-radius: var(--r); padding: clamp(32px, 6vw, 72px); display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: end; overflow: hidden; position: relative; }
+  .cta h2 { font-size: clamp(30px, 5vw, 64px); font-weight: 800; }
+  .cta h2 em { font-style: normal; color: var(--violet-2); }
+  .cta p { color: rgba(255,255,255,.7); margin-bottom: 18px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 99px; font-weight: 600; font-size: 15px; transition: transform .25s var(--ease), background .2s, color .2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.blue { background: var(--violet); color: #fff; }
+  .btn.blue:hover { background: #8F4BFF; }
+  .btn.line { border: 1.5px solid rgba(255,255,255,.5); color: #fff; }
+  .btn.line:hover { background: #fff; color: var(--ink); }
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 28px 4px 40px; font-size: 14px; color: var(--muted); }
+
+  .hl { color: var(--violet); }
+  .ghost { position: absolute; left: 50%; top: 18px; transform: translateX(-50%); white-space: nowrap; pointer-events: none; font: 800 clamp(80px, 16vw, 230px)/1 "Unbounded";
+           color: transparent; -webkit-text-stroke: 1.5px rgba(160,107,255,.35); letter-spacing: -.02em; }
+  .band { position: relative; margin-top: 28px; background: radial-gradient(60% 50% at 50% 0%, rgba(123,47,247,.35), transparent 70%), var(--black); border-radius: 28px; padding: clamp(120px, 15vw, 210px) 24px 24px; overflow: hidden; }
+  .band-head { position: relative; text-align: center; color: #fff; margin-bottom: 28px; }
+  .band-head h2 { font-size: clamp(26px, 3.4vw, 42px); font-weight: 800; }
+  .band-head p { color: rgba(255,255,255,.65); margin-top: 8px; }
+  .band .work-grid { position: relative; }
+
+  /* scroll reveal */
+  .rv { opacity: 0; transform: translateY(26px) scale(.98); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+  .rv.in { opacity: 1; transform: none; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes slideIn { to { opacity: 1; transform: none; } }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .rv { opacity: 1 !important; transform: none !important; }
+    .track i { width: var(--p); }
+  }
+  @media (hover: none) { .proj { cursor: pointer; } .bubble { display: none; } }
+
+  @media (max-width: 1000px) {
+    .about { grid-template-columns: 1fr; }
+    .resume { grid-template-columns: 1fr 1fr; }
+    .resume .col:last-child { grid-column: span 2; }
+    .proj, .proj.wide, .proj.narrow { grid-column: span 3; }
+    .early { grid-template-columns: repeat(2, 1fr); }
+    .cta { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .wrap { padding: 0 16px; }
+    .tabs a { padding: 8px 10px; font-size: 14px; }
+    .bar-icons { display: none; }
+    .me { min-height: 460px; }
+    .intro-card { grid-template-columns: 1fr; }
+    .intro-card img { width: 100%; height: 180px; }
+    .contact3, .facts { grid-template-columns: 1fr; }
+    .resume { grid-template-columns: 1fr; }
+    .resume .col:last-child { grid-column: auto; }
+    .work-grid { grid-template-columns: 1fr; }
+    .proj, .proj.wide, .proj.narrow, .early { grid-column: auto; }
+    .early { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
-    <!-- SVG icon sprite (no emojis anywhere) -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-        <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
-        <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
-        <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
-        <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
-        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
-        <symbol id="i-split" viewBox="0 0 24 24"><path d="M16 3h5v5M8 3H3v5M12 22v-8.3a4 4 0 0 0-1.17-2.87L3 3M15 9l6-6"/></symbol>
-        <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
-        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
-        <symbol id="i-pen" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
-        <symbol id="i-term" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
-        <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
-        <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect x="13" y="13" width="8" height="8" rx="2"/></symbol>
-        <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z"/><path d="M19 3v4M17 5h4"/></symbol>
-        <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></symbol>
-        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-        <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
-        <symbol id="i-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
-        <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
-        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
-        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
-        <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></symbol>
-        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
-        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-        <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
-        <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></symbol>
-        <symbol id="i-leet" viewBox="0 0 24 24"><path d="M14 4 6 12l8 8M10 12h11"/></symbol>
-        <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
-        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
-        <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
-        <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></symbol>
-    </svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-leet" viewBox="0 0 24 24"><path d="M14 4 6 12l8 8M10 12h11"/></symbol>
+</svg>
 
-    <!-- ADVANCED BACKGROUND: aurora + neural mesh + cursor spotlight + grain -->
-    <div class="bg" aria-hidden="true">
-        <div class="aurora a1"></div>
-        <div class="aurora a2"></div>
-        <div class="aurora a3"></div>
-        <canvas id="neural"></canvas>
-        <div class="spotlight"></div>
-        <div class="grain"></div>
+<!-- HERO SLIDER -->
+<header class="show" id="top" aria-roledescription="carousel" aria-label="Introduction">
+  <div class="show-top">
+    <a class="show-brand" href="#top"><img src="assets/favicon.png" alt=""><span>Sandhosh Gowravan<small>AI &amp; Automation Engineer</small></span></a>
+    <nav class="show-nav" aria-label="Main">
+      <a href="#about">About</a><a href="#resume">Resume</a><a href="#work">Work</a><a href="mailto:sandhoshtechie02@gmail.com">Contact</a>
+    </nav>
+  </div>
+
+  <div class="slides">
+    <article class="slide on" data-dur="8000" aria-roledescription="slide" aria-label="1 of 4">
+      <div class="bg"><video class="fit" src="assets/video/not-real.mp4" poster="assets/video/not-real-poster.jpg" muted playsinline preload="auto"></video></div>
+      <div class="txt">
+        <span class="kick">n8n · 50+ workflows</span>
+        <h1 class="title">The Art of<br>Automation</h1>
+        <p class="aside"><em>Workflows</em><span>that run 24/7 across CRMs, databases, Slack and internal APIs — with real error handling.</span></p>
+      </div>
+    </article>
+
+    <article class="slide" data-dur="5200" aria-roledescription="slide" aria-label="2 of 4">
+      <div class="bg"><img src="assets/me/desk.jpg" alt="" loading="lazy" style="object-position:center 30%"></div>
+      <div class="txt">
+        <span class="kick">24 / 7</span>
+        <h2 class="title">Agents Never<br>Sleep</h2>
+        <p class="aside"><em>Real</em><span>results — even when the worker is an agent. Not everything is real.</span></p>
+      </div>
+    </article>
+
+    <article class="slide" data-dur="5200" aria-roledescription="slide" aria-label="3 of 4">
+      <div class="bg"><img class="contain" src="assets/me/office.jpg" alt="" loading="lazy"></div>
+      <div class="txt">
+        <span class="kick">Currently</span>
+        <h2 class="title">Built at<br>Promon</h2>
+        <p class="aside"><em>Promon</em><span>Software Solutions — AI &amp; Automation Engineer shipping agents, RAG pipelines and integrations.</span></p>
+      </div>
+    </article>
+
+    <article class="slide" data-dur="5200" aria-roledescription="slide" aria-label="4 of 4">
+      <div class="bg"><img src="assets/me/portrait.jpg" alt="" style="object-position:center 30%"></div>
+      <div class="txt">
+        <span class="kick">Sandhosh Gowravan</span>
+        <h2 class="title">AI Agent<br>Engineer</h2>
+        <p class="aside"><em>Agents</em><span>that plan, call tools and verify their own work — built with Claude Code &amp; MCP.</span></p>
+      </div>
+    </article>
+  </div>
+
+  <div class="show-foot">
+    <div class="foot-l">
+      <b>Full-service AI automation</b>
+      <span>Agents · n8n · MCP · RAG · Theni, Tamil Nadu</span>
+      <a href="mailto:sandhoshtechie02@gmail.com">sandhoshtechie02@gmail.com</a>
     </div>
+    <div class="foot-r">
+      <div class="dots" role="tablist" aria-label="Choose slide">
+        <button type="button" class="on" aria-label="Slide 1"><i></i></button>
+        <button type="button" aria-label="Slide 2"><i></i></button>
+        <button type="button" aria-label="Slide 3"><i></i></button>
+        <button type="button" aria-label="Slide 4"><i></i></button>
+      </div>
+      <span class="count" aria-live="polite"><b>01</b> / 04</span>
+      <a class="down" href="#about" aria-label="Scroll to About"><svg class="ic"><use href="#i-down"/></svg></a>
+    </div>
+  </div>
+</header>
 
-    <div class="scroll-progress" aria-hidden="true"></div>
+<div class="wrap">
 
-    <!-- NAV -->
-    <header class="nav-wrap">
-        <nav class="nav">
-            <a class="brand" href="#top">
-                <svg class="ic brand-ic"><use href="#i-infinity"/></svg>
-                <span class="brand-text">Sandhosh<span>.ai</span></span>
-            </a>
-            <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
-            <div class="nav-links">
-                <a href="#live"><span>#</span>live-flow</a>
-                <a href="#orchestration"><span>#</span>orchestration</a>
-                <a href="#expertise"><span>#</span>expertise</a>
-                <a href="#workflows"><span>#</span>case-studies</a>
-                <a href="#skills"><span>#</span>stack</a>
-                <a href="#experience"><span>#</span>experience</a>
-                <a class="nav-cta" href="#contact">Hire me</a>
-            </div>
-        </nav>
-    </header>
 
-    <!-- SOCIAL RAIL (original theme) -->
-    <div class="side-rail">
-        <span class="rail-line"></span>
-        <a href="https://github.com/sandhosh02" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="ic"><use href="#i-github"/></svg></a>
+  <!-- STICKY TAB BAR -->
+  <nav class="bar" aria-label="Sections">
+    <div class="bar-in">
+      <a class="logo" href="#top" aria-label="Back to top">S</a>
+      <div class="tabs">
+        <span class="pill-ind" aria-hidden="true"></span>
+        <a href="#about">About me</a>
+        <a href="#resume">Resume</a>
+        <a href="#work">Work</a>
+      </div>
+      <div class="bar-icons">
+        <a href="mailto:sandhoshtechie02@gmail.com" aria-label="Email"><svg class="ic"><use href="#i-mail"/></svg></a>
         <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="ic"><use href="#i-linkedin"/></svg></a>
-        <a href="https://leetcode.com/u/santhoshgowravan/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode"><svg class="ic"><use href="#i-leet"/></svg></a>
+        <a href="assets/resume/Sandhosh-resume.pdf" download aria-label="Download resume"><svg class="ic"><use href="#i-dl"/></svg></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="me rv" id="me" tabindex="0" aria-label="Video: portrait dissolving into pixels. Press to replay.">
+      <img src="assets/video/not-real-poster.jpg" alt="Sandhosh Gowravan" loading="lazy">
+      <video src="assets/video/not-real.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
+      <div class="me-copy">
+        <div><small>Hello,</small><h2>My name is <span style="color:var(--violet-2)">Sandhosh</span></h2></div>
+        <div><div class="me-tag">not everything is real</div><p>I build agents and automations so the repetitive work disappears — the result is real, even when the worker isn't.</p></div>
+      </div>
+      <button class="replay" type="button" tabindex="-1"><svg class="ic"><use href="#i-replay"/></svg>Replay</button>
     </div>
 
-    <main id="top">
-
-        <!-- HERO -->
-        <section class="hero">
-            <div class="grid-floor" aria-hidden="true"></div>
-
-            <div class="hero-inner">
-                <div class="hero-copy">
-                    <div class="status-pill reveal"><span class="dot"></span>Available for AI Agent &amp; n8n Automation projects</div>
-
-                    <h1 class="headline">
-                        <span class="ln"><span>Architecting <em class="gradient-text">Autonomous</em></span></span>
-                        <span class="ln"><span><em class="gradient-text">AI Agents</em> &amp; Production</span></span>
-                        <span class="ln"><span><em class="gradient-text">n8n Automations</em><i class="type-caret"></i></span></span>
-                    </h1>
-
-                    <p class="hero-sub reveal">
-                        I turn repetitive manual processes into autonomous, self-healing agentic workflows —
-                        from tool-calling agents with Claude Code &amp; MCP to enterprise n8n pipelines that run 24/7.
-                    </p>
-
-                    <div class="hero-cta reveal">
-                        <a class="btn btn-primary" href="#live">Watch an agent run <svg class="ic"><use href="#i-down"/></svg></a>
-                        <a class="btn btn-ghost" href="mailto:sandhoshtechie02@gmail.com">Let's automate together <svg class="ic"><use href="#i-arrow"/></svg></a>
-                    </div>
-
-                    <div class="terminal reveal" aria-label="Agent run demo">
-                        <div class="terminal-bar"><i></i><i></i><i></i><span><svg class="ic"><use href="#i-term"/></svg> agent.log</span></div>
-                        <pre id="agentLog"></pre>
-                    </div>
-                </div>
-
-                <!-- AI portrait: real photo swept by an AI-render scan -->
-                <div class="hero-visual reveal">
-                    <div class="ai-portrait" id="aiPortrait">
-                        <div class="ring r1"></div>
-                        <div class="ring r2"></div>
-                        <div class="frame">
-                            <img class="real" src="assets/me/portrait.jpg" alt="Sandhosh Gowravan">
-                            <div class="ai-layer"><img src="assets/me/portrait.jpg" alt=""></div>
-                            <div class="scanline"></div>
-                            <svg class="mesh" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                                <g class="mesh-lines">
-                                    <path d="M54 22 L37 36 L48 40 L54 22 L61 40 L68 36 Z"/>
-                                    <path d="M37 36 L40 56 L48 55 L48 40 M68 36 L66 56 L61 55 L61 40"/>
-                                    <path d="M48 40 L55 49 L61 40 M48 55 L55 49 L61 55 M40 56 L55 66 L66 56 M48 55 L55 66 L61 55"/>
-                                </g>
-                                <g class="mesh-pts">
-                                    <circle cx="54" cy="22" r=".9"/><circle cx="37" cy="36" r=".9"/><circle cx="68" cy="36" r=".9"/>
-                                    <circle cx="48" cy="40" r="1.1"/><circle cx="61" cy="40" r="1.1"/><circle cx="55" cy="49" r=".9"/>
-                                    <circle cx="48" cy="55" r=".9"/><circle cx="61" cy="55" r=".9"/><circle cx="40" cy="56" r=".9"/>
-                                    <circle cx="66" cy="56" r=".9"/><circle cx="55" cy="66" r=".9"/>
-                                </g>
-                            </svg>
-                            <div class="detect" style="left:33%;top:16%;width:39%;height:56%"><b>face · 0.99</b></div>
-                            <span class="hud tl"></span><span class="hud tr"></span><span class="hud bl"></span><span class="hud br"></span>
-                            <div class="readout">
-                                <span>model: <b>vision-v4</b></span>
-                                <span>identity: <b>sandhosh</b></span>
-                                <span>role: <b>ai_engineer</b></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chip chip-1"><svg class="ic"><use href="#i-flow"/></svg>n8n Specialist</div>
-                    <div class="chip chip-2"><svg class="ic"><use href="#i-bot"/></svg>Claude Code &amp; MCP</div>
-                    <div class="chip chip-3"><svg class="ic"><use href="#i-code"/></svg>Python &amp; FastAPI</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- METRICS -->
-        <section class="metrics">
-            <div class="metric reveal">
-                <svg class="ic m-ic"><use href="#i-flow"/></svg>
-                <strong><span class="count" data-to="50">0</span>+</strong>
-                <p>Workflows automated — webhooks, error handlers, sub-workflows</p>
-            </div>
-            <div class="metric reveal">
-                <svg class="ic m-ic"><use href="#i-clock"/></svg>
-                <strong><span class="count" data-to="24">0</span>/7</strong>
-                <p>Autonomous pipelines running without human clicks</p>
-            </div>
-            <div class="metric reveal">
-                <svg class="ic m-ic"><use href="#i-layers"/></svg>
-                <strong><span class="count" data-to="3">0</span> LLMs</strong>
-                <p>Claude, OpenAI &amp; Gemini orchestrated with smart fallbacks</p>
-            </div>
-            <div class="metric reveal">
-                <svg class="ic m-ic"><use href="#i-plug"/></svg>
-                <strong>MCP</strong>
-                <p>Custom tool-calling servers &amp; Claude Code agent loops</p>
-            </div>
-        </section>
-
-        <!-- LIVE n8n CANVAS -->
-        <section id="live" class="section">
-            <h2 class="section-title reveal"><span>#</span>live-workflow</h2>
-
-            <div class="n8n reveal">
-                <div class="n8n-bar">
-                    <div class="n8n-title">
-                        <svg class="ic"><use href="#i-flow"/></svg>
-                        <span class="wf-name">Lead Qualifier Agent</span>
-                        <span class="badge-active"><i></i>Active</span>
-                    </div>
-                    <div class="n8n-actions">
-                        <span class="exec-status" id="execStatus">Waiting for trigger…</span>
-                        <button class="btn btn-primary btn-sm" id="execBtn"><svg class="ic"><use href="#i-play"/></svg>Execute workflow</button>
-                    </div>
-                </div>
-
-                <div class="n8n-canvas">
-                    <svg class="n8n-svg" viewBox="0 0 1000 400" role="img" aria-label="n8n workflow: Webhook, Normalize, AI Agent with Claude model, memory and vector store, If, Slack and Gmail">
-                        <!-- main wires -->
-                        <path id="w1" class="wire" d="M136 178 L200 178"/>
-                        <path id="w2" class="wire" d="M296 178 L360 178"/>
-                        <path id="w3" class="wire" d="M610 178 L680 178"/>
-                        <path id="w4" class="wire" d="M776 160 C 825 160, 820 98, 870 98"/>
-                        <path id="w5" class="wire" d="M776 196 C 825 196, 820 278, 870 278"/>
-                        <!-- sub-node wires (AI connections) -->
-                        <path id="s1" class="wire sub" d="M405 300 L405 226"/>
-                        <path id="s2" class="wire sub" d="M485 300 L485 226"/>
-                        <path id="s3" class="wire sub" d="M565 300 L565 226"/>
-
-                        <text class="items" id="t1" x="168" y="168">1 item</text>
-                        <text class="items" id="t2" x="328" y="168">1 item</text>
-                        <text class="items" id="t3" x="645" y="168">1 item</text>
-                        <text class="items" id="t4" x="835" y="118">true</text>
-                        <text class="branch" x="790" y="152">true</text>
-                        <text class="branch" x="790" y="214">false</text>
-
-                        <circle class="packet" id="pk1" r="5"><animateMotion begin="indefinite" dur=".5s" fill="freeze"><mpath href="#w1"/></animateMotion></circle>
-                        <circle class="packet" id="pk2" r="5"><animateMotion begin="indefinite" dur=".5s" fill="freeze"><mpath href="#w2"/></animateMotion></circle>
-                        <circle class="packet" id="pk3" r="5"><animateMotion begin="indefinite" dur=".5s" fill="freeze"><mpath href="#w3"/></animateMotion></circle>
-                        <circle class="packet" id="pk4" r="5"><animateMotion begin="indefinite" dur=".6s" fill="freeze"><mpath href="#w4"/></animateMotion></circle>
-
-                        <!-- nodes -->
-                        <g class="nd trigger" id="n-wh">
-                            <path class="body" d="M84 130 h44 a8 8 0 0 1 8 8 v80 a8 8 0 0 1 -8 8 h-44 a44 48 0 0 1 0 -96 z"/>
-                            <use class="nic" href="#i-zap" x="70" y="160" width="36" height="36"/>
-                            <circle class="h-out" cx="136" cy="178" r="5"/>
-                            <g class="ok"><circle cx="128" cy="138" r="9"/><use href="#i-check" x="122" y="132" width="12" height="12"/></g>
-                            <text class="lbl" x="88" y="248">Webhook</text><text class="sub-lbl" x="88" y="264">POST /lead</text>
-                        </g>
-
-                        <g class="nd" id="n-ef">
-                            <rect class="body" x="200" y="130" width="96" height="96" rx="8"/>
-                            <use class="nic" href="#i-pen" x="230" y="160" width="36" height="36"/>
-                            <rect class="h-in" x="195" y="172" width="6" height="12" rx="1"/><circle class="h-out" cx="296" cy="178" r="5"/>
-                            <g class="ok"><circle cx="288" cy="138" r="9"/><use href="#i-check" x="282" y="132" width="12" height="12"/></g>
-                            <text class="lbl" x="248" y="248">Normalize</text><text class="sub-lbl" x="248" y="264">Edit Fields</text>
-                        </g>
-
-                        <g class="nd agent" id="n-ag">
-                            <rect class="body" x="360" y="130" width="250" height="96" rx="8"/>
-                            <use class="nic" href="#i-bot" x="380" y="156" width="40" height="40"/>
-                            <text class="lbl in" x="436" y="174">AI Agent</text>
-                            <text class="sub-lbl in" x="436" y="192">Tools Agent · ReAct</text>
-                            <rect class="h-in" x="355" y="172" width="6" height="12" rx="1"/><circle class="h-out" cx="610" cy="178" r="5"/>
-                            <path class="port" d="M405 220 l6 6 -6 6 -6 -6z"/><path class="port" d="M485 220 l6 6 -6 6 -6 -6z"/><path class="port" d="M565 220 l6 6 -6 6 -6 -6z"/>
-                            <g class="ok"><circle cx="602" cy="138" r="9"/><use href="#i-check" x="596" y="132" width="12" height="12"/></g>
-                            <g class="spinner"><circle cx="590" cy="160" r="8"/></g>
-                        </g>
-
-                        <g class="nd subnode" id="n-llm">
-                            <circle class="body" cx="405" cy="330" r="30"/>
-                            <use class="nic" href="#i-spark" x="391" y="316" width="28" height="28"/>
-                            <text class="lbl sm" x="405" y="380">Claude</text>
-                        </g>
-                        <g class="nd subnode" id="n-mem">
-                            <circle class="body" cx="485" cy="330" r="30"/>
-                            <use class="nic" href="#i-db" x="471" y="316" width="28" height="28"/>
-                            <text class="lbl sm" x="485" y="380">Memory</text>
-                        </g>
-                        <g class="nd subnode" id="n-vec">
-                            <circle class="body" cx="565" cy="330" r="30"/>
-                            <use class="nic" href="#i-search" x="551" y="316" width="28" height="28"/>
-                            <text class="lbl sm" x="565" y="380">Vectors</text>
-                        </g>
-
-                        <g class="nd" id="n-if">
-                            <rect class="body" x="680" y="130" width="96" height="96" rx="8"/>
-                            <use class="nic" href="#i-split" x="710" y="160" width="36" height="36"/>
-                            <rect class="h-in" x="675" y="172" width="6" height="12" rx="1"/>
-                            <circle class="h-out" cx="776" cy="160" r="5"/><circle class="h-out" cx="776" cy="196" r="5"/>
-                            <g class="ok"><circle cx="768" cy="138" r="9"/><use href="#i-check" x="762" y="132" width="12" height="12"/></g>
-                            <text class="lbl" x="728" y="248">If</text><text class="sub-lbl" x="728" y="264">score &gt; 0.8</text>
-                        </g>
-
-                        <g class="nd" id="n-sl">
-                            <rect class="body" x="870" y="50" width="96" height="96" rx="8"/>
-                            <use class="nic" href="#i-msg" x="900" y="80" width="36" height="36"/>
-                            <rect class="h-in" x="865" y="92" width="6" height="12" rx="1"/>
-                            <g class="ok"><circle cx="958" cy="58" r="9"/><use href="#i-check" x="952" y="52" width="12" height="12"/></g>
-                            <text class="lbl" x="918" y="30">Slack</text><text class="sub-lbl" x="918" y="166">#sales alert</text>
-                        </g>
-
-                        <g class="nd" id="n-gm">
-                            <rect class="body" x="870" y="230" width="96" height="96" rx="8"/>
-                            <use class="nic" href="#i-mail" x="900" y="260" width="36" height="36"/>
-                            <rect class="h-in" x="865" y="272" width="6" height="12" rx="1"/>
-                            <text class="lbl" x="918" y="346">Gmail</text><text class="sub-lbl" x="918" y="362">nurture email</text>
-                        </g>
-                    </svg>
-                </div>
-
-                <div class="n8n-log" id="execLog" aria-live="polite"></div>
-            </div>
-        </section>
-
-        <!-- CLAUDE ORCHESTRATION: one goal → parallel sub-agents → full stack app -->
-        <section id="orchestration" class="section">
-            <h2 class="section-title reveal"><span>#</span>claude-orchestration</h2>
-            <p class="section-lead reveal">One goal in, a full stack product out. A Claude orchestrator plans the build, fans the work out to specialised sub-agents running in parallel, then reviews and merges what they ship.</p>
-
-            <div class="orch reveal" id="orch">
-                <div class="n8n-bar">
-                    <div class="n8n-title">
-                        <svg class="ic"><use href="#i-spark"/></svg>
-                        <span class="wf-name">claude-orchestrator</span>
-                        <span class="badge-active"><i></i>5 agents</span>
-                    </div>
-                    <div class="n8n-actions">
-                        <span class="exec-status" id="orchStatus">Idle</span>
-                        <button class="btn btn-primary btn-sm" id="orchBtn"><svg class="ic"><use href="#i-play"/></svg>Run build</button>
-                    </div>
-                </div>
-
-                <div class="orch-body">
-                    <div class="orch-core">
-                        <div class="core-orb"><svg class="ic"><use href="#i-spark"/></svg></div>
-                        <h3>Orchestrator</h3>
-                        <span class="core-model">claude · planner</span>
-                        <div class="core-goal"><b>goal</b><span id="orchGoal"></span></div>
-                        <ol class="core-plan" id="orchPlan">
-                            <li>decompose → 5 tasks</li>
-                            <li>dispatch in parallel</li>
-                            <li>review &amp; run tests</li>
-                            <li>merge &amp; ship</li>
-                        </ol>
-                    </div>
-
-                    <div class="orch-agents">
-                        <div class="agent-row" data-agent="0">
-                            <b class="link"></b>
-                            <div class="agent-card">
-                                <div class="agent-top"><svg class="ic"><use href="#i-layout"/></svg><strong>Frontend agent</strong><i class="agent-state">queued</i></div>
-                                <div class="agent-task">waiting for plan…</div>
-                                <div class="agent-bar"><span></span></div>
-                            </div>
-                            <b class="link"></b>
-                            <div class="layer"><svg class="ic"><use href="#i-layout"/></svg>React UI</div>
-                        </div>
-                        <div class="agent-row" data-agent="1">
-                            <b class="link"></b>
-                            <div class="agent-card">
-                                <div class="agent-top"><svg class="ic"><use href="#i-server"/></svg><strong>Backend agent</strong><i class="agent-state">queued</i></div>
-                                <div class="agent-task">waiting for plan…</div>
-                                <div class="agent-bar"><span></span></div>
-                            </div>
-                            <b class="link"></b>
-                            <div class="layer"><svg class="ic"><use href="#i-server"/></svg>FastAPI</div>
-                        </div>
-                        <div class="agent-row" data-agent="2">
-                            <b class="link"></b>
-                            <div class="agent-card">
-                                <div class="agent-top"><svg class="ic"><use href="#i-db"/></svg><strong>Data agent</strong><i class="agent-state">queued</i></div>
-                                <div class="agent-task">waiting for plan…</div>
-                                <div class="agent-bar"><span></span></div>
-                            </div>
-                            <b class="link"></b>
-                            <div class="layer"><svg class="ic"><use href="#i-db"/></svg>PostgreSQL</div>
-                        </div>
-                        <div class="agent-row" data-agent="3">
-                            <b class="link"></b>
-                            <div class="agent-card">
-                                <div class="agent-top"><svg class="ic"><use href="#i-shield"/></svg><strong>QA agent</strong><i class="agent-state">queued</i></div>
-                                <div class="agent-task">waiting for plan…</div>
-                                <div class="agent-bar"><span></span></div>
-                            </div>
-                            <b class="link"></b>
-                            <div class="layer"><svg class="ic"><use href="#i-shield"/></svg>Tests</div>
-                        </div>
-                        <div class="agent-row" data-agent="4">
-                            <b class="link"></b>
-                            <div class="agent-card">
-                                <div class="agent-top"><svg class="ic"><use href="#i-rocket"/></svg><strong>DevOps agent</strong><i class="agent-state">queued</i></div>
-                                <div class="agent-task">waiting for plan…</div>
-                                <div class="agent-bar"><span></span></div>
-                            </div>
-                            <b class="link"></b>
-                            <div class="layer"><svg class="ic"><use href="#i-rocket"/></svg>Docker · CI</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="orch-foot">
-                    <span><svg class="ic"><use href="#i-layers"/></svg>Parallel sub-agents</span>
-                    <span><svg class="ic"><use href="#i-plug"/></svg>Shared context via MCP</span>
-                    <span><svg class="ic"><use href="#i-shield"/></svg>Self-review &amp; tests before merge</span>
-                    <span><svg class="ic"><use href="#i-code"/></svg>Claude Code in the loop</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- EXPERTISE -->
-        <section id="expertise" class="section">
-            <h2 class="section-title reveal"><span>#</span>what-i-build</h2>
-
-            <div class="pillars">
-                <article class="pillar reveal">
-                    <div class="pillar-icon"><svg class="ic"><use href="#i-bot"/></svg></div>
-                    <h3>Autonomous AI Agents &amp; Tool Calling</h3>
-                    <p>Agents that read their environment, plan, execute multi-step CLI / browser / API tools and self-correct on failure.</p>
-                    <ul class="tags"><li>Claude Code</li><li>Agentic Loops</li><li>ReAct</li><li>Function Calling</li><li>MCP Servers</li></ul>
-                </article>
-                <article class="pillar reveal">
-                    <div class="pillar-icon"><svg class="ic"><use href="#i-flow"/></svg></div>
-                    <h3>Enterprise n8n Workflow Automation</h3>
-                    <p>End-to-end pipelines connecting CRMs, databases, Slack / WhatsApp and internal APIs — with real error handling.</p>
-                    <ul class="tags"><li>n8n Self-Hosted</li><li>Webhooks</li><li>AI Agent Nodes</li><li>Vector Stores</li><li>JSON Transforms</li></ul>
-                </article>
-                <article class="pillar reveal">
-                    <div class="pillar-icon"><svg class="ic"><use href="#i-server"/></svg></div>
-                    <h3>Full Stack &amp; Production Engineering</h3>
-                    <p>React frontends, Python &amp; Node.js APIs, databases and Docker deploys — the whole product, built and orchestrated with Claude.</p>
-                    <ul class="tags"><li>React</li><li>FastAPI</li><li>Node.js</li><li>PostgreSQL</li><li>Docker</li></ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- CASE STUDIES -->
-        <section id="workflows" class="section">
-            <h2 class="section-title reveal"><span>#</span>case-studies</h2>
-
-            <div class="cases">
-                <article class="case reveal">
-                    <div class="mini-flow">
-                        <span><svg class="ic"><use href="#i-term"/></svg></span><b></b>
-                        <span class="hot"><svg class="ic"><use href="#i-bot"/></svg></span><b></b>
-                        <span><svg class="ic"><use href="#i-plug"/></svg></span><b></b>
-                        <span><svg class="ic"><use href="#i-check"/></svg></span>
-                    </div>
-                    <div class="case-head"><span class="case-no">01</span><span class="case-kind">Claude Code · MCP</span></div>
-                    <h3>Autonomous Multi-Tool Agent</h3>
-                    <p class="case-tag">Goal-driven execution engine with system tool invocation.</p>
-                    <dl>
-                        <dt>Problem</dt><dd>Dev &amp; data routines needed manual hand-offs across many APIs.</dd>
-                        <dt>Solution</dt><dd>An agent loop on Model Context Protocol that runs bash, queries vector stores and verifies its own output.</dd>
-                    </dl>
-                    <ul class="tags"><li>Claude Code</li><li>MCP</li><li>Python</li><li>Node.js</li></ul>
-                </article>
-
-                <article class="case reveal">
-                    <div class="mini-flow">
-                        <span><svg class="ic"><use href="#i-zap"/></svg></span><b></b>
-                        <span class="hot"><svg class="ic"><use href="#i-spark"/></svg></span><b></b>
-                        <span><svg class="ic"><use href="#i-split"/></svg></span><b></b>
-                        <span><svg class="ic"><use href="#i-msg"/></svg></span>
-                    </div>
-                    <div class="case-head"><span class="case-no">02</span><span class="case-kind">n8n · LLM</span></div>
-                    <h3>AI Lead Intelligence Pipeline</h3>
-                    <p class="case-tag">Webhook ingestion, AI enrichment, scoring &amp; routing in real time.</p>
-                    <dl>
-                        <dt>Problem</dt><dd>Sales lost hours researching inbound leads and typing CRM data.</dd>
-                        <dt>Solution</dt><dd>n8n flow that enriches company data, scores intent with an LLM node and pushes structured alerts to Slack &amp; CRM.</dd>
-                    </dl>
-                    <ul class="tags"><li>n8n</li><li>Anthropic / OpenAI</li><li>Webhooks</li><li>JSON</li></ul>
-                </article>
-
-                <article class="case reveal">
-                    <div class="mini-flow">
-                        <span><svg class="ic"><use href="#i-file"/></svg></span><b></b>
-                        <span><svg class="ic"><use href="#i-layers"/></svg></span><b></b>
-                        <span class="hot"><svg class="ic"><use href="#i-db"/></svg></span><b></b>
-                        <span><svg class="ic"><use href="#i-search"/></svg></span>
-                    </div>
-                    <div class="case-head"><span class="case-no">03</span><span class="case-kind">RAG · Vector</span></div>
-                    <h3>Document Extraction &amp; RAG Pipeline</h3>
-                    <p class="case-tag">Multi-format PDFs turned into searchable knowledge.</p>
-                    <dl>
-                        <dt>Problem</dt><dd>Invoices, contracts and resumes sat siloed and unsearchable.</dd>
-                        <dt>Solution</dt><dd>Automated split → embed → store, plus a retrieval-augmented assistant the whole team can query.</dd>
-                    </dl>
-                    <ul class="tags"><li>n8n</li><li>Python</li><li>Qdrant / Pinecone</li><li>LangChain</li></ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- ABOUT (desk photo with computer-vision overlay) -->
-        <section id="about" class="section about">
-            <div class="cv-shot reveal" style="aspect-ratio:1672/941">
-                <img src="assets/me/desk.jpg" alt="Sandhosh at his workstation">
-                <div class="detect" style="left:30%;top:12%;width:44%;height:87%"><b>engineer · 0.98</b></div>
-                <div class="detect alt" style="left:.6%;top:28%;width:23.6%;height:34%"><b>monitor · 0.95</b></div>
-                <div class="detect alt" style="left:8%;top:65%;width:21%;height:9%"><b>keyboard · 0.91</b></div>
-                <div class="cv-scan"></div>
-            </div>
-            <div class="about-copy reveal">
-                <h2 class="section-title"><span>#</span>about-me</h2>
-                <p>I'm <span>Sandhosh</span> — I build the systems that let LLMs actually <em>do</em> work: agents that call tools, n8n flows that never sleep, and the backends that keep them honest.</p>
-                <p>My rule: if a human clicks it twice a day, an agent should be doing it.</p>
-                <ul class="about-list">
-                    <li><svg class="ic"><use href="#i-check"/></svg>Designs agent loops with guardrails &amp; retries</li>
-                    <li><svg class="ic"><use href="#i-check"/></svg>Ships n8n flows with error branches, not just happy paths</li>
-                    <li><svg class="ic"><use href="#i-check"/></svg>Writes the MCP servers &amp; APIs the agents need</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SKILLS -->
-        <section id="skills" class="section">
-            <h2 class="section-title reveal"><span>#</span>stack-&amp;-tools</h2>
-
-            <div class="skills-grid">
-                <div class="skill-box reveal">
-                    <h3><svg class="ic"><use href="#i-spark"/></svg>Agentic AI &amp; LLMs</h3>
-                    <ul><li>Anthropic Claude</li><li>Claude Code</li><li>MCP</li><li>OpenAI API</li><li>Gemini</li><li>Prompt Architecture</li><li>RAG</li></ul>
-                </div>
-                <div class="skill-box reveal">
-                    <h3><svg class="ic"><use href="#i-flow"/></svg>Workflow Automation</h3>
-                    <ul><li>n8n Cloud &amp; Self-Hosted</li><li>Webhooks</li><li>REST Integrations</li><li>Sub-workflows</li><li>Data Transformation</li><li>Zapier</li></ul>
-                </div>
-                <div class="skill-box reveal">
-                    <h3><svg class="ic"><use href="#i-code"/></svg>Programming &amp; Backend</h3>
-                    <ul><li>Python</li><li>JavaScript ES6+</li><li>React</li><li>FastAPI</li><li>Django</li><li>Node.js</li><li>Bash</li></ul>
-                </div>
-                <div class="skill-box reveal">
-                    <h3><svg class="ic"><use href="#i-db"/></svg>Databases &amp; DevOps</h3>
-                    <ul><li>PostgreSQL</li><li>MongoDB</li><li>Vector DBs</li><li>Git</li><li>Docker</li><li>Linux</li></ul>
-                </div>
-            </div>
-
-            <div class="marquee" aria-hidden="true">
-                <div class="marquee-track">
-                    <span>n8n</span><span>Claude Code</span><span>MCP</span><span>LangChain</span><span>FastAPI</span><span>Python</span><span>RAG</span><span>Webhooks</span><span>Vector DB</span><span>Docker</span>
-                    <span>n8n</span><span>Claude Code</span><span>MCP</span><span>LangChain</span><span>FastAPI</span><span>Python</span><span>RAG</span><span>Webhooks</span><span>Vector DB</span><span>Docker</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- EXPERIENCE -->
-        <section id="experience" class="section experience">
+    <div class="about-right">
+      <details class="panel rv" style="--d:1" open>
+        <summary><h2>Intro<span class="hl">duction</span></h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body">
+          <div class="intro-card">
             <div>
-                <h2 class="section-title reveal"><span>#</span>experience</h2>
-                <ol class="timeline">
-                    <li class="reveal">
-                        <span class="when">2025 — Present</span>
-                        <h3>AI &amp; Automation Engineer</h3>
-                        <p>Architecting autonomous agent pipelines, custom n8n business automations and LLM integrations.</p>
-                    </li>
-                    <li class="reveal">
-                        <span class="when">2024 — 2025</span>
-                        <h3>AI Model Developer · <span>WG Tech Solutions</span></h3>
-                        <p>Real-world AI solution modelling, model training and integration.</p>
-                    </li>
-                </ol>
+              <h3>An <span class="hl">AI &amp; Automation</span> Engineer based in Tamil Nadu</h3>
+              <p>I work at Promon Software Solutions building the systems that let LLMs do real work: tool-calling agents with Claude Code &amp; MCP, n8n pipelines that run 24/7 with proper error handling, and the Python / Node.js backends behind them. If a human clicks it twice a day, an agent should be doing it.</p>
             </div>
-            <div class="cv-shot tall reveal" style="aspect-ratio:720/1280">
-                <img src="assets/me/office.jpg" alt="Sandhosh at the office">
-                <div class="detect" style="left:61%;top:31%;width:38%;height:66%"><b>status: shipping</b></div>
-                <div class="cv-scan"></div>
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact" class="section contact reveal">
-            <div class="contact-card">
-                <svg class="ic contact-ic"><use href="#i-bot"/></svg>
-                <h2 class="contact-title">Have an automation pipeline or <span class="gradient-text">AI agent</span> to build?</h2>
-                <p>Tell me the manual process. I'll send back the workflow.</p>
-                <div class="hero-cta center">
-                    <a class="btn btn-primary" href="mailto:sandhoshtechie02@gmail.com"><svg class="ic"><use href="#i-mail"/></svg>sandhoshtechie02@gmail.com</a>                </div>
-                <div class="contact-links">
-                    <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-linkedin"/></svg>LinkedIn</a>
-                    <a href="https://github.com/sandhosh02" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
-                    <a href="https://leetcode.com/u/santhoshgowravan/" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-leet"/></svg>LeetCode</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <svg class="ic"><use href="#i-infinity"/></svg> © 2026 Sandhosh Gowravan · built with agents in mind
-    </footer>
-
-    <!--
-    ===== ARCHIVED (no longer needed) — old projects, college & competitions. Uncomment to restore. =====
-
-    <div id="projects">
-        <img src="/assets/projects/main.svg" alt="">
-        <div class="project-round projects-grid-round">
-            <a class="project-item" href="https://github.com/SANDHOSH02/PyLab_Arena" target="_blank"><video class="project-video" src="/assets/pylearn.mp4" muted playsinline loop autoplay></video></a>
-            <a class="project-item" href="https://nscet.org/iqarena" target="_blank"><video class="project-video" src="/assets/iqarena_vid.mp4" muted playsinline loop autoplay></video></a>
-            <a class="project-item" href="https://github.com/SANDHOSH02/Result-Portal" target="_blank"><video class="project-video" src="/assets/result.mp4" muted playsinline loop autoplay></video></a>
-            <a class="project-item" href="http://nscet.org/hackathon" target="_blank"><video class="project-video" src="/assets/hackathon.mp4" muted playsinline loop autoplay></video></a>
-            <a class="project-item" href="https://github.com/SANDHOSH02/Safety-gear" target="_blank"><video class="project-video" src="/assets/Safetygear.mp4" muted playsinline loop autoplay></video></a>
-            <a class="project-item" href="https://github.com/SANDHOSH02/Retail-monitoring" target="_blank"><video class="project-video" src="/assets/retail.mp4" muted playsinline loop autoplay></video></a>
+            <img src="assets/me/desk.jpg" alt="Sandhosh at his workstation" loading="lazy">
+          </div>
+          <div class="facts" style="margin-top:12px">
+            <div class="fact"><b>1 yr</b><span>Industry experience</span></div>
+            <div class="fact"><b>50+</b><span>n8n workflows shipped</span></div>
+            <div class="fact"><b>3</b><span>LLM providers in production</span></div>
+          </div>
         </div>
+      </details>
+
+      <details class="panel rv" style="--d:2" open>
+        <summary><h2>Get In <span class="hl">Touch</span></h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body contact3">
+          <a class="cbox dark" href="mailto:sandhoshtechie02@gmail.com"><svg class="ic"><use href="#i-mail"/></svg><span>sandhoshtechie02@gmail.com</span></a>
+          <a class="cbox blue" href="https://www.linkedin.com/in/sandhosh-g-884b7b279/" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-linkedin"/></svg><span>linkedin.com/in/sandhosh-g</span></a>
+          <a class="cbox" href="https://github.com/SANDHOSH02" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg><span>github.com/SANDHOSH02</span></a>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume" class="resume">
+    <div class="col">
+      <details class="panel rv" open>
+        <summary><h2><span class="hl">Exp</span>erience</h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body">
+          <div class="job">
+            <span class="date">Present</span>
+            <small>Promon Software Solutions</small>
+            <h4>AI &amp; Automation Engineer</h4>
+            <p>Autonomous agent pipelines (Claude Code, MCP, ReAct), n8n automations across CRMs, databases, Slack / WhatsApp and internal APIs, LLM integrations with fallbacks, and the APIs agents depend on.</p>
+            <div class="track"><i style="--p:88%"></i></div>
+            <div class="track-l"><span>Start</span><span>Present</span></div>
+          </div>
+          <div class="job">
+            <span class="date dk">May — Nov 2025</span>
+            <small>WG Tech Solutions Pvt. Ltd</small>
+            <h4>AI Model Training Engineer (Intern)</h4>
+            <p>Data collection, preprocessing and labeling; trained, fine-tuned and evaluated AI models.</p>
+            <div class="track"><i style="--p:100%"></i></div>
+            <div class="track-l"><span>Start</span><span>End</span></div>
+          </div>
+        </div>
+      </details>
     </div>
 
-    College:
-        Syed Ammal Engineering College: Django internship, BMI calculation & analysis project, 2024.
-        2023 - Present: Engineering Student at Anna University (AI & Data Science).
-
-    <div id="competition">
-        HackZion V.1 at AMC Engineering College, Bengaluru — competition-one.jpg, competition-two.jpg
-        Quantathon 2.0 X IBM Qiskit online, SRM University — competition-three.jpg, competition-four.jpg
-        36-hour Hackathon at Karur Kumarasamy College of Engineering — competition-five.jpeg, competition-six.jpg
-        Quantathon 2.0 X IBM Qiskit offline, SRM Chennai — competition-seven.jpeg, competition-eight.jpeg
-        OpenAI to Z Challenge, global hackathon — competition-ten.jpeg, amazon.jpeg
+    <div class="col">
+      <details class="panel rv" style="--d:1" open>
+        <summary><h2>Exper<span class="hl">tise</span></h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body expert">Autonomous AI agents &amp; tool calling, enterprise n8n workflow automation, RAG pipelines, MCP servers, and full stack production engineering.</div>
+      </details>
+      <details class="panel rv" style="--d:2" open>
+        <summary><h2><span class="hl">Hard</span>skill</h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body hard">
+          <h5>Agentic AI &amp; LLMs</h5>
+          <ul class="chips"><li>Claude</li><li>Claude Code</li><li>MCP</li><li>OpenAI</li><li>Gemini</li><li>LangChain</li><li>RAG</li></ul>
+          <h5>Automation</h5>
+          <ul class="chips"><li>n8n</li><li>Webhooks</li><li>REST APIs</li><li>Sub-workflows</li><li>Zapier</li></ul>
+          <h5>Code &amp; Data</h5>
+          <ul class="chips"><li>Python</li><li>JavaScript</li><li>React</li><li>FastAPI</li><li>Django</li><li>Node.js</li><li>PostgreSQL</li><li>MongoDB</li><li>Vector DBs</li><li>Docker</li><li>Linux</li></ul>
+        </div>
+      </details>
+      <details class="panel soft rv" style="--d:3" open>
+        <summary><h2><span class="hl">Soft</span>skill</h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body"><ul class="chips"><li class="f">#Problem_Solving</li><li>#Ownership</li><li>#Communication</li><li class="f">#Fast_Learner</li><li>#Teamwork</li></ul></div>
+      </details>
     </div>
-    -->
 
-    <script>
-    (() => {
-        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const fine = matchMedia('(pointer: fine)').matches;
-        const sleep = ms => new Promise(r => setTimeout(r, ms));
-        const $ = s => document.querySelector(s);
+    <div class="col">
+      <details class="panel rv" style="--d:2" open>
+        <summary><h2><span class="hl">Edu</span>cation</h2><span class="chev"><svg class="ic"><use href="#i-chev"/></svg></span></summary>
+        <div class="body">
+          <div class="edu">
+            <span class="date">2022 — 2026</span>
+            <div><small>Nadar Saraswathi College of Engineering and Technology</small><h4>BTech — AI &amp; Data Science</h4><p>Theni, Tamil Nadu</p></div>
+          </div>
+          <div class="edu">
+            <span class="date">Hackathons</span>
+            <div><small>Competitions</small><h4>HackZion V.1 · Quantathon 2.0 × IBM Qiskit</h4><p>36-hour hackathon (Karur Kumarasamy) · Kaggle OpenAI + Amazon Write-Up</p></div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
 
-        // --- Mobile nav ---
-        const toggle = $('.nav-toggle'), links = $('.nav-links');
-        toggle.addEventListener('click', () => toggle.setAttribute('aria-expanded', links.classList.toggle('open')));
-        links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            links.classList.remove('open'); toggle.setAttribute('aria-expanded', false);
-        }));
+  <!-- WORK -->
+  <section id="work" class="band">
+    <div class="ghost" aria-hidden="true">WORK</div>
+    <div class="band-head rv"><h2>Selected <span style="color:var(--violet-2)">work</span></h2><p>Agents, automations and pipelines running in production.</p></div>
+    <div class="work-grid">
+      <a class="proj blue wide rv" href="https://github.com/SANDHOSH02" target="_blank" rel="noopener noreferrer" data-bubble="View on GitHub">
+        <span class="no">01 · Claude Code · MCP</span>
+        <h3>Autonomous Multi-Tool Agent</h3>
+        <p>An agent loop on Model Context Protocol that runs bash, queries vector stores and verifies its own output — removing manual hand-offs across many APIs.</p>
+        <ul class="chips"><li>Claude Code</li><li>MCP</li><li>Python</li><li>Node.js</li></ul>
+        <span class="big" aria-hidden="true">AI</span>
+      </a>
+      <a class="proj narrow dark rv" style="--d:1" href="https://github.com/SANDHOSH02" target="_blank" rel="noopener noreferrer" data-bubble="View on GitHub">
+        <span class="no">02 · n8n · LLM</span>
+        <h3>AI Lead Intelligence Pipeline</h3>
+        <p>Enriches inbound leads, scores intent with an LLM node and routes alerts to Slack &amp; CRM in real time.</p>
+        <ul class="chips"><li>n8n</li><li>Webhooks</li><li>OpenAI</li></ul>
+        <span class="big" aria-hidden="true">n8n</span>
+      </a>
+      <a class="proj narrow rv" href="https://github.com/SANDHOSH02" target="_blank" rel="noopener noreferrer" data-bubble="View on GitHub">
+        <span class="no">03 · RAG</span>
+        <h3>Document Extraction &amp; RAG</h3>
+        <p>PDFs, invoices and contracts turned into searchable knowledge: split → embed → store → ask.</p>
+        <ul class="chips"><li>Qdrant</li><li>LangChain</li><li>Python</li></ul>
+        <span class="big" aria-hidden="true">RAG</span>
+      </a>
+      <a class="proj wide blue rv" style="--d:1" href="https://github.com/SANDHOSH02" target="_blank" rel="noopener noreferrer" data-bubble="View on GitHub">
+        <span class="no">04 · Multi-agent</span>
+        <h3>Claude Multi-Agent Orchestrator</h3>
+        <p>One goal in, a full stack product out. An orchestrator plans the build, runs frontend, backend, data, QA and DevOps sub-agents in parallel, then reviews, tests and merges their work.</p>
+        <ul class="chips"><li>Claude Code</li><li>MCP</li><li>React</li><li>FastAPI</li><li>Docker</li></ul>
+        <span class="big" aria-hidden="true">×5</span>
+      </a>
+      <div class="early rv">
+        <a href="https://github.com/SANDHOSH02/Safety-gear" target="_blank" rel="noopener noreferrer"><b>Safety-Gear PPE <svg class="ic"><use href="#i-out"/></svg></b><span>YOLO detection of helmets, vests and gloves</span></a>
+        <a href="https://github.com/SANDHOSH02/Retail-monitoring" target="_blank" rel="noopener noreferrer"><b>Retail Monitoring <svg class="ic"><use href="#i-out"/></svg></b><span>Real-time customer counting &amp; theft alerts</span></a>
+        <a href="https://github.com/SANDHOSH02/PyLab_Arena" target="_blank" rel="noopener noreferrer"><b>PyLab <svg class="ic"><use href="#i-out"/></svg></b><span>Python learning platform with in-browser runner</span></a>
+        <a href="https://nscet.org/hackathon/" target="_blank" rel="noopener noreferrer"><b>NSCET Hackathon <svg class="ic"><use href="#i-out"/></svg></b><span>Team &amp; problem-statement registration</span></a>
+      </div>
+    </div>
+  </section>
 
-        // --- Scroll progress + nav glass ---
-        const bar = $('.scroll-progress'), navWrap = $('.nav-wrap');
-        const onScroll = () => {
-            const h = document.documentElement;
-            bar.style.transform = `scaleX(${h.scrollTop / (h.scrollHeight - h.clientHeight || 1)})`;
-            navWrap.classList.toggle('scrolled', h.scrollTop > 20);
-        };
-        addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  <!-- CTA -->
+  <section class="cta rv">
+    <h2>Have a process worth <em>automating?</em></h2>
+    <div>
+      <p>Tell me the manual process. I'll send back the agent or the n8n workflow.</p>
+      <div class="btns">
+        <a class="btn blue" href="mailto:sandhoshtechie02@gmail.com"><svg class="ic"><use href="#i-mail"/></svg>Email me</a>
+        <a class="btn line" href="assets/resume/Sandhosh-resume.pdf" download><svg class="ic"><use href="#i-dl"/></svg>Resume</a>
+      </div>
+    </div>
+  </section>
 
-        // --- Reveal on scroll + count-up ---
-        const io = new IntersectionObserver(entries => entries.forEach(e => {
-            if (!e.isIntersecting) return;
-            e.target.classList.add('in');
-            e.target.querySelectorAll('.count').forEach(countUp);
-            io.unobserve(e.target);
-        }), { threshold: 0.15 });
-        document.querySelectorAll('.reveal, .section-title, .cv-shot').forEach((el, i) => {
-            el.style.setProperty('--d', `${(i % 4) * 90}ms`);
-            io.observe(el);
-        });
-        function countUp(el) {
-            const to = +el.dataset.to;
-            if (reduce) { el.textContent = to; return; }
-            const t0 = performance.now();
-            const step = t => {
-                const p = Math.min((t - t0) / 1400, 1);
-                el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
-                if (p < 1) requestAnimationFrame(step);
-            };
-            requestAnimationFrame(step);
-        }
+  <footer>
+    <span>© 2026 Sandhosh Gowravan</span>
+    <span><a href="https://github.com/SANDHOSH02" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://leetcode.com/u/santhoshgowravan/" target="_blank" rel="noopener noreferrer">LeetCode</a> · <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+  </footer>
+</div>
 
-        // --- Agent terminal typing loop ---
-        const log = $('#agentLog');
-        const lines = [
-            '<b>$</b> agent run --goal "qualify inbound leads"',
-            '<i>▸ thinking…</i> planned 4 steps',
-            '<i>▸ tool_call</i> webhook.fetch(lead)',
-            '<i>▸ tool_call</i> vector.search(company) → 6 docs',
-            '<i>▸ tool_call</i> claude.score(intent) → <u>0.92</u>',
-            '<i>▸ tool_call</i> slack.notify(#sales)',
-            '<em>✓ done in 2.4s · 0 human clicks</em>'
-        ];
-        if (reduce) log.innerHTML = lines.join('\n');
-        else (async () => {
-            for (;;) {
-                log.innerHTML = '';
-                for (const line of lines) {
-                    const plain = line.replace(/<[^>]+>/g, ''), before = log.innerHTML;
-                    for (let i = 1; i <= plain.length; i++) {
-                        log.innerHTML = before + plain.slice(0, i) + '<span class="caret">▋</span>';
-                        await sleep(16 + Math.random() * 22);
-                    }
-                    log.innerHTML = before + line + '\n';
-                    await sleep(240);
-                }
-                log.innerHTML += '<span class="caret">▋</span>';
-                await sleep(3200);
-            }
-        })();
+<div class="bubble" aria-hidden="true"><svg class="ic"><use href="#i-out"/></svg><span>View on GitHub</span></div>
 
-        // --- Neural mesh background (fixed, pauses when tab hidden) ---
-        const cv = $('#neural'), ctx = cv.getContext('2d');
-        let W, H, nodes = [];
-        const mouse = { x: -9999, y: -9999 };
-        function resize() {
-            const dpr = Math.min(devicePixelRatio || 1, 2);
-            W = innerWidth; H = innerHeight;
-            cv.width = W * dpr; cv.height = H * dpr;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            const n = Math.round(Math.min(90, W * H / 15000));
-            nodes = Array.from({ length: n }, () => ({
-                x: Math.random() * W, y: Math.random() * H,
-                vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, p: Math.random() * 6.28
-            }));
-        }
-        function draw(t) {
-            ctx.clearRect(0, 0, W, H);
-            const sy = scrollY * .15; // parallax drift
-            // ponytail: O(n²) pair scan, fine for ≤90 nodes
-            for (let i = 0; i < nodes.length; i++) {
-                const a = nodes[i];
-                if (!reduce) {
-                    a.x += a.vx; a.y += a.vy;
-                    if (a.x < 0 || a.x > W) a.vx *= -1;
-                    if (a.y < 0 || a.y > H) a.vy *= -1;
-                }
-                const ay = (a.y - sy % H + H) % H;
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const b = nodes[j], by = (b.y - sy % H + H) % H, d = Math.hypot(a.x - b.x, ay - by);
-                    if (d < 140) {
-                        ctx.strokeStyle = `rgba(199,120,221,${(1 - d / 140) * .22})`;
-                        ctx.beginPath(); ctx.moveTo(a.x, ay); ctx.lineTo(b.x, by); ctx.stroke();
-                    }
-                }
-                const dm = Math.hypot(a.x - mouse.x, ay - mouse.y);
-                if (dm < 200) {
-                    ctx.strokeStyle = `rgba(97,175,239,${(1 - dm / 200) * .5})`;
-                    ctx.beginPath(); ctx.moveTo(a.x, ay); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
-                }
-                const pulse = 1.4 + Math.sin((t || 0) / 600 + a.p) * .6;
-                ctx.fillStyle = dm < 200 ? '#61AFEF' : 'rgba(199,120,221,.7)';
-                ctx.beginPath(); ctx.arc(a.x, ay, pulse, 0, 7); ctx.fill();
-            }
-            if (!reduce && !document.hidden) requestAnimationFrame(draw);
-        }
-        document.addEventListener('visibilitychange', () => { if (!document.hidden && !reduce) requestAnimationFrame(draw); });
-        addEventListener('resize', resize);
-        resize(); requestAnimationFrame(draw);
+<!--
+===== ARCHIVED — old projects, college & competitions. =====
+College: Syed Ammal Engineering College: Django internship, BMI calculation & analysis project, 2024.
+Competitions images: assets/competition/. Project videos: assets/pylearn.mp4, iqarena_vid.mp4, result.mp4, hackathon.mp4, Safetygear.mp4, retail.mp4
+-->
 
-        // --- Cursor spotlight + mouse for mesh ---
-        const spot = $('.spotlight');
-        addEventListener('mousemove', e => {
-            mouse.x = e.clientX; mouse.y = e.clientY;
-            spot.style.setProperty('--x', e.clientX + 'px');
-            spot.style.setProperty('--y', e.clientY + 'px');
-        }, { passive: true });
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s);
 
-        // --- Portrait parallax tilt ---
-        const portrait = $('#aiPortrait');
-        if (fine && !reduce) {
-            portrait.addEventListener('mousemove', e => {
-                const r = portrait.getBoundingClientRect();
-                const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-                portrait.style.transform = `perspective(900px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg)`;
-            });
-            portrait.addEventListener('mouseleave', () => { portrait.style.transform = ''; });
-        }
+  document.body.classList.add('go');
 
-        // --- n8n workflow execution (runs when on screen, replays on button) ---
-        const canvas = $('.n8n');
-        const statusEl = $('#execStatus'), execLog = $('#execLog'), execBtn = $('#execBtn');
-        let runId = 0, visible = false;
-        const node = id => document.getElementById(id);
-        const logLine = (txt, cls = '') => {
-            const d = document.createElement('div');
-            d.className = cls; d.innerHTML = txt;
-            execLog.prepend(d);
-            while (execLog.children.length > 4) execLog.lastChild.remove();
-        };
-        function resetFlow() {
-            canvas.querySelectorAll('.nd').forEach(n => n.classList.remove('running', 'done', 'thinking'));
-            canvas.querySelectorAll('.wire').forEach(w => w.classList.remove('live'));
-            canvas.querySelectorAll('.items').forEach(t => t.classList.remove('show'));
-            canvas.querySelectorAll('.packet').forEach(p => p.classList.remove('go'));
-        }
-        async function step(id, ms, label) {
-            const n = node(id);
-            n.classList.add('running');
-            statusEl.textContent = `Executing: ${label}`;
-            await sleep(ms);
-            n.classList.remove('running'); n.classList.add('done');
-            logLine(`<b>✓</b> ${label} <i>${ms}ms</i>`);
-        }
-        function send(w, pk, t) {
-            node(w).classList.add('live');
-            const p = node(pk);
-            p.classList.add('go');
-            p.querySelector('animateMotion').beginElement();
-            setTimeout(() => { p.classList.remove('go'); t && node(t).classList.add('show'); }, 520);
-        }
-        async function run() {
-            const id = ++runId, alive = () => id === runId;
-            resetFlow(); execLog.innerHTML = '';
-            await step('n-wh', 500, 'Webhook'); if (!alive()) return;
-            send('w1', 'pk1', 't1'); await sleep(550);
-            await step('n-ef', 450, 'Normalize'); if (!alive()) return;
-            send('w2', 'pk2', 't2'); await sleep(550);
-            node('n-ag').classList.add('running');
-            statusEl.textContent = 'Executing: AI Agent';
-            for (const [s, n, l] of [['s2', 'n-mem', 'Memory · load context'], ['s3', 'n-vec', 'Vectors · 6 docs'], ['s1', 'n-llm', 'Claude · intent 0.92']]) {
-                node(s).classList.add('live'); node(n).classList.add('thinking');
-                await sleep(550); if (!alive()) return;
-                node(n).classList.replace('thinking', 'done'); logLine(`<b>◆</b> ${l}`);
-            }
-            node('n-ag').classList.replace('running', 'done'); logLine('<b>✓</b> AI Agent <i>1.9s</i>');
-            send('w3', 'pk3', 't3'); await sleep(550);
-            await step('n-if', 350, 'If · score > 0.8 → true'); if (!alive()) return;
-            send('w4', 'pk4', 't4'); await sleep(650);
-            await step('n-sl', 450, 'Slack · #sales alert'); if (!alive()) return;
-            statusEl.innerHTML = '<span class="ok-txt">Workflow executed successfully</span> · 4.1s';
-            await sleep(3500);
-            if (alive() && visible && !reduce) run();
-        }
-        execBtn.addEventListener('click', run);
-        new IntersectionObserver(([e]) => {
-            const was = visible; visible = e.isIntersecting;
-            if (visible && !was) run();
-        }, { threshold: .35 }).observe(canvas);
+  // ---- Hero slider: title zooms through, backgrounds blur-swap ----
+  const show = document.querySelector('.show');
+  const slides = [...show.querySelectorAll('.slide')];
+  const dots = [...show.querySelectorAll('.dots button')];
+  const count = show.querySelector('.count');
+  let cur = 0, timer = null, visible = true;
 
-        // --- Claude orchestration: plan → parallel sub-agents → shipped stack ---
-        const orch = $('#orch'), orchStatus = $('#orchStatus'), orchGoal = $('#orchGoal');
-        const planItems = orch.querySelectorAll('.core-plan li');
-        const rows = [...orch.querySelectorAll('.agent-row')];
-        const tasks = [
-            ['scaffold React + Vite', 'build dashboard & auth screens', 'wire API client + states'],
-            ['design REST contract', 'implement FastAPI routes', 'JWT auth + validation'],
-            ['model schema', 'write migrations', 'seed + index queries'],
-            ['generate unit tests', 'e2e: login → create task', 'all 42 tests passing'],
-            ['write Dockerfile', 'CI pipeline: lint · test · build', 'deploy preview live']
-        ];
-        const GOAL = 'Build a task-manager SaaS with auth';
-        let orchRun = 0, orchVisible = false;
-        async function runAgent(row, list, alive) {
-            const state = row.querySelector('.agent-state'), task = row.querySelector('.agent-task'), fill = row.querySelector('.agent-bar span');
-            row.classList.add('active'); state.textContent = 'running';
-            for (let i = 0; i < list.length; i++) {
-                task.textContent = list[i];
-                fill.style.width = `${((i + 1) / list.length) * 100}%`;
-                await sleep(700 + Math.random() * 900);
-                if (!alive()) return;
-            }
-            row.classList.replace('active', 'done'); state.textContent = 'done';
-        }
-        async function runOrch() {
-            const id = ++orchRun, alive = () => id === orchRun;
-            rows.forEach(r => {
-                r.classList.remove('active', 'done');
-                r.querySelector('.agent-state').textContent = 'queued';
-                r.querySelector('.agent-task').textContent = 'waiting for plan…';
-                r.querySelector('.agent-bar span').style.width = '0';
-            });
-            planItems.forEach(li => li.classList.remove('on'));
-            orch.classList.remove('shipped'); orch.classList.add('thinking');
-            orchStatus.textContent = 'Planning…'; orchGoal.textContent = '';
-            for (let i = 1; i <= GOAL.length; i++) {
-                orchGoal.textContent = GOAL.slice(0, i);
-                await sleep(reduce ? 0 : 28); if (!alive()) return;
-            }
-            planItems[0].classList.add('on'); await sleep(600);
-            planItems[1].classList.add('on'); orchStatus.textContent = 'Agents working in parallel…';
-            await Promise.all(rows.map((r, i) => sleep(i * 150).then(() => runAgent(r, tasks[i], alive))));
-            if (!alive()) return;
-            planItems[2].classList.add('on'); orchStatus.textContent = 'Reviewing & testing…';
-            await sleep(900); if (!alive()) return;
-            planItems[3].classList.add('on'); orch.classList.replace('thinking', 'shipped');
-            orchStatus.innerHTML = '<span class="ok-txt">Shipped</span> · 5 agents · 0 merge conflicts';
-            await sleep(4500);
-            if (alive() && orchVisible && !reduce) runOrch();
-        }
-        $('#orchBtn').addEventListener('click', runOrch);
-        new IntersectionObserver(([e]) => {
-            const was = orchVisible; orchVisible = e.isIntersecting;
-            if (orchVisible && !was) runOrch();
-        }, { threshold: .3 }).observe(orch);
+  const paint = () => {
+    dots.forEach((d, i) => {
+      d.classList.toggle('done', i < cur);
+      d.classList.remove('on');
+      d.setAttribute('aria-selected', i === cur);
+    });
+    void dots[cur].offsetWidth; // restart the progress fill
+    dots[cur].style.setProperty('--dur', slides[cur].dataset.dur + 'ms');
+    dots[cur].classList.add('on');
+    count.innerHTML = `<b>${String(cur + 1).padStart(2, '0')}</b> / ${String(slides.length).padStart(2, '0')}`;
+  };
+  const schedule = () => {
+    clearTimeout(timer);
+    if (!reduce && visible) timer = setTimeout(() => go((cur + 1) % slides.length), +slides[cur].dataset.dur);
+  };
+  const go = n => {
+    if (n === cur) return;
+    const out = slides[cur], inn = slides[n];
+    out.classList.remove('on');
+    if (!reduce) { out.classList.add('leaving'); setTimeout(() => out.classList.remove('leaving'), 1000); }
+    const ov = out.querySelector('video'); if (ov) ov.pause();
+    inn.classList.remove('leaving'); inn.classList.add('on');
+    const v = inn.querySelector('video');
+    if (v && !reduce) { v.preload = 'auto'; v.currentTime = 0; v.play().catch(() => {}); }
+    cur = n; paint(); schedule();
+  };
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  show.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') go((cur + 1) % slides.length);
+    if (e.key === 'ArrowLeft') go((cur - 1 + slides.length) % slides.length);
+  });
+  // pause when the hero is scrolled away or the tab is hidden
+  new IntersectionObserver(es => {
+    visible = es[0].isIntersecting;
+    show.classList.toggle('paused', !visible);
+    schedule();
+  }, { threshold: 0.3 }).observe(show);
+  document.addEventListener('visibilitychange', () => { visible = !document.hidden; show.classList.toggle('paused', !visible); schedule(); });
+  if (reduce) dots.forEach(d => d.style.setProperty('--dur', '0s'));
+  const v0 = slides[0].querySelector('video');
+  if (v0 && !reduce) v0.play().catch(() => {});
+  paint(); schedule();
 
-        // --- Sparkle cursor (original theme), lerp-smoothed; desktop only ---
-        if (fine && !reduce) {
-            const cursor = document.createElement('div');
-            cursor.className = 'custom-cursor';
-            document.body.appendChild(cursor);
-            let tx = -100, ty = -100, cx = -100, cy = -100, last = 0;
-            addEventListener('mousemove', e => {
-                tx = e.clientX; ty = e.clientY;
-                const now = performance.now();
-                if (now - last < 35) return;
-                last = now;
-                const g = document.createElement('div');
-                g.className = 'glitter';
-                g.style.left = tx + 'px'; g.style.top = ty + 'px';
-                g.style.setProperty('--dx', (Math.random() - .5) * 24 + 'px');
-                g.style.setProperty('--dy', (Math.random() - .5) * 24 + 'px');
-                document.body.appendChild(g);
-                setTimeout(() => g.remove(), 700);
-            });
-            (function follow() {
-                cx += (tx - cx) * .25; cy += (ty - cy) * .25;
-                cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
-                requestAnimationFrame(follow);
-            })();
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-            });
+  // ---- Scroll reveal ----
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-            // --- 3D tilt + glow follow on cards ---
-            document.querySelectorAll('.pillar, .case').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const r = card.getBoundingClientRect();
-                    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-                    card.style.transform = `perspective(800px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
-                    card.style.setProperty('--mx', `${(x + .5) * 100}%`);
-                    card.style.setProperty('--my', `${(y + .5) * 100}%`);
-                });
-                card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-            });
-        }
-    })();
-    </script>
+  // ---- Tab bar: scroll-spy + sliding pill ----
+  const tabs = [...document.querySelectorAll('.tabs a')], ind = $('.pill-ind');
+  const setTab = a => {
+    tabs.forEach(t => t.classList.toggle('on', t === a));
+    ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px';
+  };
+  setTab(tabs[0]);
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) setTab(tabs.find(t => t.hash === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ['about', 'resume', 'work'].forEach(id => spy.observe(document.getElementById(id)));
+  addEventListener('resize', () => setTab($('.tabs a.on') || tabs[0]));
+
+  // ---- "Not everything is real" video card ----
+  const me = $('#me'), mv = me.querySelector('video');
+  const play = () => { mv.classList.remove('hide'); me.classList.remove('ended'); mv.currentTime = 0; mv.play().catch(() => {}); };
+  mv.addEventListener('ended', () => { setTimeout(() => { mv.classList.add('hide'); me.classList.add('ended'); }, 400); });
+  if (reduce) { mv.remove(); }
+  else {
+    new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { play(); o.disconnect(); } }), { threshold: 0.5 }).observe(me);
+    me.addEventListener('click', play);
+    me.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); } });
+  }
+
+  // ---- Cursor bubble on project cards (fine pointers only) ----
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const b = $('.bubble'), label = b.querySelector('span');
+    document.querySelectorAll('[data-bubble]').forEach(card => {
+      card.addEventListener('mouseenter', () => { label.textContent = card.dataset.bubble; b.classList.add('is-visible'); });
+      card.addEventListener('mouseleave', () => b.classList.remove('is-visible'));
+      card.addEventListener('mousemove', e => { b.style.left = e.clientX + 'px'; b.style.top = e.clientY + 'px'; });
+    });
+  }
+})();
+</script>
 </body>
 </html>

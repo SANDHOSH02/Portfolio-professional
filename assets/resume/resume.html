@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sandhosh – Resume</title>
+<!-- Edit the text below, open in Chrome, Ctrl+P → "Save as PDF" (A4, margins: none). -->
+<!-- Yellow <mark> = fill in before exporting. -->
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 10pt/1.4 "Segoe UI", Arial, sans-serif; color: #222; background: #fff; }
+  .page { width: 100%; max-width: 210mm; padding: 11mm 12mm; margin: auto; overflow-wrap: anywhere; }
+  @media print {
+    body { font-size: 9pt; line-height: 1.33; }
+    .page { width: 210mm; padding: 8mm 10mm; }
+    h2 { margin: 7px 0 4px; font-size: 12pt; }
+    h3 { margin: 5px 0 1px; font-size: 9.5pt; }
+  }
+  @media screen and (max-width: 700px) {
+    .page { padding: 16px; }
+    .cols { grid-template-columns: 1fr; }
+    h1 { font-size: 22pt; }
+  }
+  h1 { font-size: 28pt; letter-spacing: .5px; line-height: 1.1; }
+  .role { font-size: 12pt; font-weight: 600; color: #7a3f8f; }
+  .contact { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 4px 0 10px; font-size: 9.5pt; }
+  a { color: #1a8fb3; text-decoration: none; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  h2 { font-size: 13.5pt; border-bottom: 1.5px solid #222; margin: 10px 0 5px; }
+  h3 { font-size: 10.5pt; margin: 7px 0 1px; }
+  .muted { color: #555; font-size: 9.5pt; }
+  ul { padding-left: 16px; margin: 3px 0; }
+  li { margin-bottom: 2px; }
+  .links { font-weight: 600; font-size: 9.5pt; }
+  mark { background: #ffe36e; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>SANDHOSH GOWRAVAN</h1>
+  <div class="role">AI Agent &amp; n8n Automation Engineer</div>
+  <div class="contact">
+    <span>Theni, Tamil Nadu</span>
+    <span>sandhoshtechie02@gmail.com</span>
+    <span>8778692231</span>
+    <a href="https://sandhosh.vercel.app/">Portfolio</a>
+    <a href="https://github.com/SANDHOSH02">GitHub</a>
+    <a href="https://www.linkedin.com/in/sandhosh-g-884b7b279/">LinkedIn</a>
+    <a href="https://leetcode.com/u/santhoshgowravan/">LeetCode</a>
+  </div>
+
+  <h2>SUMMARY</h2>
+  <p>AI &amp; Automation Engineer with 1 year of hands-on experience building the systems that let LLMs actually do work: tool-calling agents with Claude Code &amp; MCP, production n8n pipelines that run 24/7 with real error handling, and the Python / Node.js backends behind them. Rule of thumb: if a human clicks it twice a day, an agent should be doing it.</p>
+
+  <div class="cols">
+    <div>
+      <h2>EXPERIENCE</h2>
+      <h3>AI &amp; Automation Engineer</h3>
+      <div class="muted">Promon Software Solutions</div>
+      <ul>
+        <li>Architect autonomous AI agent pipelines that plan, call CLI / browser / API tools and self-correct on failure (Claude Code, MCP, ReAct).</li>
+        <li>Build enterprise n8n automations connecting CRMs, databases, Slack / WhatsApp and internal APIs — with webhooks, sub-workflows and error branches, not just happy paths.</li>
+        <li>Integrate Claude, OpenAI &amp; Gemini with smart fallbacks; design prompt architecture and RAG over vector stores.</li>
+        <li>Write the MCP servers and FastAPI / Node.js APIs the agents depend on; ship with Docker.</li>
+      </ul>
+
+      <h3>AI Model Training Engineer (Intern)</h3>
+      <div class="muted">WG Tech Solutions Pvt. Ltd · May 2025 – November 2025</div>
+      <ul>
+        <li>Handled data collection, preprocessing and labeling for model training.</li>
+        <li>Trained, fine-tuned and evaluated AI models to improve accuracy.</li>
+        <li>Supported real-time AI project workflows with the team.</li>
+      </ul>
+
+      <h2>SKILLS</h2>
+      <ul>
+        <li><b>Agentic AI &amp; LLMs:</b> Anthropic Claude, Claude Code, MCP, OpenAI API, Gemini, LangChain, Prompt Architecture, RAG, Function Calling</li>
+        <li><b>Workflow Automation:</b> n8n (Cloud &amp; Self-Hosted), Webhooks, REST Integrations, Sub-workflows, AI Agent Nodes, Data Transformation, Zapier</li>
+        <li><b>Programming &amp; Backend:</b> Python, JavaScript (ES6+), React, FastAPI, Django, Node.js, Bash</li>
+        <li><b>Databases &amp; DevOps:</b> PostgreSQL, MongoDB, MySQL, Vector DBs (Qdrant / Pinecone), Git, Docker, Linux</li>
+        <li><b>ML:</b> TensorFlow, Keras, Scikit-Learn, Pandas, YOLO</li>
+      </ul>
+
+      <h2>EDUCATION</h2>
+      <h3>Nadar Saraswathi College of Engineering and Technology</h3>
+      <div>BTech – Artificial Intelligence &amp; Data Science</div>
+      <div class="muted">Theni, Tamil Nadu · 2022 – 2026</div>
+    </div>
+
+    <div>
+      <h2>PROJECTS</h2>
+      <h3>Autonomous Multi-Tool Agent</h3>
+      <div class="muted">Claude Code · MCP · Python · Node.js</div>
+      <ul>
+        <li>Goal-driven agent loop on Model Context Protocol that runs bash, queries vector stores and verifies its own output.</li>
+        <li>Removed manual hand-offs across many APIs in dev &amp; data routines.</li>
+      </ul>
+
+      <h3>AI Lead Intelligence Pipeline</h3>
+      <div class="muted">n8n · Anthropic / OpenAI · Webhooks</div>
+      <ul>
+        <li>Real-time webhook ingestion that enriches company data, scores intent with an LLM node and routes structured alerts to Slack &amp; CRM.</li>
+        <li>Saved sales hours of manual lead research and CRM data entry.</li>
+      </ul>
+
+      <h3>Document Extraction &amp; RAG Pipeline</h3>
+      <div class="muted">n8n · Python · Qdrant / Pinecone · LangChain</div>
+      <ul>
+        <li>Turns multi-format PDFs (invoices, contracts, resumes) into searchable knowledge: split → embed → store.</li>
+        <li>Retrieval-augmented assistant the whole team can query.</li>
+      </ul>
+
+      <h3>Claude Multi-Agent Orchestrator</h3>
+      <div class="muted">Claude Code · MCP · React · FastAPI · Docker</div>
+      <ul>
+        <li>Orchestrator plans a build, fans work out to parallel sub-agents (frontend, backend, data, QA, DevOps), then reviews, tests and merges.</li>
+      </ul>
+
+      <h3>Earlier Projects</h3>
+      <ul>
+        <li><a href="https://github.com/SANDHOSH02/Safety-gear">Safety-Gear PPE Detection</a> – YOLO detection of helmets, vests and gloves in images &amp; video.</li>
+        <li><a href="https://github.com/SANDHOSH02/Retail-monitoring">Retail Monitoring</a> – real-time YOLO customer IN/OUT counting and theft alerts.</li>
+        <li><a href="https://github.com/SANDHOSH02/PyLab_Arena">PyLab</a> – Python learning platform with in-browser Pyodide runner (React, Express, MySQL).</li>
+        <li><a href="https://github.com/SANDHOSH02/NSCET-HACKATHON-MANAGEMENT">NSCET Hackathon Management</a> – <a href="https://nscet.org/hackathon/">live</a> platform for team &amp; problem-statement registration.</li>
+      </ul>
+
+      <h2>ACHIEVEMENTS</h2>
+      <ul>
+        <li>912+ GitHub commits · 50+ LeetCode problems solved</li>
+        <li>Hackathons: HackZion V.1 (AMC Bengaluru), Quantathon 2.0 × IBM Qiskit (SRM Chennai), 36-hour hackathon (Karur Kumarasamy College), Kaggle OpenAI + Amazon Write-Up Challenge</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
